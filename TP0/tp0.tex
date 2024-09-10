@@ -17,7 +17,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{layout}
 \usepackage{fancyhdr}
-
+\usepackage{hyperref}
 
 %%%%%%%%%%%%%%%%%% Notations %%%%%%%%%%%%%%%%%%%
 
@@ -119,8 +119,7 @@ of the {\tt man} command, and the fact not all online resources are exact...).
 This is just the starting point of your journey with C/C++. There are also tons of information online, and some good printed books to (ask me depending on your present knowledge of these langages). For a quick reference, {\tt cppreference.com} and {\tt cplusplus.com} are recommended online sources.\\
 
 
-\section{Pascal's triangle and console output}
-\noindent
+\section{Loops and formatted output}
 Write a C program that takes as command line argument an integer $n$ and then prints the first $n$ lines of Pascal's triangle in the terminal:
 $$
 \begin{array}{llll}
@@ -140,7 +139,7 @@ using the recurrence formula $A_{i,j} = A_{i-1,j-1} + A_{i-1,j}$ (if $0 < j < i$
 \item[1)] Build a C program, with executable called \texttt{read\_file},
   which reads the content of a text file (whose name is a command line argument) 
   and print it line by line in the terminal. Test it over the file 
-  \texttt{test-tp0.txt} included within this TP0.7z archive.\\
+  \texttt{test-tp0.txt} included within this TP0 directory.\\
   
 \item[2)] Let $n$ be a positive integer, $x_{\mrm{min}} = -6\pi$, $x_{\mrm{max}} = +6\pi$, and $
   \Delta x = (x_{\mrm{max}}-x_{\mrm{min}})/(n-1)$. For $j=0,\dots, n-1$, set  
@@ -153,7 +152,7 @@ using the recurrence formula $A_{i,j} = A_{i-1,j-1} + A_{i-1,j}$ (if $0 < j < i$
     $x_{n-1}$ && $y_{n-1}$\\   
   \end{tabular}
   \quad\\[10pt]
-  with a tabulation separating elements in the same line, and linebreaks to separate lines.\\
+  with a tab separating elements in the same line, and linebreaks to separate lines.\\
 
 \item[3)] Make a graphical representation of the function $x\mapsto \sin(x)/x$ on the interval 
   $x\in \lbr-6\pi,+6\pi\rbr$ using GNU Gnuplot tracing program (see \texttt{http://www.gnuplot.info}).
@@ -176,20 +175,21 @@ the command :
 \begin{center}
 	{\tt git clone https://[token]@github.com/didiersmets/MU4MA016\_Students.git} 
 \end{center}
-where you replace 
+where you replace {\tt [token]} by 
 \begin{center}
-	{\tt [token] by }\\ 
-	{\tt \footnotesize github\_pat\_11ATF6NQI0Hpq8GjJhLeql\_dKV8db1DpYSMeMs4nqljNkaAmlGVgPXEr92g8sGoKqmNP6Y6NAQOmVzrMEp}
+	{\tt \scriptsize github\_pat\_11ATF6NQI0Hpq8GjJhLeql\_dKV8db1DpYSMeMs4nqljNkaAmlGVgPXEr92g8sGoKqmNP6Y6NAQOmVzrMEp}
 \end{center}
 That will create a directory called {\tt MU4MA016\_Students} inside your home
-directory. Inside that directory, create a subdirectory whose name is your
-family name (better avoid blank space in the name), in the sequel I call it
-NAME. Organize your source files to your liking into that NAME directory, 
-and then upload them to Github. For that purpose you will need to :
+directory, and you can check that the token was saved (with other info) 
+inside the {\tt .git/config} file in that directory. Inside that same directory, 
+create a subdirectory whose name is your family name (better avoid blank space 
+in the name), in the sequel I call it NAME. Organize your source files to your 
+liking into that NAME directory, and then upload it to Github. For that purpose 
+you will need to :
 \begin{enumerate}
 	\item
 		Set your name and email into your local git config : from inside
-		the {\tt MU4MA016\_Students} directory issue the command
+		the {\tt MU4MA016\_Students} directory launch the commands
 		\begin{center}
 		{\tt git config --local user.name "yournamewithoutspace"}
 		\end{center}
@@ -197,24 +197,34 @@ and then upload them to Github. For that purpose you will need to :
 		\begin{center}
 		{\tt git config --local user.email "youremail"}
 		\end{center}
-	\item Next, 
+		You can check that this is recorded in the {\tt .git/config}
+		file and won't be needed anymore for future uploads.
+	\item Next, add your directory for the next commit :   
 		\begin{center}
 			{\tt git add NAME}
 		\end{center}
-		Check all files added for the next commit by
+		You can check which files were indeed added by
 		\begin{center}
 			{\tt git status}
 		\end{center}
-	\item Commit you changes with a commit message :
+		At this point, these files are only in {\it staged} state, and
+		the changes could be revertible.
+	\item Commit your changes with a commit message :
 		\begin{center}
 			{\tt git commit -m "The first commit of [yournamehere]"}
 		\end{center}
-	\item Finally push your commit to the central repository :
+	      The modification to your local repository is now active.	
+      \item To sync it with the remote repository (i.e. on Github), finally push 
+	      your commit there :
 		\begin{center}
 			{\tt git push}
 		\end{center}
+	    By visiting \url{https://github.com/didiersmets/MU4MA016\_Students}
+		you can verify that your commit appears (along the ones of your
+		class mates, for those who did it before you).
 \end{enumerate}
-Take a tour of a Git, either through the man command or using online tutorials. 
+Take the time to lear a little more of Git, either through the {\tt man} command 
+or using online tutorials. 
 The goal is to get familiar with that fantastic tool. Note that {\tt git pull} 
 will bring back the last centralized version of the repository, including your 
 class mate files ! (on purpose, you can then learn by glancing at your class 
