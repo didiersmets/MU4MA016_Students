@@ -1,0 +1,3 @@
+/home/janmarxen/MU4MA016_Students/TP0/pascal/build/CMakeFiles/print_pascal.dir
+/home/janmarxen/MU4MA016_Students/TP0/pascal/build/CMakeFiles/edit_cache.dir
+/home/janmarxen/MU4MA016_Students/TP0/pascal/build/CMakeFiles/rebuild_cache.dir

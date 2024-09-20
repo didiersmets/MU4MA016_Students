@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/print_pascal.dir/print_pascal.c.o -o print_pascal
