@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/pascal.dir/pascal.c.o -o pascal 
