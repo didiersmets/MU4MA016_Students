@@ -3,4 +3,5 @@ project(MyProject VERSION 1.0.0)
 
 
 
-add_executable(read_file read_file.c)
+add_executable(nspread n_spread.c)
+target_link_libraries(nspread m)

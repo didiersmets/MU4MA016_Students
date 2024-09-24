@@ -117,41 +117,41 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named read_file
+# Target rules for targets named nspread
 
 # Build rule for target.
-read_file: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 read_file
-.PHONY : read_file
+nspread: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 nspread
+.PHONY : nspread
 
 # fast build rule for target.
-read_file/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/read_file.dir/build.make CMakeFiles/read_file.dir/build
-.PHONY : read_file/fast
+nspread/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nspread.dir/build.make CMakeFiles/nspread.dir/build
+.PHONY : nspread/fast
 
-read_file.o: read_file.c.o
-.PHONY : read_file.o
+n_spread.o: n_spread.c.o
+.PHONY : n_spread.o
 
 # target to build an object file
-read_file.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/read_file.dir/build.make CMakeFiles/read_file.dir/read_file.c.o
-.PHONY : read_file.c.o
+n_spread.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nspread.dir/build.make CMakeFiles/nspread.dir/n_spread.c.o
+.PHONY : n_spread.c.o
 
-read_file.i: read_file.c.i
-.PHONY : read_file.i
+n_spread.i: n_spread.c.i
+.PHONY : n_spread.i
 
 # target to preprocess a source file
-read_file.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/read_file.dir/build.make CMakeFiles/read_file.dir/read_file.c.i
-.PHONY : read_file.c.i
+n_spread.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nspread.dir/build.make CMakeFiles/nspread.dir/n_spread.c.i
+.PHONY : n_spread.c.i
 
-read_file.s: read_file.c.s
-.PHONY : read_file.s
+n_spread.s: n_spread.c.s
+.PHONY : n_spread.s
 
 # target to generate assembly for a file
-read_file.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/read_file.dir/build.make CMakeFiles/read_file.dir/read_file.c.s
-.PHONY : read_file.c.s
+n_spread.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nspread.dir/build.make CMakeFiles/nspread.dir/n_spread.c.s
+.PHONY : n_spread.c.s
 
 # Help Target
 help:
@@ -161,10 +161,10 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... read_file"
-	@echo "... read_file.o"
-	@echo "... read_file.i"
-	@echo "... read_file.s"
+	@echo "... nspread"
+	@echo "... n_spread.o"
+	@echo "... n_spread.i"
+	@echo "... n_spread.s"
 .PHONY : help
 
 
