@@ -3,4 +3,4 @@ project(MyProject VERSION 1.0.0)
 
 
 
-add_executable(pascal_ex pascal.c)
+add_executable(nspread n_spread.c)
