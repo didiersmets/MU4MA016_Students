@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc,char ** argv)
+{
+  //open a doc in read mode
+  FILE *f = fopen(argv[1], "r");
+  char line[100];
+  
+  if (f != NULL)
+  {
+    while (fgets(line,100,f) )
+    {
+      printf("%s",line);
+    }
+  
+  }
+  else
+  {
+    printf("can not open");
+    return 1;
+  }    
+  
+  fclose(f);
+  return EXIT_SUCCESS;
+}
+
