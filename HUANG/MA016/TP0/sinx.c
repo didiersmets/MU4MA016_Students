@@ -2,26 +2,33 @@
 #include <stdlib.h>
 #include <math.h>
 
-float xmin = -6*M_PI
-float xmax = 6*M_PI
 
-int sin(int argc,char **argv)
+void main(int argc,char **argv)
 {
-  int n = argv[1];
-  float xj = 0;
-  float yj = 0;
-  float dx =( xmax - xmin)/(n - 1);
-
-  filename= "output_sin(x)/x.txt";
-
-  FILE *outfile = fopen(filename,'w');
+  int n = atoi(argv[1]);
+  FILE *f;
+  f = fopen("results1.txt","w+");
+    
+  float xmin = -6*M_PI;
+  float xmax = 6*M_PI;
+  float xj ;
+  float yj ;
+  float dx =( xmax - xmin)/n;
   
-  while(int j=0;j < n; j++)
+  for (int j=0;j < n; j++)
   {
-    xj = xmin + j* dt ;
-    yj = sin(xj)/xj
+    xj = xmin + j* dx ;
+    if( xj == 0 )
+      {
+	yj = 1;
+      }
+    else
+      {
+	yj = sinf(xj) / xj;
+      }
+    fprintf(f,"%f %f \n",xj,yj);
     
   }
-  
-  
+  fclose(f);
+
 }
