@@ -1,1 +1,0 @@
-/usr/bin/cc CMakeFiles/read.dir/read_file.c.o -o read 
