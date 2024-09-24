@@ -54,16 +54,16 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /users/home/21102451/MA016/TP0
+CMAKE_SOURCE_DIR = /users/home/21102451/MU4MA016_Students/HUANG/MA016/TP0
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /users/home/21102451/MA016/TP0/build
+CMAKE_BINARY_DIR = /users/home/21102451/MU4MA016_Students/HUANG/MA016/TP0/build
 
 #=============================================================================
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/read.dir/all
+all: CMakeFiles/tp0.sin.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -71,34 +71,34 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/read.dir/clean
+clean: CMakeFiles/tp0.sin.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/read.dir
+# Target rules for target CMakeFiles/tp0.sin.dir
 
 # All Build rule for target.
-CMakeFiles/read.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/read.dir/build.make CMakeFiles/read.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/read.dir/build.make CMakeFiles/read.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/users/home/21102451/MA016/TP0/build/CMakeFiles --progress-num=1,2 "Built target read"
-.PHONY : CMakeFiles/read.dir/all
+CMakeFiles/tp0.sin.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tp0.sin.dir/build.make CMakeFiles/tp0.sin.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tp0.sin.dir/build.make CMakeFiles/tp0.sin.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/users/home/21102451/MU4MA016_Students/HUANG/MA016/TP0/build/CMakeFiles --progress-num=1,2 "Built target tp0.sin"
+.PHONY : CMakeFiles/tp0.sin.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/read.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /users/home/21102451/MA016/TP0/build/CMakeFiles 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/read.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /users/home/21102451/MA016/TP0/build/CMakeFiles 0
-.PHONY : CMakeFiles/read.dir/rule
+CMakeFiles/tp0.sin.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /users/home/21102451/MU4MA016_Students/HUANG/MA016/TP0/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/tp0.sin.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /users/home/21102451/MU4MA016_Students/HUANG/MA016/TP0/build/CMakeFiles 0
+.PHONY : CMakeFiles/tp0.sin.dir/rule
 
 # Convenience name for target.
-read: CMakeFiles/read.dir/rule
-.PHONY : read
+tp0.sin: CMakeFiles/tp0.sin.dir/rule
+.PHONY : tp0.sin
 
 # clean rule for target.
-CMakeFiles/read.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/read.dir/build.make CMakeFiles/read.dir/clean
-.PHONY : CMakeFiles/read.dir/clean
+CMakeFiles/tp0.sin.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tp0.sin.dir/build.make CMakeFiles/tp0.sin.dir/clean
+.PHONY : CMakeFiles/tp0.sin.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

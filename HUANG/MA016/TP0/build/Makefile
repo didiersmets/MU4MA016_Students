@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /users/home/21102451/MA016/TP0
+CMAKE_SOURCE_DIR = /users/home/21102451/MU4MA016_Students/HUANG/MA016/TP0
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /users/home/21102451/MA016/TP0/build
+CMAKE_BINARY_DIR = /users/home/21102451/MU4MA016_Students/HUANG/MA016/TP0/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /users/home/21102451/MA016/TP0/build/CMakeFiles /users/home/21102451/MA016/TP0/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /users/home/21102451/MU4MA016_Students/HUANG/MA016/TP0/build/CMakeFiles /users/home/21102451/MU4MA016_Students/HUANG/MA016/TP0/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /users/home/21102451/MA016/TP0/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /users/home/21102451/MU4MA016_Students/HUANG/MA016/TP0/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -117,41 +117,41 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named read
+# Target rules for targets named tp0.sin
 
 # Build rule for target.
-read: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 read
-.PHONY : read
+tp0.sin: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tp0.sin
+.PHONY : tp0.sin
 
 # fast build rule for target.
-read/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/read.dir/build.make CMakeFiles/read.dir/build
-.PHONY : read/fast
+tp0.sin/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tp0.sin.dir/build.make CMakeFiles/tp0.sin.dir/build
+.PHONY : tp0.sin/fast
 
-read_file.o: read_file.c.o
-.PHONY : read_file.o
+sinx.o: sinx.c.o
+.PHONY : sinx.o
 
 # target to build an object file
-read_file.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/read.dir/build.make CMakeFiles/read.dir/read_file.c.o
-.PHONY : read_file.c.o
+sinx.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tp0.sin.dir/build.make CMakeFiles/tp0.sin.dir/sinx.c.o
+.PHONY : sinx.c.o
 
-read_file.i: read_file.c.i
-.PHONY : read_file.i
+sinx.i: sinx.c.i
+.PHONY : sinx.i
 
 # target to preprocess a source file
-read_file.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/read.dir/build.make CMakeFiles/read.dir/read_file.c.i
-.PHONY : read_file.c.i
+sinx.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tp0.sin.dir/build.make CMakeFiles/tp0.sin.dir/sinx.c.i
+.PHONY : sinx.c.i
 
-read_file.s: read_file.c.s
-.PHONY : read_file.s
+sinx.s: sinx.c.s
+.PHONY : sinx.s
 
 # target to generate assembly for a file
-read_file.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/read.dir/build.make CMakeFiles/read.dir/read_file.c.s
-.PHONY : read_file.c.s
+sinx.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tp0.sin.dir/build.make CMakeFiles/tp0.sin.dir/sinx.c.s
+.PHONY : sinx.c.s
 
 # Help Target
 help:
@@ -161,10 +161,10 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... read"
-	@echo "... read_file.o"
-	@echo "... read_file.i"
-	@echo "... read_file.s"
+	@echo "... tp0.sin"
+	@echo "... sinx.o"
+	@echo "... sinx.i"
+	@echo "... sinx.s"
 .PHONY : help
 
 
