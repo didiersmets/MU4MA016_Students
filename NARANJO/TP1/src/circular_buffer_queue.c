@@ -25,6 +25,15 @@ size_t queue_length(const struct Queue *q)
 	return (q->length);
 }
 
+
+static void enlarge_queue_capacity(struct Queue *q)
+{
+        int new_cap = 2*q->capacity;
+        q->capacity += new_cap;
+
+}
+
+
 struct Queue* queue_init(size_t elem_size, size_t capacity)
 {
 	struct Queue *q = malloc(sizeof(q));
@@ -51,7 +60,7 @@ void queue_enqueue(struct Queue *q, const void *src)
 {
 	assert(q != NULL);
 	if (q->length == q->capacity){
-		enlarge_capacity(q);
+		enlarge_queue_capacity(q);
 	}
 	size_t tail = (q->front + q->length)%q->capacity;
 	memcpy((char*)q->data + tail*(q->elem_size), src, q->elem_size);	 
@@ -63,13 +72,6 @@ void queue_dequeue(struct Queue *q, void *dest)
 	memcpy(dest, (char*)q->data, q->elem_size);
 	q->front = (q->front + 1)%q->capacity;
 	q->data = q->data + q->elem_size;
-	
-}
-
-static void enlarge_queue_capacity(struct Queue *q)
-{
-	int new_cap = 2*q->capacity;
-	q->capacity += new_cap;
 	
 }
 

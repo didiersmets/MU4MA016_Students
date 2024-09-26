@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 int random_queue(int n){
-	int l_max = 0
+	int l_max = 0;
 	struct Queue *q = queue_init(sizeof(int), n);
 	for (int i; i < n; i++){
 		int p = rand();
@@ -13,9 +13,25 @@ int random_queue(int n){
 			int dummy;
 			queue_dequeue(q, dummy);
 		}
-		if queue_length(q) > l_max{
-			l_max = queue.length(q);
+		if (queue_length(q) > l_max){
+			l_max = queue_length(q);
 		}
 	}
 	return l_max;
 }
+
+int main() {
+    int n;
+
+    // Prompt user to enter number of successive random integers
+    printf("Enter the number of successive random integers to be picked: ");
+    scanf("%d", &n);
+
+    // Print Pascal's triangle
+    random_queue(n);
+
+    return 0;
+}
+
+
+
