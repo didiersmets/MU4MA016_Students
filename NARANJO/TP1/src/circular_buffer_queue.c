@@ -4,6 +4,8 @@
 #include <assert.h>
 #include <stdlib.h>
 
+
+
 struct Queue {
 	size_t front;      // index of the first element in the queue 
 	size_t length;     // number of items presently in the queue 
@@ -28,8 +30,7 @@ size_t queue_length(const struct Queue *q)
 
 static void enlarge_queue_capacity(struct Queue *q)
 {
-        int new_cap = 2*q->capacity;
-        q->capacity += new_cap;
+        q->capacity *= 2;
 
 }
 
@@ -59,20 +60,27 @@ void queue_dispose(struct Queue *q)
 void queue_enqueue(struct Queue *q, const void *src)
 {
 	assert(q != NULL);
-	if (q->length == q->capacity){
+
+	if (q->length >= q->capacity){
 		enlarge_queue_capacity(q);
+		void* data_new = malloc(q->capacity*q->elem_size);
+		memcpy(data_new, q->data, q->elem_size*q->capacity);
+		free(q->data);
+		q->data = data_new;
 	}
+	q->length += 1;
 	size_t tail = (q->front + q->length)%q->capacity;
-	memcpy((char*)q->data + tail*(q->elem_size), src, q->elem_size);	 
+	memcpy((char*)q->data + tail*(q->elem_size), src, 1);	 
 }
 
 void queue_dequeue(struct Queue *q, void *dest)
 {
 	assert(q != NULL);
-	memcpy(dest, (char*)q->data, q->elem_size);
-	q->front = (q->front + 1)%q->capacity;
-	q->data = q->data + q->elem_size;
-	
+	if (q->length > 0){
+		memcpy(dest, (char*)q->data + q->front * q->elem_size, 1);
+		q->front = (q->front + 1)%q->capacity;
+		q->length -= 1;
+	}
 }
 
 

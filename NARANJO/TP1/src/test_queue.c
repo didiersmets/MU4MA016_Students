@@ -1,17 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "../include/circular_buffer_queue.h"
+
+typedef struct Queue Q;
+
 int random_queue(int n){
 	int l_max = 0;
-	struct Queue *q = queue_init(sizeof(int), n);
+	Q* q = queue_init(sizeof(int), n);
 	for (int i; i < n; i++){
 		int p = rand();
 		if (p%2 == 0){
-			queue_enqueue(q, p);
+			queue_enqueue(q, &p);
 		}
 		else{
-			int dummy;
-			queue_dequeue(q, dummy);
+			void* dest = malloc(sizeof(int));
+			queue_dequeue(q, dest);
+			free(dest);
 		}
 		if (queue_length(q) > l_max){
 			l_max = queue_length(q);
