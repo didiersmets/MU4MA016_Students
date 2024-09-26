@@ -92,7 +92,11 @@ this cours:
 			available, provided that our successive access to 
 			memory is sufficiently local.
 
- 
+= Understanding Locality = 
+
+	Typical example: Matrix Multiplication A*B
+
+
 
 
 

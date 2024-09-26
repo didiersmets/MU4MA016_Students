@@ -46,7 +46,8 @@ Exos:
 
 ADS - Abstract Data Structure
 	-> Abstract description of 
-		1. What kind of data can be stored (possibly refering to other ADS)
+		1. What kind of data can be stored (possibly refering to
+			 other ADS)
 		2. What operations can be performed on this data
 
 Examples of Data Stuctures inclued in the cours:
@@ -55,27 +56,43 @@ Examples of Data Stuctures inclued in the cours:
 
 = Computer Programming =
 
-We're going to study how to efficiently implement (good) algorithms. As such there
-are two main options:
+We're going to study how to efficiently implement (good) algorithms. As such
+there are two main options:
 
-	1. Using high level language, offering a number of high native data structures
-		and potentially also an interactive interpreter. 
+	1. Using high level language, offering a number of high native data
+		structures and potentially also an interactive interpreter. 
 
 		Ex. Python and CPhyton or Julia and its compiler JIT
 
-	2. Using a lower level language, giving a close access to the hardward or at
-		least to the virtual memeory
+	2. Using a lower level language, giving a close access to the 
+		hardward or at least to the virtual memeory
 
-		Thus allowing the code to be compiled into an efficeint machine code 
-		due to compiler optimizations
+		Thus allowing the code to be compiled into an efficeint 
+		machine code due to compiler optimizations
 
 
 LEARN F****ING C by yourselfs!
 
+Key concept for the low level language and the hardware relation for 
+this cours:
+	
+	The storage memory is presented as an operating system (OS), which
+	can be understood as a large addressable 1D array, the so called
+	VIRCTUAL MEMORY 
+ 
+	The access time needed to bring back some data from Random-Access 
+	Memory (RAM) to the Central Processing Unit (CPU) can be much larger
+	than a typical time needed by the CPU to perform some computation.
 
+	Physical levels (aka. caches) are introduced in between the CPU and
+	the RAM to overcome such problems. These caches can be thought of as
+	smaller but faster intermedian access memories.
+	IMPORTANT: if data is put into a cache, then the "nearby" data is
+			brought at the same time and thus it will be 
+			available, provided that our successive access to 
+			memory is sufficiently local.
 
-
-
+ 
 
 
 
