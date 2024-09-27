@@ -1,6 +1,7 @@
 *.swp
-
+HUN/tp0/build/
 *.log
 *.aux
 *.out
 
+Devora/.DS_Store

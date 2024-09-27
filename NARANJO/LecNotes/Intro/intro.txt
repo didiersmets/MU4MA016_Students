@@ -1,0 +1,141 @@
+** Docuement to be read in half-screen
+
+=== MU4MA016 - Algorithms and Datat Structures for Comp. Programming ===
+
+== Chapter 1: Intro == 
+
+= Algorithms = 
+
+First example of an algorithm: Euclid's algorithm OG
+	Goal: Find the gcd between two positive integers a and b
+
+Propoerties of Algorithms:
+	1. Correctness
+		Proving algorithms correctness proceeds by showing that some
+		form of invariant is preserved during the process. 
+			In the case of Euclide's algorithms, the preserved
+			invariant was the divisibility of c
+	2. Complexity: Time and space complexity 
+		Time complexity:
+			How many operations/computations will an algorithm
+			perform in order to provide an output in the worst
+			scenario. 
+		Space complexity:
+			Measurment of the amount of local storage required
+			by the algorithm to perform the operations; in
+			addition to the storage of its inputs
+		The two notions usually pull in opposite directions, as such 
+		it turns out to be a matter of balancing both notions
+		
+		Note that for Euclide we have a trivial space complexity as
+		all update is done directly to the variables, and there is a
+		time complexity of O(max(a,b)) 
+	3. Implementation
+
+-------------------------------------------------------------------------------
+
+Exos:
+
+	Exo 1. Pf correctness of improved version 
+
+	Exo 2. Pf. that time complexity is O(log(max(a,b)))
+
+-------------------------------------------------------------------------------
+
+= Data Structures = 
+
+ADS - Abstract Data Structure
+	-> Abstract description of 
+		1. What kind of data can be stored (possibly refering to
+			 other ADS)
+		2. What operations can be performed on this data
+
+Examples of Data Stuctures inclued in the cours:
+	arrays, stacks, queues, list & linked listed, hast tables, 
+	trees, heaps and graphes
+
+= Computer Programming =
+
+We're going to study how to efficiently implement (good) algorithms. As such
+there are two main options:
+
+	1. Using high level language, offering a number of high native data
+		structures and potentially also an interactive interpreter. 
+
+		Ex. Python and CPhyton or Julia and its compiler JIT
+
+	2. Using a lower level language, giving a close access to the 
+		hardward or at least to the virtual memeory
+
+		Thus allowing the code to be compiled into an efficeint 
+		machine code due to compiler optimizations
+
+
+LEARN F****ING C by yourselfs!
+
+Key concept for the low level language and the hardware relation for 
+this cours:
+	
+	The storage memory is presented as an operating system (OS), which
+	can be understood as a large addressable 1D array, the so called
+	VIRCTUAL MEMORY 
+ 
+	The access time needed to bring back some data from Random-Access 
+	Memory (RAM) to the Central Processing Unit (CPU) can be much larger
+	than a typical time needed by the CPU to perform some computation.
+
+	Physical levels (aka. caches) are introduced in between the CPU and
+	the RAM to overcome such problems. These caches can be thought of as
+	smaller but faster intermedian access memories.
+	IMPORTANT: if data is put into a cache, then the "nearby" data is
+			brought at the same time and thus it will be 
+			available, provided that our successive access to 
+			memory is sufficiently local.
+
+= Understanding Locality = 
+
+	Typical example: Matrix Multiplication A*B
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
