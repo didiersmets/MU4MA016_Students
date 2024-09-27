@@ -54,10 +54,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /users/home/21106595/MU4MA016_Students/EE
+CMAKE_SOURCE_DIR = /users/home/21106595/MU4MA016_Students/EE/TP0
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /users/home/21106595/MU4MA016_Students/EE/build
+CMAKE_BINARY_DIR = /users/home/21106595/MU4MA016_Students/EE/TP0/build
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -65,6 +65,7 @@ CMAKE_BINARY_DIR = /users/home/21106595/MU4MA016_Students/EE/build
 # The main recursive "all" target.
 all: CMakeFiles/hello.dir/all
 all: CMakeFiles/triangle.dir/all
+all: CMakeFiles/readline.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -74,6 +75,7 @@ preinstall:
 # The main recursive "clean" target.
 clean: CMakeFiles/hello.dir/clean
 clean: CMakeFiles/triangle.dir/clean
+clean: CMakeFiles/readline.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -83,14 +85,14 @@ clean: CMakeFiles/triangle.dir/clean
 CMakeFiles/hello.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/hello.dir/build.make CMakeFiles/hello.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/hello.dir/build.make CMakeFiles/hello.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/users/home/21106595/MU4MA016_Students/EE/build/CMakeFiles --progress-num=1,2 "Built target hello"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/users/home/21106595/MU4MA016_Students/EE/TP0/build/CMakeFiles --progress-num=1,2 "Built target hello"
 .PHONY : CMakeFiles/hello.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/hello.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /users/home/21106595/MU4MA016_Students/EE/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /users/home/21106595/MU4MA016_Students/EE/TP0/build/CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/hello.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /users/home/21106595/MU4MA016_Students/EE/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /users/home/21106595/MU4MA016_Students/EE/TP0/build/CMakeFiles 0
 .PHONY : CMakeFiles/hello.dir/rule
 
 # Convenience name for target.
@@ -109,14 +111,14 @@ CMakeFiles/hello.dir/clean:
 CMakeFiles/triangle.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/triangle.dir/build.make CMakeFiles/triangle.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/triangle.dir/build.make CMakeFiles/triangle.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/users/home/21106595/MU4MA016_Students/EE/build/CMakeFiles --progress-num=3,4 "Built target triangle"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/users/home/21106595/MU4MA016_Students/EE/TP0/build/CMakeFiles --progress-num=5,6 "Built target triangle"
 .PHONY : CMakeFiles/triangle.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/triangle.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /users/home/21106595/MU4MA016_Students/EE/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /users/home/21106595/MU4MA016_Students/EE/TP0/build/CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/triangle.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /users/home/21106595/MU4MA016_Students/EE/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /users/home/21106595/MU4MA016_Students/EE/TP0/build/CMakeFiles 0
 .PHONY : CMakeFiles/triangle.dir/rule
 
 # Convenience name for target.
@@ -127,6 +129,32 @@ triangle: CMakeFiles/triangle.dir/rule
 CMakeFiles/triangle.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/triangle.dir/build.make CMakeFiles/triangle.dir/clean
 .PHONY : CMakeFiles/triangle.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/readline.dir
+
+# All Build rule for target.
+CMakeFiles/readline.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/readline.dir/build.make CMakeFiles/readline.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/readline.dir/build.make CMakeFiles/readline.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/users/home/21106595/MU4MA016_Students/EE/TP0/build/CMakeFiles --progress-num=3,4 "Built target readline"
+.PHONY : CMakeFiles/readline.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/readline.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /users/home/21106595/MU4MA016_Students/EE/TP0/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/readline.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /users/home/21106595/MU4MA016_Students/EE/TP0/build/CMakeFiles 0
+.PHONY : CMakeFiles/readline.dir/rule
+
+# Convenience name for target.
+readline: CMakeFiles/readline.dir/rule
+.PHONY : readline
+
+# clean rule for target.
+CMakeFiles/readline.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/readline.dir/build.make CMakeFiles/readline.dir/clean
+.PHONY : CMakeFiles/readline.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.
