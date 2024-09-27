@@ -142,6 +142,32 @@ triangle/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/triangle.dir/build.make CMakeFiles/triangle.dir/build
 .PHONY : triangle/fast
 
+#=============================================================================
+# Target rules for targets named read_file
+
+# Build rule for target.
+read_file: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 read_file
+.PHONY : read_file
+
+# fast build rule for target.
+read_file/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/read_file.dir/build.make CMakeFiles/read_file.dir/build
+.PHONY : read_file/fast
+
+#=============================================================================
+# Target rules for targets named read_file2
+
+# Build rule for target.
+read_file2: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 read_file2
+.PHONY : read_file2
+
+# fast build rule for target.
+read_file2/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/read_file2.dir/build.make CMakeFiles/read_file2.dir/build
+.PHONY : read_file2/fast
+
 hello.o: hello.c.o
 .PHONY : hello.o
 
@@ -165,6 +191,33 @@ hello.s: hello.c.s
 hello.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/hello.dir/build.make CMakeFiles/hello.dir/hello.c.s
 .PHONY : hello.c.s
+
+readfile.o: readfile.c.o
+.PHONY : readfile.o
+
+# target to build an object file
+readfile.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/read_file.dir/build.make CMakeFiles/read_file.dir/readfile.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/read_file2.dir/build.make CMakeFiles/read_file2.dir/readfile.c.o
+.PHONY : readfile.c.o
+
+readfile.i: readfile.c.i
+.PHONY : readfile.i
+
+# target to preprocess a source file
+readfile.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/read_file.dir/build.make CMakeFiles/read_file.dir/readfile.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/read_file2.dir/build.make CMakeFiles/read_file2.dir/readfile.c.i
+.PHONY : readfile.c.i
+
+readfile.s: readfile.c.s
+.PHONY : readfile.s
+
+# target to generate assembly for a file
+readfile.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/read_file.dir/build.make CMakeFiles/read_file.dir/readfile.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/read_file2.dir/build.make CMakeFiles/read_file2.dir/readfile.c.s
+.PHONY : readfile.c.s
 
 triangle_Pascal.o: triangle_Pascal.c.o
 .PHONY : triangle_Pascal.o
@@ -199,10 +252,15 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... hello"
+	@echo "... read_file"
+	@echo "... read_file2"
 	@echo "... triangle"
 	@echo "... hello.o"
 	@echo "... hello.i"
 	@echo "... hello.s"
+	@echo "... readfile.o"
+	@echo "... readfile.i"
+	@echo "... readfile.s"
 	@echo "... triangle_Pascal.o"
 	@echo "... triangle_Pascal.i"
 	@echo "... triangle_Pascal.s"

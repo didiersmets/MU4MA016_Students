@@ -45,4 +45,6 @@ set(CMAKE_MAKEFILE_PRODUCTS
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/hello.dir/DependInfo.cmake"
   "CMakeFiles/triangle.dir/DependInfo.cmake"
+  "CMakeFiles/read_file.dir/DependInfo.cmake"
+  "CMakeFiles/read_file2.dir/DependInfo.cmake"
   )

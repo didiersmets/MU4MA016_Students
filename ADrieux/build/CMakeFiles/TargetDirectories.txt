@@ -1,4 +1,6 @@
 /users/home/28624202/MU4MA016_Students/ADrieux/build/CMakeFiles/hello.dir
 /users/home/28624202/MU4MA016_Students/ADrieux/build/CMakeFiles/triangle.dir
+/users/home/28624202/MU4MA016_Students/ADrieux/build/CMakeFiles/read_file.dir
+/users/home/28624202/MU4MA016_Students/ADrieux/build/CMakeFiles/read_file2.dir
 /users/home/28624202/MU4MA016_Students/ADrieux/build/CMakeFiles/edit_cache.dir
 /users/home/28624202/MU4MA016_Students/ADrieux/build/CMakeFiles/rebuild_cache.dir
