@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /users/home/21106595/MU4MA016_Students/EE
+CMAKE_SOURCE_DIR = /users/home/21106595/MU4MA016_Students/EE/TP0
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /users/home/21106595/MU4MA016_Students/EE/build
+CMAKE_BINARY_DIR = /users/home/21106595/MU4MA016_Students/EE/TP0/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /users/home/21106595/MU4MA016_Students/EE/build/CMakeFiles /users/home/21106595/MU4MA016_Students/EE/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /users/home/21106595/MU4MA016_Students/EE/TP0/build/CMakeFiles /users/home/21106595/MU4MA016_Students/EE/TP0/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /users/home/21106595/MU4MA016_Students/EE/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /users/home/21106595/MU4MA016_Students/EE/TP0/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -142,6 +142,19 @@ triangle/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/triangle.dir/build.make CMakeFiles/triangle.dir/build
 .PHONY : triangle/fast
 
+#=============================================================================
+# Target rules for targets named readline
+
+# Build rule for target.
+readline: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 readline
+.PHONY : readline
+
+# fast build rule for target.
+readline/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/readline.dir/build.make CMakeFiles/readline.dir/build
+.PHONY : readline/fast
+
 hello.o: hello.c.o
 .PHONY : hello.o
 
@@ -165,6 +178,30 @@ hello.s: hello.c.s
 hello.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/hello.dir/build.make CMakeFiles/hello.dir/hello.c.s
 .PHONY : hello.c.s
+
+readfile.o: readfile.c.o
+.PHONY : readfile.o
+
+# target to build an object file
+readfile.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/readline.dir/build.make CMakeFiles/readline.dir/readfile.c.o
+.PHONY : readfile.c.o
+
+readfile.i: readfile.c.i
+.PHONY : readfile.i
+
+# target to preprocess a source file
+readfile.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/readline.dir/build.make CMakeFiles/readline.dir/readfile.c.i
+.PHONY : readfile.c.i
+
+readfile.s: readfile.c.s
+.PHONY : readfile.s
+
+# target to generate assembly for a file
+readfile.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/readline.dir/build.make CMakeFiles/readline.dir/readfile.c.s
+.PHONY : readfile.c.s
 
 triangle.o: triangle.c.o
 .PHONY : triangle.o
@@ -199,10 +236,14 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... hello"
+	@echo "... readline"
 	@echo "... triangle"
 	@echo "... hello.o"
 	@echo "... hello.i"
 	@echo "... hello.s"
+	@echo "... readfile.o"
+	@echo "... readfile.i"
+	@echo "... readfile.s"
 	@echo "... triangle.o"
 	@echo "... triangle.i"
 	@echo "... triangle.s"

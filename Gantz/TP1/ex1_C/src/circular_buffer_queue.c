@@ -47,8 +47,6 @@ void queue_dequeue(Q* q, void* dest){
 		memcpy(dest,(char*)q->data+q->front*q->elem_size,1);
 		q->front = (q->front+1)%q->capacity;
 		q->length -= 1;
-	} else {
-		printf("empty queue");
 	}
 }
 
