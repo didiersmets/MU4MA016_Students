@@ -33,7 +33,7 @@ int main() {
     scanf("%d", &n);
 
     // Print Pascal's triangle
-    random_queue(n);
+    printf("%d \n" , random_queue(n));
 
     return 0;
 }

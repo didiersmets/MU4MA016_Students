@@ -37,7 +37,7 @@ static void enlarge_queue_capacity(struct Queue *q)
 
 struct Queue* queue_init(size_t elem_size, size_t capacity)
 {
-	struct Queue *q = malloc(sizeof(q));
+	struct Queue *q = malloc(sizeof(struct Queue));
 	if (q != NULL){
 		q->front = 0;
 		q->length = 0;
