@@ -13,7 +13,7 @@ bool is_empty(const struct Queue *q);
 
 size_t queue_length(const struct Queue *q);
 
-int queue_init(struct Queue *q, size_t elem_size, size_t capacity);
+struct Queue* queue_init(size_t elem_size, size_t capacity);
 
 void queue_dispose(struct Queue *q);
 
