@@ -28,7 +28,7 @@ struct Queue<T>* queue_init(size_t capacity){
 	q->front = 0;
 	q->length = 0;
 	q->capacity = capacity;
-	q->data[capacity];
+	q->data = (T*) malloc(sizeof(T)*q->capacity);
 	return q;
 }
 
@@ -44,7 +44,7 @@ void queue_enqueue(struct Queue<T>* q, T src){
 
 	if(q->length>q->capacity){
 		q->capacity *= 2;
-		T* data_new[q->capacity];
+		T* data_new = (T*) malloc(sizeof(T)*q->capacity);
 		memcpy(data_new,q->data,sizeof(T)*q->capacity);
 		free(q->data);
 		q->data = data_new;
@@ -53,12 +53,11 @@ void queue_enqueue(struct Queue<T>* q, T src){
 }
 	
 template <typename T>
-int queue_dequeue(struct Queue<T>* q){
+void queue_dequeue(struct Queue<T>* q, T& dest){
 	if(q->length > 0){
-		T dest = q->data[q->front];
+		dest = q->data[q->front];
 		q->front = (q->front+1)%q->capacity;
 		q->length -= 1;
-		return dest;
 	}
 }
 

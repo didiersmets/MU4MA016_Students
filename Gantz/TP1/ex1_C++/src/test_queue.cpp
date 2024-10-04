@@ -19,8 +19,9 @@ int main(int argc, char* argv[]){
 			printf("-> enqueue\n");
 			queue_enqueue<int>(q,rand_value);
 		} else {
+			int dest;
 			printf("-> dequeue\n");
-			queue_dequeue<int>(q);
+			queue_dequeue<int>(q,dest);
 		}
 
 		length_max = q->length > length_max ? q->length : length_max;
