@@ -6,9 +6,9 @@
 typedef struct Queue Q;
 
 int random_queue(int n){
-	int l_max = 0;
+	size_t l_max = 0;
 	Q* q = queue_init(sizeof(int), n);
-	for (int i; i < n; i++){
+	for (int i = 0; i < n; i++){
 		int p = rand();
 		if (p%2 == 0){
 			queue_enqueue(q, &p);
