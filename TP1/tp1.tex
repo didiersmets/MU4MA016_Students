@@ -99,7 +99,7 @@
 
 \fancyhead[R]{
   MU4MA016\\
-  2023-2024}
+  2024-2025}
 
 
 \quad\\[-5pt]
@@ -135,7 +135,7 @@ struct Queue {
 \item[] As you can observe, the type of the items in the queue is not prescribed (and hence not known by the compiler). Since C is a strongly typed language, we rely instead on the {\it size} (in bytes) of each item, which must be prescribed at the level of the queue initialization.
 \end{enumerate}
 \begin{lstlisting}[caption=]
-struct Queue * queue_init(size_t elem_size, size_t capacity);
+struct Queue *queue_init(size_t elem_size, size_t capacity);
 \end{lstlisting}
 \begin{enumerate}
 \item[] The enqueue and dequeue operations, since the type is unknown, have the form:
