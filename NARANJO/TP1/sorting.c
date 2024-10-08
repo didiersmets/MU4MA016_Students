@@ -8,7 +8,7 @@ void bubble_sort(int* loc, int size)
 	for (int j = 1; j<size; j++){	
 		for (int i=0; i<size - j; i++){
 			if (loc[i] > loc[i+1]){
-				float tmp = loc[i+1];
+				int tmp = loc[i+1];
 				loc[i+1] = loc[i];
 				loc[i] = tmp;
 			}
@@ -65,22 +65,25 @@ void merge_sort(float* loc, int p, int r)
 
 int main(){
 	int lst[7] = {10, 20, 50, 100, 200, 500, 1000};
-	double* times = malloc(7); 
+	double* times = malloc(7 * sizeof(double)); 
 	for (int j = 0; j < 7; j++){
 		int k = lst[j];
 		int arr[k];
 		srand(0);
-		for (int i = 0; i < 100; i ++){
+		for (int i = 0; i < k; i ++){
 			arr[i] = rand();
 		}
 		double time1 = (double) clock();
 		time1 = time1 / CLOCKS_PER_SEC;
 		
 		bubble_sort(arr, k);
+
 		double timedif = ( ((double) clock()) / CLOCKS_PER_SEC) - time1;
 		times[j] = timedif;
 	}
-	for (int j = 0; j < 7; j++){
-		printf("The elapsed time is %lf seconds for %d elements \n", times[j], j);
+	for (int k = 0; k < 7; k++){
+		printf("The elapsed time is %lf seconds for %d elements \n", times[k], lst[k]);
 	}
+
+	free(times);
 }
