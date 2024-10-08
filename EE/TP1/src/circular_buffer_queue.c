@@ -1,6 +1,7 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdlib.h>
+#include <string.h>
 
 struct Queue {
 	size_t front;
@@ -22,7 +23,7 @@ size_t queue_length(const struct Queue *q)
 
 struct Queue *queue_init(size_t elem_size, size_t capacity)
 {
-	struct Queue* q= malloc(sizeof(struct Queue*));
+	struct Queue* q= (struct Queue*)malloc(sizeof(struct Queue*));
 	q->front = 0;
 	q->length = 0;
 	q->data = malloc(capacity*elem_size);
@@ -44,14 +45,29 @@ void queue_dispose(struct Queue *q)
 	free(q);
 }
 
-void queue_enqueue(struct Queue *q, const void *src)
+static void enlarge_queue_capacity(struct Queue *q)
 {
-	if (q->length < q->capacity){}
-
-void queue_dequeue(struct Queue *q, void *dest)
-{
-	q->length-=1;
-	q->front++;
+	q->capacity*=2;
+	q->data = realloc(q->data,q->capacity * q->elem_size);
+	void*dest = (char *)q->data+(q->capacity/2) * q->elem_size;
+	memcpy(dest,q->data,q->front*q->elem_size);
 	return;
 }
 
+void queue_enqueue(struct Queue *q, const void *src)
+{	
+	if(q->length+sizeof(src)>q->capacity){
+		enlarge_queue_capacity(q);
+	}
+	size_t tail = (q->front+q->length)%q->capacity;
+	void *dest = (char *)q->data+(tail*q->elem_size);
+	memcpy (dest, src,q->elem_size);
+	q->length++;
+	return;
+}
+void queue_dequeue(struct Queue *q, void *dest)
+{
+	q->length-=1;
+	q->front=(q->front+1)%q->capacity;
+	return;
+}
