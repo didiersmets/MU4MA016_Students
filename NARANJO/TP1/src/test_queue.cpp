@@ -12,12 +12,10 @@ int random_queue(int n){
 	for (int i = 0; i < n; i++){
 		int p = rand();
 		if (p%2 == 0){
-			queue_enqueue<int>(q, &p);
+			queue_enqueue<int>(q, p);
 		}
 		else{
-			void* dest = malloc(sizeof(int));
-			queue_dequeue<int>(q, dest);
-			free(dest);
+			queue_dequeue<int>(q);
 		}
 		if (queue_length(q) > l_max){
 			l_max = queue_length(q);
