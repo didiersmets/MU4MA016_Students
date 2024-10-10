@@ -16,7 +16,7 @@ void bubble_sort(int* loc, int size)
 	}
 }
 
-void insertion_sort(float *loc, int size)
+void insertion_sort(int* loc, int size)
 {
 	for(int i = 1; i < size; ++i){
 		int j = i;
@@ -30,7 +30,7 @@ void insertion_sort(float *loc, int size)
 }
 
 
-void merge(float *T, int p, int q, int r)
+void merge(int* T, int p, int q, int r)
 {
 	int A_count = 0;
 	int B_count = 0;
@@ -53,7 +53,7 @@ void merge(float *T, int p, int q, int r)
 	}
 }
 
-void merge_sort(float* loc, int p, int r)
+void merge_sort(int* loc, int p, int r)
 {
 	if (p<r){
 		float q = floor((p + r)/2);
@@ -65,7 +65,9 @@ void merge_sort(float* loc, int p, int r)
 
 int main(){
 	int lst[7] = {10, 20, 50, 100, 200, 500, 1000};
-	double* times = malloc(7 * sizeof(double)); 
+	double* times1 = malloc(7 * sizeof(double));
+       	double* times2 = malloc(7 * sizeof(double));
+	double* times3 = malloc(7 * sizeof(double));       
 	for (int j = 0; j < 7; j++){
 		int k = lst[j];
 		int arr[k];
@@ -79,11 +81,52 @@ int main(){
 		bubble_sort(arr, k);
 
 		double timedif = ( ((double) clock()) / CLOCKS_PER_SEC) - time1;
-		times[j] = timedif;
-	}
-	for (int k = 0; k < 7; k++){
-		printf("The elapsed time is %lf seconds for %d elements \n", times[k], lst[k]);
+		times1[j] = timedif;
 	}
 
-	free(times);
+	for (int j = 0; j < 7; j++){
+        	int k = lst[j];
+		int arr[k];
+                srand(0);
+                for (int i = 0; i < k; i ++){
+                        arr[i] = rand();
+                }
+                double time2 = (double) clock();
+                time2 = time2 / CLOCKS_PER_SEC;
+
+                insertion_sort(arr, k);
+
+                double timedif = ( ((double) clock()) / CLOCKS_PER_SEC) - time2;
+                times2[j] = timedif;
+        }
+
+	for (int j = 0; j < 7; j++){
+                int k = lst[j];
+                int arr[k];
+                srand(0);
+                for (int i = 0; i < k; i ++){
+                        arr[i] = rand();
+                }
+                double time3 = (double) clock();
+                time3 = time3 / CLOCKS_PER_SEC;
+
+                merge_sort(arr, 0, k);
+
+                double timedif = ( ((double) clock()) / CLOCKS_PER_SEC) - time3;
+                times3[j] = timedif;
+        }
+
+	for (int k = 0; k < 7; k++){
+		printf("The elapsed time is %lf seconds for sorting %d elements using bubble sort \n", times1[k], lst[k]);
+	}
+	free(times1);
+	for (int k = 0; k < 7; k++){
+                printf("The elapsed time is %lf seconds for sorting %d elements using insertion sort \n", times2[k], lst[k]);
+	}
+	 free(times2);
+	 for (int k = 0; k < 7; k++){
+                printf("The elapsed time is %lf seconds for sorting %d elements using merge sort \n", times3[k], lst[k]);
+	}
+
+	free(times3);
 }
