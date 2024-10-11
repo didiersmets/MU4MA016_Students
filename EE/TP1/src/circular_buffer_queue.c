@@ -23,7 +23,7 @@ size_t queue_length(const struct Queue *q)
 
 struct Queue *queue_init(size_t elem_size, size_t capacity)
 {
-	struct Queue* q= (struct Queue*)malloc(sizeof(struct Queue*));
+	struct Queue* q= (struct Queue*)malloc(sizeof(struct Queue));
 	q->front = 0;
 	q->length = 0;
 	q->data = malloc(capacity*elem_size);
@@ -38,9 +38,6 @@ struct Queue *queue_init(size_t elem_size, size_t capacity)
 
 void queue_dispose(struct Queue *q)
 {
-	if (is_empty(q)){
-		return;
-	}
 	free(q->data);
 	free(q);
 }
@@ -56,7 +53,7 @@ static void enlarge_queue_capacity(struct Queue *q)
 
 void queue_enqueue(struct Queue *q, const void *src)
 {	
-	if(q->length+sizeof(src)>q->capacity){
+	if(q->length >= q->capacity){
 		enlarge_queue_capacity(q);
 	}
 	size_t tail = (q->front+q->length)%q->capacity;
@@ -67,6 +64,8 @@ void queue_enqueue(struct Queue *q, const void *src)
 }
 void queue_dequeue(struct Queue *q, void *dest)
 {
+	if (is_empty(q))
+		return;
 	q->length-=1;
 	q->front=(q->front+1)%q->capacity;
 	return;
