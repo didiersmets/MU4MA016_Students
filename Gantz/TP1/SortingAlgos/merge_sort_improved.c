@@ -3,98 +3,85 @@
 #include<stdio.h>
 #include<math.h>
 
+/* Input: 
+ * - array T* with len elements where the sub-arrays [0,...,size-1], [size,...,2*size-1], ..., [len/size,...,len-1] are sorted
+ * - array C* with len elements
+ *
+ * Output:
+ * - array T* with len elements
+ * - array C* with len elements where the sub-arrays [0,...,2*size-1], [size,...,4*size-1], ..., [len/size,...,len-1] are sorted
+ */
+void merge(int *T, int* C, int len, int size){
 
-void MergeSort(int *T, int p, int r){
+	for(int i=0; i<len; i+=size){
+		int p = i;
+		int end = i+size <= len ? i+size : len; 
+		int q = i+(size/2) <= end ? i+(size/2) : end;
+		int q0 = q; 
 
-	int* T0 = T;
-	int size_T = (r-p)+1;
-
-	if(size_T>0){
-		
-		int* C = (int*) malloc(size_T*sizeof(int)); // second array to merge into
-
-		for(int size=2; size <= size_T; size*=2){
-			
-			for(int i=0; i<size_T; i+=size){
-
-				printf("i: %d\n", i);
-				
-				// Merge sub-arrays
-				
-				int p = i;
-				int q = i+size/2;
-				int q0 = q;
-				int end = i+size <= r ? i+size : r+1; 
-
-				for(int k = i; k<end; k++){
-					if( ((p<q0)&&(q==end))  || (T[p]<=T[q]) ) {
-						C[k] = T[p++];
-					} else {
-						C[k] = T[q++];
-					}
-				}
-
+		for(int k = i; k<end; k++){
+			if( p<q0 && (q==end||T[p]<=T[q]) ) {
+				C[k] = T[p++];
+			} else {
+				C[k] = T[q++];
 			}
+		}
+	}
+}
+
+
+void MergeSort(int *T, int len){
+
+	/* Save the memory address known to the user.
+	 * We will always sort from the array located at T* to C*. 
+	 */
+	
+	int *T0 = T;
+
+	if(len>0){
 		
-			// swap pointers
+		/* Allocate second array to ping-pong */
+		int* C = (int*) malloc(len*sizeof(int)); 
+
+		for(int size=2; size <= len*2; size*=2){
+			merge(T,C,len,size);
+				
+			/* Swap pointers */
 			int* temp = T;
 			T = C;
 			C = temp;
-
-
-			printf("sorted array (%d)\n", size);
-			for(int k=p; k<=r; k++){
-				printf("%d\n", T[k]);
-			}
-			printf("\n");
-		
 		}
-
-
-
-		for(int k=p; k<=r; k++){
+		
+		/* Copy the sorted data to T0 */
+		for(int k=0; k<len; k++){
 			T0[k] = T[k];
 		}
 	}
 }
 
 int main(){
-	
-	// FILE *file = fopen("data.txt", "w");
-	
-	for(int k=3; k<4; k++){
 		
-		int N = (int) pow(2.,(double)k);
+	int N = 9;
 		
-		int* T = (int*) malloc(N*sizeof(int)); 
+	int* T = (int*) malloc(N*sizeof(int)); 
 
-		for(int i=0; i<N; i++){
-			T[i] = rand();
+	for(int i=0; i<N; i++){
+		T[i] = rand();
 		}
 
-		printf("initial array:\n");
-		for(int k=0; k<N; k++){
-			printf("%d\n", T[k]);
-		}
-		printf("\n");
-
-		MergeSort(T,0,N-1);
-
-		printf("sorted array:\n");
-		for(int k=0; k<N; k++){
-			printf("%d\n", T[k]);
-		}
-		printf("\n");
-		
-		/*
-		clock_t t = clock();
-		MergeSort(T,0,N-1);
-		t = clock() - t;
-		double time = ((double)t)/CLOCKS_PER_SEC;
-
-		fprintf(file, "%d %lf \n", N, time);
-		*/
+	printf("initial array:\n");
+	for(int k=0; k<N; k++){
+		printf("%d\n", T[k]);
 	}
+	printf("\n");
+
+	MergeSort(T,N);
+
+	printf("sorted array:\n");
+	for(int k=0; k<N; k++){
+		printf("%d\n", T[k]);
+	}
+	printf("\n");
 
 	return 0;
 }
