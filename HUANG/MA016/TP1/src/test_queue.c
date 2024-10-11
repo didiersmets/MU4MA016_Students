@@ -31,6 +31,6 @@ int main()
   int n;
   printf("please input the number : \n");
   scanf("%d",&n);
-  printf("the largest length %d",random_q(n));
+  printf("the largest length : %d \n",random_q(n));
   return 0;
 };  

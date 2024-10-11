@@ -7,11 +7,10 @@
 
 struct Queue
 {
-  size_t front; // index of the first element in the queue
-  size_t length; // number of items presently in the queue
-  size_t capacity; // capacity of the queue (in nbr of items)
-  size_t elem_size; // length in bytes of each item in the queue
-  void *data; // address of the array
+  size_t front ;
+  size_t length ;
+  size_t capacity ;
+  T      * data ;
 };
 
 bool is_empty(const struct Queue *q)
@@ -39,11 +38,6 @@ struct Queue *queue_init(size_t elem_size, size_t capacity)
   return (q);
 };
 
-static void enlarge_queue_capacity (struct Queue *q )
-{
-  q -> capacity *= 2;
-};
-
 void queue_dispose(struct Queue *q)
 {
   if(q == NULL){
@@ -56,7 +50,7 @@ void queue_dispose(struct Queue *q)
 void queue_enqueue(struct Queue *q, const void *src)
 {
   if (q -> length >= q -> capacity){
-  	enlarge_queue_capacity(q);
+    enlarge_queue_capacity(q);
   }
   void * place = (char*)(q->data) + ((q -> front + q -> length)%(q->capacity)) * q->elem_size;
   memcpy(place,src,q -> elem_size);
@@ -67,6 +61,10 @@ void queue_dequeue(struct Queue *q, void *dest)
 {
   void * src = (char*)(q->data) + ((q -> front + q -> length)%q->capacity ) * q->elem_size;
   memcpy(dest , src , q -> elem_size);
+  q->length -= 1;
 };
 
-
+static void enlarge_queue_capacity (struct Queue *q )
+{
+  q -> capacity *= 2;
+};
