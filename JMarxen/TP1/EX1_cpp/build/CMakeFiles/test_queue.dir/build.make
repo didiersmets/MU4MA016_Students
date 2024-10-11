@@ -44,19 +44,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/cmake/1413/bin/cmake
+CMAKE_COMMAND = /snap/cmake/1417/bin/cmake
 
 # The command to remove a file.
-RM = /snap/cmake/1413/bin/cmake -E rm -f
+RM = /snap/cmake/1417/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1
+CMAKE_SOURCE_DIR = /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1_cpp
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1/build
+CMAKE_BINARY_DIR = /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1_cpp/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/test_queue.dir/depend.make
@@ -69,47 +69,31 @@ include CMakeFiles/test_queue.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/test_queue.dir/flags.make
 
-CMakeFiles/test_queue.dir/src/test_queue.c.o: CMakeFiles/test_queue.dir/flags.make
-CMakeFiles/test_queue.dir/src/test_queue.c.o: /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1/src/test_queue.c
-CMakeFiles/test_queue.dir/src/test_queue.c.o: CMakeFiles/test_queue.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/test_queue.dir/src/test_queue.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/test_queue.dir/src/test_queue.c.o -MF CMakeFiles/test_queue.dir/src/test_queue.c.o.d -o CMakeFiles/test_queue.dir/src/test_queue.c.o -c /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1/src/test_queue.c
+CMakeFiles/test_queue.dir/src/test_queue.cpp.o: CMakeFiles/test_queue.dir/flags.make
+CMakeFiles/test_queue.dir/src/test_queue.cpp.o: /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1_cpp/src/test_queue.cpp
+CMakeFiles/test_queue.dir/src/test_queue.cpp.o: CMakeFiles/test_queue.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/test_queue.dir/src/test_queue.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_queue.dir/src/test_queue.cpp.o -MF CMakeFiles/test_queue.dir/src/test_queue.cpp.o.d -o CMakeFiles/test_queue.dir/src/test_queue.cpp.o -c /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1_cpp/src/test_queue.cpp
 
-CMakeFiles/test_queue.dir/src/test_queue.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/test_queue.dir/src/test_queue.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1/src/test_queue.c > CMakeFiles/test_queue.dir/src/test_queue.c.i
+CMakeFiles/test_queue.dir/src/test_queue.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_queue.dir/src/test_queue.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1_cpp/src/test_queue.cpp > CMakeFiles/test_queue.dir/src/test_queue.cpp.i
 
-CMakeFiles/test_queue.dir/src/test_queue.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/test_queue.dir/src/test_queue.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1/src/test_queue.c -o CMakeFiles/test_queue.dir/src/test_queue.c.s
-
-CMakeFiles/test_queue.dir/src/circular_buffer_queue.c.o: CMakeFiles/test_queue.dir/flags.make
-CMakeFiles/test_queue.dir/src/circular_buffer_queue.c.o: /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1/src/circular_buffer_queue.c
-CMakeFiles/test_queue.dir/src/circular_buffer_queue.c.o: CMakeFiles/test_queue.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/test_queue.dir/src/circular_buffer_queue.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/test_queue.dir/src/circular_buffer_queue.c.o -MF CMakeFiles/test_queue.dir/src/circular_buffer_queue.c.o.d -o CMakeFiles/test_queue.dir/src/circular_buffer_queue.c.o -c /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1/src/circular_buffer_queue.c
-
-CMakeFiles/test_queue.dir/src/circular_buffer_queue.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/test_queue.dir/src/circular_buffer_queue.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1/src/circular_buffer_queue.c > CMakeFiles/test_queue.dir/src/circular_buffer_queue.c.i
-
-CMakeFiles/test_queue.dir/src/circular_buffer_queue.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/test_queue.dir/src/circular_buffer_queue.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1/src/circular_buffer_queue.c -o CMakeFiles/test_queue.dir/src/circular_buffer_queue.c.s
+CMakeFiles/test_queue.dir/src/test_queue.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_queue.dir/src/test_queue.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1_cpp/src/test_queue.cpp -o CMakeFiles/test_queue.dir/src/test_queue.cpp.s
 
 # Object files for target test_queue
 test_queue_OBJECTS = \
-"CMakeFiles/test_queue.dir/src/test_queue.c.o" \
-"CMakeFiles/test_queue.dir/src/circular_buffer_queue.c.o"
+"CMakeFiles/test_queue.dir/src/test_queue.cpp.o"
 
 # External object files for target test_queue
 test_queue_EXTERNAL_OBJECTS =
 
-test_queue: CMakeFiles/test_queue.dir/src/test_queue.c.o
-test_queue: CMakeFiles/test_queue.dir/src/circular_buffer_queue.c.o
+test_queue: CMakeFiles/test_queue.dir/src/test_queue.cpp.o
 test_queue: CMakeFiles/test_queue.dir/build.make
 test_queue: CMakeFiles/test_queue.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable test_queue"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable test_queue"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/test_queue.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -121,6 +105,6 @@ CMakeFiles/test_queue.dir/clean:
 .PHONY : CMakeFiles/test_queue.dir/clean
 
 CMakeFiles/test_queue.dir/depend:
-	cd /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1 /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1 /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1/build /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1/build /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1/build/CMakeFiles/test_queue.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1_cpp/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1_cpp /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1_cpp /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1_cpp/build /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1_cpp/build /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1_cpp/build/CMakeFiles/test_queue.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/test_queue.dir/depend
 

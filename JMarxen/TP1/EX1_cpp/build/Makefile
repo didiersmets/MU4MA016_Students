@@ -48,19 +48,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/cmake/1413/bin/cmake
+CMAKE_COMMAND = /snap/cmake/1417/bin/cmake
 
 # The command to remove a file.
-RM = /snap/cmake/1413/bin/cmake -E rm -f
+RM = /snap/cmake/1417/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1
+CMAKE_SOURCE_DIR = /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1_cpp
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1/build
+CMAKE_BINARY_DIR = /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1_cpp/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -68,7 +68,7 @@ CMAKE_BINARY_DIR = /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1/build
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running CMake cache editor..."
-	/snap/cmake/1413/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/snap/cmake/1417/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -78,7 +78,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running CMake to regenerate build system..."
-	/snap/cmake/1413/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/snap/cmake/1417/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1/build/CMakeFiles /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1_cpp/build/CMakeFiles /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1_cpp/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1_cpp/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -129,53 +129,29 @@ test_queue/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_queue.dir/build.make CMakeFiles/test_queue.dir/build
 .PHONY : test_queue/fast
 
-src/circular_buffer_queue.o: src/circular_buffer_queue.c.o
-.PHONY : src/circular_buffer_queue.o
-
-# target to build an object file
-src/circular_buffer_queue.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_queue.dir/build.make CMakeFiles/test_queue.dir/src/circular_buffer_queue.c.o
-.PHONY : src/circular_buffer_queue.c.o
-
-src/circular_buffer_queue.i: src/circular_buffer_queue.c.i
-.PHONY : src/circular_buffer_queue.i
-
-# target to preprocess a source file
-src/circular_buffer_queue.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_queue.dir/build.make CMakeFiles/test_queue.dir/src/circular_buffer_queue.c.i
-.PHONY : src/circular_buffer_queue.c.i
-
-src/circular_buffer_queue.s: src/circular_buffer_queue.c.s
-.PHONY : src/circular_buffer_queue.s
-
-# target to generate assembly for a file
-src/circular_buffer_queue.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_queue.dir/build.make CMakeFiles/test_queue.dir/src/circular_buffer_queue.c.s
-.PHONY : src/circular_buffer_queue.c.s
-
-src/test_queue.o: src/test_queue.c.o
+src/test_queue.o: src/test_queue.cpp.o
 .PHONY : src/test_queue.o
 
 # target to build an object file
-src/test_queue.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_queue.dir/build.make CMakeFiles/test_queue.dir/src/test_queue.c.o
-.PHONY : src/test_queue.c.o
+src/test_queue.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_queue.dir/build.make CMakeFiles/test_queue.dir/src/test_queue.cpp.o
+.PHONY : src/test_queue.cpp.o
 
-src/test_queue.i: src/test_queue.c.i
+src/test_queue.i: src/test_queue.cpp.i
 .PHONY : src/test_queue.i
 
 # target to preprocess a source file
-src/test_queue.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_queue.dir/build.make CMakeFiles/test_queue.dir/src/test_queue.c.i
-.PHONY : src/test_queue.c.i
+src/test_queue.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_queue.dir/build.make CMakeFiles/test_queue.dir/src/test_queue.cpp.i
+.PHONY : src/test_queue.cpp.i
 
-src/test_queue.s: src/test_queue.c.s
+src/test_queue.s: src/test_queue.cpp.s
 .PHONY : src/test_queue.s
 
 # target to generate assembly for a file
-src/test_queue.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_queue.dir/build.make CMakeFiles/test_queue.dir/src/test_queue.c.s
-.PHONY : src/test_queue.c.s
+src/test_queue.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_queue.dir/build.make CMakeFiles/test_queue.dir/src/test_queue.cpp.s
+.PHONY : src/test_queue.cpp.s
 
 # Help Target
 help:
@@ -186,9 +162,6 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... test_queue"
-	@echo "... src/circular_buffer_queue.o"
-	@echo "... src/circular_buffer_queue.i"
-	@echo "... src/circular_buffer_queue.s"
 	@echo "... src/test_queue.o"
 	@echo "... src/test_queue.i"
 	@echo "... src/test_queue.s"

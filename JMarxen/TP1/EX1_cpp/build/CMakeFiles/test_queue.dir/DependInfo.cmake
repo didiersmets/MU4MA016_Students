@@ -8,8 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1/src/circular_buffer_queue.c" "CMakeFiles/test_queue.dir/src/circular_buffer_queue.c.o" "gcc" "CMakeFiles/test_queue.dir/src/circular_buffer_queue.c.o.d"
-  "/home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1/src/test_queue.c" "CMakeFiles/test_queue.dir/src/test_queue.c.o" "gcc" "CMakeFiles/test_queue.dir/src/test_queue.c.o.d"
+  "/home/janmarxen/MU4MA016_Students/JMarxen/TP1/EX1_cpp/src/test_queue.cpp" "CMakeFiles/test_queue.dir/src/test_queue.cpp.o" "gcc" "CMakeFiles/test_queue.dir/src/test_queue.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.
