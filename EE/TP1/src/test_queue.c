@@ -1,18 +1,26 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "circular_buffer_queue.c"
+#include<assert.h>
+#include "circular_buffer_queue.h"
 
 int main(int argc, char**argv)
 {
-	struct Queue *q; 
-	int p = rand;
-	for (int i=0; i< argc; i++){
+	int n = atoi(argv[1]);
+	struct Queue *q = queue_init(sizeof(int), 1); 
+	assert(q);
+	size_t l_max = 0;
+	for (int i=0; i< n; i++){
+		int p = rand();
 		if (p%2==0){
-			queue_enqueue(q, p);
+			queue_enqueue(q, &p);
 		}else{
-			queue_dequeue(q);
+			int dummy;
+			queue_dequeue(q, &dummy);
 		}
+		if (queue_length(q) > l_max)
+			l_max = queue_length(q);
 	}
-	return q->length;
+	printf("Max queue length : %zu\n", l_max);
 	queue_dispose(q);
+	return 0;
 }

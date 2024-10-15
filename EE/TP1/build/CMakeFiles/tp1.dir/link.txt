@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/tp1.dir/src/test_queue.c.o CMakeFiles/tp1.dir/src/circular_buffer_queue.c.o -o tp1 
