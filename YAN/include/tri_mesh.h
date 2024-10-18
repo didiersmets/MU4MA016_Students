@@ -9,9 +9,9 @@ struct Vertex{
 typedef struct Vertex Vertex ;
 
 struct Triangle{
-	int a;
-	int b;
-	int  c;
+	Vertex a;
+	Vertex b;
+	Vertex c;
 };
 
 typedef struct Triangle Triangle;
@@ -27,7 +27,7 @@ typedef struct Mesh2D Mesh2D;
 
 int initialize_mesh2D( Mesh2D* m, int vtx_capacity, int tri_capacity);
 
-void dispose-mesh2D( Mesh2D* m);
+void dispose_mesh2D( Mesh2D* m);
 
 double area_mesh2D( Mesh2D* m);
 
