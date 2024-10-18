@@ -4,24 +4,16 @@
 #include <stddef.h>
 #include <time.h>
 
-void bubble_sort(int adress[], int n)//adress if the array and the number of elements
+
+void merge(int T[], int n)
 {
-  for (int i=0;i < n-1 ;++i){
-    bool move = false;
-    for (int j =0;j < n-1;++j){
-      if (adress[j] > adress[j+1]){
-	int copy = adress[j];
-	adress[j] = adress[j+1];
-	adress[j+1] = copy;
-	move = true;
-      }
-    }
-    if (move == false){
-      break;
-    }
-  }
+  
 }
 
+void merge_sort(int T[],int p ,int r)
+{
+
+}
 
 int main()
 {
@@ -36,7 +28,7 @@ int main()
     }
     
     double time1= clock();
-    bubble_sort(l_sort,L_N[i]);
+    merge(l_sort,L_N[i]);
     double time2= clock();
     double timedif = (time2-time1)/CLOCKS_PER_SEC;
     

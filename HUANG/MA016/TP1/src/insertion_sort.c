@@ -4,9 +4,17 @@
 #include <stddef.h>
 #include <time.h>
 
-void insertion(int* adress[], int n)//adress if the array and the number of elements
+void insertion(int A[], int n)//adress if the array and the number of elements
 {
-  
+  for (int i=1;i < n;++i){
+    int tmp = A[i];
+    int j = i;
+    while(j>0 && tmp < A[j]){
+      j--;
+      A[j+1]=A[j];
+    }
+    A[j]=tmp;
+  }
 }
 
 
@@ -15,10 +23,10 @@ int main()
   
   int L_N[]={10,20,50,100,200,500,1000};
   
-  for (size_t i=0,i< sizeof(L_N)/sizeof(struct L_N),++i){
-    int* l_sort[L_N[i]];
+  for (size_t i=0;i< sizeof(L_N)/sizeof(int);++i){
+    int * l_sort = malloc(L_N[i] * sizeof(int));
     
-    for(int j=0, j < L_N[i], ++j){
+    for(int j=0; j < L_N[i]; ++j){
       l_sort[j] = rand();
     }
     
@@ -27,8 +35,8 @@ int main()
     double time2= clock();
     double timedif = (time2-time1)/CLOCKS_PER_SEC;
     
-    printf("the execution time of an array of %d random is %f",L_N[i],timedif);
-    
+    printf("the execution time of an array of %d randoms is %f \n",L_N[i],timedif);
+    free(l_sort);
   }
   
 }
