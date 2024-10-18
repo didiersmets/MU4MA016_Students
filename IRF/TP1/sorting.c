@@ -32,7 +32,8 @@ void insertion_sort(int *A, int size)
 
 void merge(int *T, int p, int q, int r)
 {
-	 
+	int *S = malloc((r - p + 1)
+
 
 
 

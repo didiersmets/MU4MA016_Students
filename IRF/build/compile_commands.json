@@ -1,0 +1,22 @@
+[
+{
+  "directory": "/users/home/21400676/MU4MA016_Students/IRF/build",
+  "command": "/usr/bin/cc  -I/users/home/21400676/MU4MA016_Students/IRF/include  -o CMakeFiles/tp1.dir/src/test_queue.c.o -c /users/home/21400676/MU4MA016_Students/IRF/src/test_queue.c",
+  "file": "/users/home/21400676/MU4MA016_Students/IRF/src/test_queue.c"
+},
+{
+  "directory": "/users/home/21400676/MU4MA016_Students/IRF/build",
+  "command": "/usr/bin/cc  -I/users/home/21400676/MU4MA016_Students/IRF/include  -o CMakeFiles/tp1.dir/src/circular_buffer_queue.c.o -c /users/home/21400676/MU4MA016_Students/IRF/src/circular_buffer_queue.c",
+  "file": "/users/home/21400676/MU4MA016_Students/IRF/src/circular_buffer_queue.c"
+},
+{
+  "directory": "/users/home/21400676/MU4MA016_Students/IRF/build",
+  "command": "/usr/bin/cc    -o CMakeFiles/hello.dir/hello.c.o -c /users/home/21400676/MU4MA016_Students/IRF/hello.c",
+  "file": "/users/home/21400676/MU4MA016_Students/IRF/hello.c"
+},
+{
+  "directory": "/users/home/21400676/MU4MA016_Students/IRF/build",
+  "command": "/usr/bin/cc    -o CMakeFiles/triangle.dir/triangle.c.o -c /users/home/21400676/MU4MA016_Students/IRF/triangle.c",
+  "file": "/users/home/21400676/MU4MA016_Students/IRF/triangle.c"
+}
+]
