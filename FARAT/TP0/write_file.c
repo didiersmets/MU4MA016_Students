@@ -11,8 +11,8 @@ int main(int argc, char const *argv[])
 	double x_max = 6*M_PI;
 	double x_min = -x_max;
 	double D = (x_max - x_min)/(n-1);
-	printf("%f\n", D);
-	printf("%f\n", sin(x_min));
+	//printf("%f\n", D);
+	//printf("%f\n", sin(x_min));
 
 
 	int j = 0;
