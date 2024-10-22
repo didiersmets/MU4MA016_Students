@@ -3,6 +3,8 @@
 #include <stdbool.h>
 #include <stddef.h>
 
+#define MAX_VERTICES 1000                                                                           #define MAX_TRIANGLES 1000
+
 struct Vertex {
 	double x_cord;
 	double y_cord;
@@ -56,9 +58,67 @@ double area_mesh2D(struct Mesh2D* m)
 		cor3 = vert[(trian->gamma)];
 	}
 
-	area = 0.5 * abs((cor1->x_cord)*(cor2->y_cord) - (cor1->y_cord)(cor2->x_cord))
+	area = 0.5 * ((cor1->x_cord)*((cor2->y_cord) - (cor3->y_cord + (cor2->x_cord)*((cor3->y_cord) - (cor1->y_cord) + (cor3->x_cord)*((cor1->y_cord) - (cor2->y_cord)))
 	return area;
 }
+
+int read_mesh2D(struct Mesh2D* m, const char* filename)
+{
+	FILE *file = fopen(filename, "r");
+	if (file == NULL){
+		perror("Error opening file. \n");
+		return 1
+	}
+
+    	char line[256];
+    	int reading_vertices = 0, reading_triangles = 0;
+	
+	*vertex_count = 0;
+    	*triangle_count = 0;
+
+    	while (fgets(line, sizeof(line), file)) {
+        	// Remove leading/trailing spaces
+        	char *trimmed = strtok(line, "\n");
+
+        	// Start of vertices section
+        	if (strstr(trimmed, "Vertices")) {
+            		reading_vertices = 1;
+            		continue;
+        	}
+
+        	// Start of triangles section
+        	if (strstr(trimmed, "Triangles")) {
+            		reading_triangles = 1;
+            		reading_vertices = 0;  // Stop reading vertices
+            	continue;
+        	}
+
+        	// End of the mesh file
+        	if (strstr(trimmed, "End")) {
+            		break;
+        	}
+
+        	// Reading vertices
+        	if (reading_vertices && *vertex_count < MAX_VERTICES) {
+            		int index;
+            		sscanf(trimmed, "%f %f %d", &m->vert->x_cord, &m->vert->y_cord, &index); 
+            		(*vertex_count)++;
+        	}
+
+        	// Reading triangles
+        	if (reading_triangles && *triangle_count < MAX_TRIANGLES) {
+            		Triangle t;
+            		int dummy;
+            		sscanf(trimmed, "%d %d %d %d", &m->tri->alpha, &m->tri->beta, &m->tri->gamma, &dummy)
+            		(*triangle_count)++;
+        }
+    }
+
+    fclose(file);
+
+}
+
+
 
 int main(){
 	struct Mesh2D* m = initializa_mesh2D(4, 2);
