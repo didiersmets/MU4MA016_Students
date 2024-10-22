@@ -19,7 +19,7 @@ int void queue_dispose(struct Queue *q){
 	return front;
 }
 
-void queue_enqueue(struct Queue *q, const void *src){
+int void queue_enqueue(struct Queue *q, const void *src){
 	if (front == -1){
 
 	front = 0;
@@ -28,6 +28,7 @@ void queue_enqueue(struct Queue *q, const void *src){
 length = (length + 1) % capacity;
 fprint("capacity increased by 1");
 
+
 }
 
 int void queue_dequeue(struct Queue *q, void *dest){
@@ -35,9 +36,22 @@ int void queue_dequeue(struct Queue *q, void *dest){
 		fprint("Queue is empty");
 		return;
 	}
+	x = front;
+	if (front = length){
+		front = length = -1;
+	}
+	if (front != length){
+		front = front + 1
+	}
+	if (front = capacity){
+		front = 0;
+	}
+	return x;
 }
 
 int static void enlarge_queue_capactiy(struct Queue *q){
 	if (length>capacity)
 	
 }
+
+
