@@ -117,6 +117,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named merge_sort
+
+# Build rule for target.
+merge_sort: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 merge_sort
+.PHONY : merge_sort
+
+# fast build rule for target.
+merge_sort/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/merge_sort.dir/build.make CMakeFiles/merge_sort.dir/build
+.PHONY : merge_sort/fast
+
+#=============================================================================
 # Target rules for targets named tp1
 
 # Build rule for target.
@@ -128,6 +141,30 @@ tp1: cmake_check_build_system
 tp1/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tp1.dir/build.make CMakeFiles/tp1.dir/build
 .PHONY : tp1/fast
+
+merge_sort.o: merge_sort.c.o
+.PHONY : merge_sort.o
+
+# target to build an object file
+merge_sort.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/merge_sort.dir/build.make CMakeFiles/merge_sort.dir/merge_sort.c.o
+.PHONY : merge_sort.c.o
+
+merge_sort.i: merge_sort.c.i
+.PHONY : merge_sort.i
+
+# target to preprocess a source file
+merge_sort.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/merge_sort.dir/build.make CMakeFiles/merge_sort.dir/merge_sort.c.i
+.PHONY : merge_sort.c.i
+
+merge_sort.s: merge_sort.c.s
+.PHONY : merge_sort.s
+
+# target to generate assembly for a file
+merge_sort.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/merge_sort.dir/build.make CMakeFiles/merge_sort.dir/merge_sort.c.s
+.PHONY : merge_sort.c.s
 
 src/circular_buffer_queue.o: src/circular_buffer_queue.c.o
 .PHONY : src/circular_buffer_queue.o
@@ -185,7 +222,11 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... merge_sort"
 	@echo "... tp1"
+	@echo "... merge_sort.o"
+	@echo "... merge_sort.i"
+	@echo "... merge_sort.s"
 	@echo "... src/circular_buffer_queue.o"
 	@echo "... src/circular_buffer_queue.i"
 	@echo "... src/circular_buffer_queue.s"

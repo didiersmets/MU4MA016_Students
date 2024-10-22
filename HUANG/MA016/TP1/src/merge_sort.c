@@ -7,23 +7,29 @@
 
 void merge(int T[],int p, int q, int r)
 {
-  int n1 = q - p ;
-  int n2 = r - q - 1 ;
-  int * tmp1 = malloc(n1 * sizeof(int));
-  int * tmp2 = malloc(n2 * sizeof(int));
-
-  void * src1 = ;
-  memcpy(tmp1,);
-
-  for(int i =p; i < q,i++){
-    T[i]=tmp1[i-p]
-  }
-  for (int j = q +1; j < r,j++){
-    T[j]=tmp2[j-q-1]
+    
+  int N = r - p + 1;
+  int *S = malloc(N * sizeof(int));
+  
+  int n1 = p;
+  int n2 = q + 1;
+  
+  
+  for(int i = 0; i < N; i++){
+    
+    if(T[n1] <=T[n2]){
+      S[i]=T[n1];
+      n1++;
+    }else{
+      S[i]=T[n2];
+      n2++;
+    }
+    
   }
   
-  free(tmp1);
-  free(tmp2);
+  memcpy(T+p,S,N); 
+  
+  free(S);
 }
 
 void merge_sort(int T[],int p ,int r)
@@ -32,12 +38,14 @@ void merge_sort(int T[],int p ,int r)
     int q =(p + r )/2;
     merge_sort(T,p,q);
     merge_sort(T,q+1,r);
-    merge(T,p,q,r)
+    merge(T,p,q,r);
   }
 }
 
 int main()
 {
+  FILE *f;
+  f = fopen("data_merge.txt","w+");
   
   int L_N[]={10,20,50,100,200,500,1000};
   
@@ -49,12 +57,17 @@ int main()
     }
     
     double time1= clock();
-    merge(l_sort,L_N[i]);
+    
+    
+    merge_sort(l_sort,L_N[i]/2,L_N[i]);
     double time2= clock();
     double timedif = (time2-time1)/CLOCKS_PER_SEC;
     
-    printf("the execution time of an array of %d random is %f \n",L_N[i],timedif);
-    free(l_sort)
+    //printf("the execution time of an array of %d random is %f \n",L_N[i],timedif);
+    
+    fprintf(f,"%d %f \n",L_N[i],timedif);
+    
+    free(l_sort);
   }
   
 }

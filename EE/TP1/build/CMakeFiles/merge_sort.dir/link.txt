@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/merge_sort.dir/merge_sort.c.o -o merge_sort 

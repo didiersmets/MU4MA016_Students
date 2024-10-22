@@ -20,8 +20,9 @@ void bubble(int *B, int size_A)
 
 int main(int argc, char**ardv)
 {
-	int N = {10, 20, 50, 100, 200, 500, 1000}
-	for (n in N){
+	int N = {10, 20, 50, 100, 200, 500, 1000};
+	for (int i = 0; i<7; i++){
+		void n = N[i];
 		int T=malloc(n*size(int));
 		for (i=0; i<n; i++){
 			T[i] = rand();

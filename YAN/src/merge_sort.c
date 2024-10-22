@@ -6,7 +6,6 @@
 //sorted one in S, try to copy it in t, swap will be easier
 
 void Merge(int* from , int p, int q, int r, int* to){
-	size_t n = r-p+1;
 	size_t t1 = p;
 	size_t t2 = q+1;
 	printf("verify\n");
@@ -20,7 +19,7 @@ void Merge(int* from , int p, int q, int r, int* to){
 	}
 	printf("\n");
 	printf("Merge");
-	for(size_t k=0; k<n;k++){
+	for(size_t k=p; k<r+1;k++){
 		if( (t1<q+1) && (t2==r+1 || from[t1]<= from[t2])){
 			to[k] = from[t1];
 			t1++;

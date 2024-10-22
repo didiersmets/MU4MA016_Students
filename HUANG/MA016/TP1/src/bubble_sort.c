@@ -28,6 +28,9 @@ int main()
   
   int L_N[]={10,20,50,100,200,500,1000};
   
+  FILE * f;
+  f=fopen("data_bubble","w+");
+  
   for (size_t i=0;i< sizeof(L_N)/sizeof(int);++i){
     int * l_sort=malloc(L_N[i] * sizeof(int));
     
@@ -40,8 +43,9 @@ int main()
     double time2= clock();
     double timedif = (time2-time1)/CLOCKS_PER_SEC;
     
-    printf("the execution time of an array of %d random is %f \n",L_N[i],timedif);
-    free(l_sort)
+    //printf("the execution time of an array of %d random is %f \n",L_N[i],timedif);
+    fprintf(f,"%d %f \n",L_N[i],timedif);
+    free(l_sort);
   }
   
 }
