@@ -1,12 +1,12 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 
 void bubble_sort(int *A, int size) 
 {
 	for (int i = 0; i < size; i++)
 	{       
-		int j = 0;
-		while (j<size-i)
+		for (int j = 0; j<size-i; j++)
 		{
 			if (A[j] > A[j+1])
 			{
@@ -21,18 +21,32 @@ void bubble_sort(int *A, int size)
 
 int main(int argc, char** argv)
 {
-	int N = atoi(argv[1]);
-	int *A =(int *)malloc(N*sizeof(int));
-	for (int i = 0; i<N; i++)
+
+	int N[8];
+	N[0] = 10;
+	N[1] = 20;
+	N[2] = 50;
+	N[3] = 100;
+	N[4] = 200;
+	N[5] = 500;
+	N[6] = 1000;
+	N[7] = 1000000;
+	srand(time(NULL));
+	for (int i = 0; i<8; i++)
 	{
-		A[i] = rand();
+		int *A = (int *)malloc(N[i]*sizeof(int));
+		for (int j = 0; j<N[i]; j++)
+		{
+			A[j] = rand();
+		}
+		clock_t begin = clock();
+		bubble_sort(A, N[i]);
+		clock_t end = clock();
+		unsigned long time_spent = (end - begin)*1000/CLOCKS_PER_SEC;
+		printf("bubble_sort : %ld ms\n", time_spent);
+		free(A);
 	}
-	bubble_sort(A, N);
-	for (int i =0; i<N; i++)
-	{
-		printf("%d",A[i]);
-	}
-	printf("\n");
+	return 0;
 }
 
 
