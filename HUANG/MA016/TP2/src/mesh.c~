@@ -1,0 +1,64 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+
+struct Vertex
+{
+  double coor_x;
+  double coor_y;
+}
+
+struct Triangle
+{
+  Vertex point_1;
+  Vertex point_2;
+  Vertex point_3;
+}
+
+struct Mesh2D
+{
+  int nv;//number of vertices
+  Vertex* vert;
+  int nt;//number of triangles
+  Triangle* tri;
+}
+
+int init_mesh2D(struct Mesh2D* m,int vtx_capacity, int tri_capacity)
+{
+  struct Mesh2D mesh = malloc(sizeof(struct Mesh2D));
+  if (m != NULL){
+    m->nv = 0;
+    m->nt = 0;
+    m->Vertex = malloc(vtx_capacity *sizeof(struct Vertex));
+    m->Triangle = malloc(tri_capacity * sizeof(struct Triangle));
+  }
+  return 0
+}
+
+void dispose_mesh2D(struct Mesh2D* m)
+{
+  if (m!= NULL){
+    free(m->Vertex);
+    free(m->Triangle);
+    free(m)
+  }
+}
+
+double area_mesh2D(struct Mesh2D* m)
+{
+  if(m->tri == NULL){
+    return 0
+  }
+  
+  double area=0;
+
+  for(int j=0,j<m->nt,j++){
+    struct Vertex* coord_1=m->tri[j]->point_1;
+    struct Vertex* coord_2=m->tri[j]->point_2;
+    struct Vertex* coord_3=m->tri[j]->point_3;
+    double surface =0.5* ((coord_2->coor_x - coord_1-> coor_x)*(coord_3->coor_y - coord_1->coor_y)-(coord_2->coor_y - coord_1-> coor_y)*(coord_3->coor_x - coord_1-> coor_x));
+    area += surface; 
+  }
+  return area;
+}
+
