@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/bubble.dir/bubble_sort.c.o -o bubble 

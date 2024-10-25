@@ -18,17 +18,6 @@ void insertion_sort(int *A, int size)
 
 int main(int argc, char** argv)
 {
-	int N = atoi(argv[1]);
-	int *A = (int *)malloc(N*sizeof(int));
-	for (int i = 0; i<N; i++)
-	{
-		A[i] = rand();
-	}
-	insertion_sort(A,N);
-	for (int i = 0; i<N; i++)
-	{
-		printf("%d", A[i]);
-	}
-	printf("\n");
+
 }
 
