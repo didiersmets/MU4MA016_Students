@@ -8,6 +8,14 @@ struct Vertex{
 
 typedef struct Vertex Vertex ;
 
+struct Vertex3D{
+	double x;
+	double y;
+	double z;
+};
+
+typedef struct Vertex3D Vertex3D ;
+
 struct Triangle{
 	int a;
 	int b;
@@ -24,6 +32,15 @@ struct Mesh2D{
 };
 
 typedef struct Mesh2D Mesh2D;
+
+struct Mesh3D{
+	int nv;
+	Vertex3D* vert;
+	int nt;
+	Triangle* tri;
+};
+
+typedef struct Mesh3D Mesh3D;
 
 int initialize_mesh2D( Mesh2D* m, int vtx_capacity, int tri_capacity);
 
