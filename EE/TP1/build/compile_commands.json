@@ -1,6 +1,11 @@
 [
 {
   "directory": "/users/home/21106595/MU4MA016_Students/EE/TP1/build",
+  "command": "/usr/bin/cc    -o CMakeFiles/merge_sort.dir/merge_sort.c.o -c /users/home/21106595/MU4MA016_Students/EE/TP1/merge_sort.c",
+  "file": "/users/home/21106595/MU4MA016_Students/EE/TP1/merge_sort.c"
+},
+{
+  "directory": "/users/home/21106595/MU4MA016_Students/EE/TP1/build",
   "command": "/usr/bin/cc  -I/users/home/21106595/MU4MA016_Students/EE/TP1/include  -o CMakeFiles/tp1.dir/src/test_queue.c.o -c /users/home/21106595/MU4MA016_Students/EE/TP1/src/test_queue.c",
   "file": "/users/home/21106595/MU4MA016_Students/EE/TP1/src/test_queue.c"
 },
