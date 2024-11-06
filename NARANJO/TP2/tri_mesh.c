@@ -71,7 +71,7 @@ int read_mesh2D(struct Mesh2D* m, const char* filename)
 		perror("Error opening file. \n");
 		return 1;
 	}
-
+	// Need to creat a string that should store the content of the file
     	char line[256];
     	int reading_vertices = 0, reading_triangles = 0;
 	
@@ -80,9 +80,12 @@ int read_mesh2D(struct Mesh2D* m, const char* filename)
 
 	while (fgets(line, sizeof(line), file)) {
         	// Remove leading/trailing spaces
+		//  strtok() method splits str[] according to given delimiters and returns the next token
         	char *trimmed = strtok(line, "\n");
 
         	// Start of vertices section
+		// Takes two strings s1 and s2 as arguments and finds the first occurrence 
+		// of the string s2 in the string s1.
         	if (strstr(trimmed, "Vertices")) {
             		reading_vertices = 1;
             		continue;
@@ -103,6 +106,7 @@ int read_mesh2D(struct Mesh2D* m, const char* filename)
         	// Reading vertices
         	if (reading_vertices && vertex_count < m->nv) {
             		int index;
+			// sscanf() is used for parsing the formatted strings by extracting data from a string.
             		sscanf(trimmed, "%lf %lf %d", &m->vert->x_cord, &m->vert->y_cord, &index); 
             		(vertex_count)++;
         	}
