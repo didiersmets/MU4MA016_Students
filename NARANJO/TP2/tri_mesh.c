@@ -123,7 +123,7 @@ int read_mesh2D(struct Mesh2D* m, const char* filename)
 
 }
 
-int mesh2D_to_gnuplot(struct Mesh2D* m, const char* filename)
+int mesh2D_to_gnuplot(struct Mesh2D* mesh, const char* filename)
 {
 	// Open the file for writing
 	FILE* file = fopen(filename, "w");
@@ -131,31 +131,19 @@ int mesh2D_to_gnuplot(struct Mesh2D* m, const char* filename)
         	return -1; 
     	}
 	
-	// Write the vertices
-	for (int i = 0; i < m->nv; i++) {
-        	fprintf(file, "%lf %lf\n", m->vert[i].x_cord, m->vert[i].y_cord);
+	// Write vertices section
+    	fprintf(file, "# Vertices\n");
+    	for (int i = 0; i < mesh->nv; i++) {
+        	fprintf(file, "%d %f %f\n", i+1, mesh->vert[i].x_cord, mesh->vert[i].y_cord);
     	}
-	
-	//Write the triangles 
-	for (int i = 0; i < m->nt; i++) {
-        	int alpha = m->tri[i].alpha;
-        	int beta = m->tri[i].beta;
-        	int gamma = m->tri[i].gamma;
-        
-        	// Edge 1: alpha -> beta
-        	fprintf(file, "%lf %lf\n", m->vert[alpha].x_cord, m->vert[alpha].y_cord);
-        	fprintf(file, "%lf %lf\n", m->vert[beta].x_cord, m->vert[beta].y_cord);
-        	fprintf(file, "\n"); // Separate edges with a blank line
 
-        	// Edge 2: beta -> gamma
-        	fprintf(file, "%lf %lf\n", m->vert[beta].x_cord, m->vert[beta].y_cord);
-        	fprintf(file, "%lf %lf\n", m->vert[gamma].x_cord, m->vert[gamma].y_cord);
-        	fprintf(file, "\n"); // Separate edges with a blank line
-
-        	// Edge 3: gamma -> alpha
-        	fprintf(file, "%lf %lf\n", m->vert[gamma].x_cord, m->vert[gamma].y_cord);
-        	fprintf(file, "%lf %lf\n", m->vert[alpha].x_cord, m->vert[alpha].y_cord);
-        	fprintf(file, "\n"); // Separate edges with a blank line
+    	// Write triangles section
+    	fprintf(file, "\n# Triangles\n");
+    	for (int i = 0; i < mesh->nt; i++) {
+        	fprintf(file, "%d %d %d\n", 
+        	        mesh->tri[i].alpha + 1, 
+                	mesh->tri[i].beta + 1, 
+                	mesh->tri[i].gamma + 1);
     	}
 
 	// Close the file
