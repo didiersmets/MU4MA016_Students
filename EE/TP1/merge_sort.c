@@ -42,26 +42,25 @@ void merge_sort(int *A, size_t nA)
 
 int main(int argc, char**argv)
 {
-	int N[7];
-	N[0] = 10;
-	N[1] = 20;
-	N[3] = 50;
-	N[4] = 100;
-	N[5] = 500;
-	N[6] = 1000;
-	for (int n = 0; n < 7; n ++){
-		int *T = malloc(N[n] * sizeof(int));
+	FILE *fptr = fopen("data.txt", "w");
+	int N[] = {10,20,50,100,200,500,1000};
+	for (int j = 0; j < 7; j ++){
+		int *T = malloc(N[j] * sizeof(int));
 		srand(time(NULL));
-		for (int i = 0; i < n; i ++){
+		for (int i = 0; i < N[j]; i ++){
 			T[i] = rand() % 100 + 1;
-			printf(" %d", T[i]);
 		}
-		printf(" \n");
 		clock_t begin = clock();
-		merge_sort(T, n);
+		merge_sort(T, N[j]);
 		clock_t end = clock();
 		double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-		printf( );
+		fprintf(fptr, " %d", N[j]);
+		fprintf(fptr, " %f", time_spent);
+		fprintf(fptr," \n");
+		printf(" %f", time_spent);
+		free(T);
 	}
+	printf(" \n");
+	fclose(fptr);
 	return 0;
 }
