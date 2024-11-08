@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
-#include <time.h>
 
 void bubble(int *B, int size_A)
 {
@@ -15,24 +14,32 @@ void bubble(int *B, int size_A)
 				B[i+1] = temp;
 			}else{
 				i++;
+
 			}
 		}
 	}
 }
 
-int main (int argc, char **argv)
-{
-	int n = atoi(argv[1]);
-	int *T = malloc(n * sizeof(int));
-	srand(time(NULL));
-	for (int i = 0; i < n; i ++){
-		T[i] = rand() % 100 + 1;
-	}
-	bubble (T, n);
-	for (int i = 0; i < n; i ++){
-		printf(" %d", T[i]);
-	}
-	printf(" \n");
-	free(T);
+int main (int argc, char **argv){
+	FILE *fptr = fopen("data.txt", "w");
+	int N[] = {10,20,50,100,200,500,1000};                                  
+        for (int j = 0; j < 7; j ++){                                           
+		int *T = malloc(N[j] * sizeof(int));                            
+                srand(time(NULL));                                              
+                for (int i = 0; i < N[j]; i ++){                                
+                        T[i] = rand() % 100 + 1;                                
+                }                                                               
+                clock_t begin = clock();                                       
+                bubble(T, N[j]);                                            
+                clock_t end = clock();                                          
+                double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;     
+                fprintf(fptr, " %d", N[j]);                                     
+                fprintf(fptr, " %f", time_spent);                               
+                fprintf(fptr," \n");                                            
+                printf(" %f", time_spent);                                      
+                free(T);                                                        
+        }                                                                       
+        printf(" \n");                                                          
+        fclose(fptr);                                                           
 	return 0;
 }
