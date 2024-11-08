@@ -130,6 +130,19 @@ merge_sort/fast:
 .PHONY : merge_sort/fast
 
 #=============================================================================
+# Target rules for targets named bubble
+
+# Build rule for target.
+bubble: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 bubble
+.PHONY : bubble
+
+# fast build rule for target.
+bubble/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bubble.dir/build.make CMakeFiles/bubble.dir/build
+.PHONY : bubble/fast
+
+#=============================================================================
 # Target rules for targets named tp1
 
 # Build rule for target.
@@ -141,6 +154,30 @@ tp1: cmake_check_build_system
 tp1/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tp1.dir/build.make CMakeFiles/tp1.dir/build
 .PHONY : tp1/fast
+
+bubble_sort.o: bubble_sort.c.o
+.PHONY : bubble_sort.o
+
+# target to build an object file
+bubble_sort.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bubble.dir/build.make CMakeFiles/bubble.dir/bubble_sort.c.o
+.PHONY : bubble_sort.c.o
+
+bubble_sort.i: bubble_sort.c.i
+.PHONY : bubble_sort.i
+
+# target to preprocess a source file
+bubble_sort.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bubble.dir/build.make CMakeFiles/bubble.dir/bubble_sort.c.i
+.PHONY : bubble_sort.c.i
+
+bubble_sort.s: bubble_sort.c.s
+.PHONY : bubble_sort.s
+
+# target to generate assembly for a file
+bubble_sort.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bubble.dir/build.make CMakeFiles/bubble.dir/bubble_sort.c.s
+.PHONY : bubble_sort.c.s
 
 merge_sort.o: merge_sort.c.o
 .PHONY : merge_sort.o
@@ -222,8 +259,12 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... bubble"
 	@echo "... merge_sort"
 	@echo "... tp1"
+	@echo "... bubble_sort.o"
+	@echo "... bubble_sort.i"
+	@echo "... bubble_sort.s"
 	@echo "... merge_sort.o"
 	@echo "... merge_sort.i"
 	@echo "... merge_sort.s"

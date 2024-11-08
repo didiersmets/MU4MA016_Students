@@ -71,7 +71,7 @@ int read_mesh2D(struct Mesh2D* m, const char* filename)
 		perror("Error opening file. \n");
 		return 1;
 	}
-
+	// Need to creat a string that should store the content of the file
     	char line[256];
     	int reading_vertices = 0, reading_triangles = 0;
 	
@@ -80,9 +80,12 @@ int read_mesh2D(struct Mesh2D* m, const char* filename)
 
 	while (fgets(line, sizeof(line), file)) {
         	// Remove leading/trailing spaces
+		//  strtok() method splits str[] according to given delimiters and returns the next token
         	char *trimmed = strtok(line, "\n");
 
         	// Start of vertices section
+		// Takes two strings s1 and s2 as arguments and finds the first occurrence 
+		// of the string s2 in the string s1.
         	if (strstr(trimmed, "Vertices")) {
             		reading_vertices = 1;
             		continue;
@@ -103,6 +106,7 @@ int read_mesh2D(struct Mesh2D* m, const char* filename)
         	// Reading vertices
         	if (reading_vertices && vertex_count < m->nv) {
             		int index;
+			// sscanf() is used for parsing the formatted strings by extracting data from a string.
             		sscanf(trimmed, "%lf %lf %d", &m->vert->x_cord, &m->vert->y_cord, &index); 
             		(vertex_count)++;
         	}
@@ -119,22 +123,72 @@ int read_mesh2D(struct Mesh2D* m, const char* filename)
 
 }
 
+int mesh2D_to_gnuplot(struct Mesh2D* mesh, const char* filename)
+{
+	// Open the file for writing
+	FILE* file = fopen(filename, "w");
+	if (file == NULL) {
+        	return -1; 
+    	}
+	
+	// Write vertices section
+    	fprintf(file, "# Vertices\n");
+    	for (int i = 0; i < mesh->nv; i++) {
+        	fprintf(file, "%d %f %f\n", i+1, mesh->vert[i].x_cord, mesh->vert[i].y_cord);
+    	}
 
+    	// Write triangles section
+    	fprintf(file, "\n# Triangles\n");
+    	for (int i = 0; i < mesh->nt; i++) {
+        	fprintf(file, "%d %d %d\n", 
+        	        mesh->tri[i].alpha + 1, 
+                	mesh->tri[i].beta + 1, 
+                	mesh->tri[i].gamma + 1);
+    	}
 
+	// Close the file
+    	fclose(file);
+    	return 0;  
+}
+	
 int main(){
 
-	struct Mesh2D* m = (struct Mesh2D*) malloc(sizeof(struct Mesh2D));
-	m = initialize_mesh2D(4,2);
+	// Example: Initialize a Mesh2D with 4 vertices and 2 triangles
+	// struct Mesh2D* m = (struct Mesh2D*) malloc(sizeof(struct Mesh2D));
+	// m = initialize_mesh2D(4,2);
 
-	m->vert[0] = (struct Vertex) {0.0, 0.0};
-	m->vert[1] = (struct Vertex) {0.0, 1.0};
-	m->vert[2] = (struct Vertex) {1.0, 1.0};
-	m->vert[3] = (struct Vertex) {1.0, 0.0};
-	m->tri[0] = (struct Triangle) {0, 1, 2};
-	m->tri[1] = (struct Triangle) {3, 0, 2};
-	double area = area_mesh2D(m);
-	printf("area: %f \n", area);
-	dispose_mesh2D(m);
+	// m->vert[0] = (struct Vertex) {0.0, 0.0};
+	// m->vert[1] = (struct Vertex) {0.0, 1.0};
+	// m->vert[2] = (struct Vertex) {1.0, 1.0};
+	// m->vert[3] = (struct Vertex) {1.0, 0.0};
+	// m->tri[0] = (struct Triangle) {0, 1, 2};
+	// m->tri[1] = (struct Triangle) {3, 0, 2};
+	// double area = area_mesh2D(m);
+	// printf("area: %f \n", area);
+	// dispose_mesh2D(m);
 
-	return 0;
+
+	// Example: Initialize a Mesh2D with 5 vertices and 2 triangles
+    	struct Mesh2D* mesh = initialize_mesh2D(5, 2);
+
+    	
+    	mesh->vert[0] = (struct Vertex) {0.0, 0.0};
+    	mesh->vert[1] = (struct Vertex) {1.0, 0.0};
+    	mesh->vert[2] = (struct Vertex) {1.0, 1.0};
+    	mesh->vert[3] = (struct Vertex) {0.0, 1.0};
+    	mesh->vert[4] = (struct Vertex) {0.5, 0.5};
+    	mesh->tri[0] = (struct Triangle) {0, 1, 4}; 
+    	mesh->tri[1] = (struct Triangle) {1, 2, 4}; 
+
+    	// Write the mesh data to a file for gnuplot
+    	if (mesh2D_to_gnuplot(mesh, "mesh_data.dat") == 0) {
+        	printf("Data successfully written to mesh_data.dat\n");
+    	}
+	else {
+        	printf("Error writing data to file\n");
+    	}
+
+    	dispose_mesh2D(mesh);
+
+    	return 0;
 }

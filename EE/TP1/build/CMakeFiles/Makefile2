@@ -64,6 +64,7 @@ CMAKE_BINARY_DIR = /users/home/21106595/MU4MA016_Students/EE/TP1/build
 
 # The main recursive "all" target.
 all: CMakeFiles/merge_sort.dir/all
+all: CMakeFiles/bubble.dir/all
 all: CMakeFiles/tp1.dir/all
 .PHONY : all
 
@@ -73,6 +74,7 @@ preinstall:
 
 # The main recursive "clean" target.
 clean: CMakeFiles/merge_sort.dir/clean
+clean: CMakeFiles/bubble.dir/clean
 clean: CMakeFiles/tp1.dir/clean
 .PHONY : clean
 
@@ -83,7 +85,7 @@ clean: CMakeFiles/tp1.dir/clean
 CMakeFiles/merge_sort.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/merge_sort.dir/build.make CMakeFiles/merge_sort.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/merge_sort.dir/build.make CMakeFiles/merge_sort.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/users/home/21106595/MU4MA016_Students/EE/TP1/build/CMakeFiles --progress-num=1,2 "Built target merge_sort"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/users/home/21106595/MU4MA016_Students/EE/TP1/build/CMakeFiles --progress-num=3,4 "Built target merge_sort"
 .PHONY : CMakeFiles/merge_sort.dir/all
 
 # Build rule for subdir invocation for target.
@@ -103,13 +105,39 @@ CMakeFiles/merge_sort.dir/clean:
 .PHONY : CMakeFiles/merge_sort.dir/clean
 
 #=============================================================================
+# Target rules for target CMakeFiles/bubble.dir
+
+# All Build rule for target.
+CMakeFiles/bubble.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bubble.dir/build.make CMakeFiles/bubble.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bubble.dir/build.make CMakeFiles/bubble.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/users/home/21106595/MU4MA016_Students/EE/TP1/build/CMakeFiles --progress-num=1,2 "Built target bubble"
+.PHONY : CMakeFiles/bubble.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/bubble.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /users/home/21106595/MU4MA016_Students/EE/TP1/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/bubble.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /users/home/21106595/MU4MA016_Students/EE/TP1/build/CMakeFiles 0
+.PHONY : CMakeFiles/bubble.dir/rule
+
+# Convenience name for target.
+bubble: CMakeFiles/bubble.dir/rule
+.PHONY : bubble
+
+# clean rule for target.
+CMakeFiles/bubble.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bubble.dir/build.make CMakeFiles/bubble.dir/clean
+.PHONY : CMakeFiles/bubble.dir/clean
+
+#=============================================================================
 # Target rules for target CMakeFiles/tp1.dir
 
 # All Build rule for target.
 CMakeFiles/tp1.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tp1.dir/build.make CMakeFiles/tp1.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tp1.dir/build.make CMakeFiles/tp1.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/users/home/21106595/MU4MA016_Students/EE/TP1/build/CMakeFiles --progress-num=3,4,5 "Built target tp1"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/users/home/21106595/MU4MA016_Students/EE/TP1/build/CMakeFiles --progress-num=5,6,7 "Built target tp1"
 .PHONY : CMakeFiles/tp1.dir/all
 
 # Build rule for subdir invocation for target.
