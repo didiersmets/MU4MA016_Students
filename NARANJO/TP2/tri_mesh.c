@@ -131,24 +131,68 @@ int mesh2D_to_gnuplot(struct Mesh2D* mesh, const char* filename)
         	return -1; 
     	}
 	
-	// Write vertices section
-    	fprintf(file, "# Vertices\n");
-    	for (int i = 0; i < mesh->nv; i++) {
-        	fprintf(file, "%d %f %f\n", i+1, mesh->vert[i].x_cord, mesh->vert[i].y_cord);
-    	}
 
-    	// Write triangles section
-    	fprintf(file, "\n# Triangles\n");
+	fprintf(file, "\n# Triangle\n");
+    	
     	for (int i = 0; i < mesh->nt; i++) {
-        	fprintf(file, "%d %d %d\n", 
-        	        mesh->tri[i].alpha + 1, 
-                	mesh->tri[i].beta + 1, 
-                	mesh->tri[i].gamma + 1);
+        	struct Triangle t = mesh->tri[i];
+        
+        	struct Vertex v1 = mesh->vert[t.alpha];
+        	struct Vertex v2 = mesh->vert[t.beta];
+        	struct Vertex v3 = mesh->vert[t.gamma];
+
+		
+        	fprintf(file, "%f %f\n", v1.x_cord, v1.y_cord);
+        	fprintf(file, "%f %f\n", v2.x_cord, v2.y_cord);
+
+		fprintf(file, "\n");
+
+		fprintf(file, "%f %f\n", v2.x_cord, v2.y_cord);
+            	fprintf(file, "%f %f\n", v3.x_cord, v3.y_cord);
+
+        	fprintf(file, "\n");
+
+		fprintf(file, "%f %f\n", v1.x_cord, v1.y_cord);
+                fprintf(file, "%f %f\n", v3.x_cord, v3.y_cord);
+
+		fprintf(file, "\n");
     	}
 
 	// Close the file
-    	fclose(file);
+	fclose(file);
     	return 0;  
+}
+
+int write_mesh2D(struct Mesh2D* mesh, const char*filename)
+{
+        // Open the file for writing
+        FILE* file = fopen(filename, "w");
+        if (file == NULL) {
+                return -1;
+        }
+	
+	fprintf(file, "MeshVersionFormatted 2\n");
+
+	fprintf(file, "Dimension 2\n");
+
+
+	fprintf(file, "Vertices %d\n", mesh->nv);
+    	for (int i = 0; i < mesh->nv; i++) {
+        	fprintf(file, "%f %f\n", mesh->vert[i].x_cord, mesh->vert[i].y_cord);
+    	}
+
+
+        fprintf(file, "\n Triangles %d\n", mesh->nt);
+        for (int i = 0; i < mesh->nt; i++) {
+                struct Triangle t = mesh->tri[i];
+		fprintf(file, "%d %d %d\n", t.alpha, t.beta, t.gamma);
+
+        }
+	
+	fprintf(file, "End");
+        // Close the file
+        fclose(file);
+        return 0;
 }
 	
 int main(){
@@ -181,8 +225,8 @@ int main(){
     	mesh->tri[1] = (struct Triangle) {1, 2, 4}; 
 
     	// Write the mesh data to a file for gnuplot
-    	if (mesh2D_to_gnuplot(mesh, "mesh_data.dat") == 0) {
-        	printf("Data successfully written to mesh_data.dat\n");
+    	if (write_mesh2D(mesh, "write_m.mesh") == 0) {
+        	printf("Data successfully written to write_m.mesh\n");
     	}
 	else {
         	printf("Error writing data to file\n");

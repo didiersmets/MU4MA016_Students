@@ -4,9 +4,10 @@
 #include<string.h>
 #include<stdio.h>
 #include<circular_buffer_queue.h>
-
+#include<time.h>
 
 int main() {
+	srand(time(NULL));
 	struct Queue* queue =  queue_init(sizeof(int), 10);
 	
 	int n;
@@ -21,6 +22,7 @@ int main() {
 			queue_enqueue(queue, &p);
 			if (queue_length(queue) > l_max) {
 				l_max = queue_length(queue);
+				printf("Lmax to : %d\n", l_max);
 			}
 		} else {
 			int dummy;
