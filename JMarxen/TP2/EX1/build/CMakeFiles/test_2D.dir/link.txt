@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/test_2D.dir/src/test_2D.c.o CMakeFiles/test_2D.dir/src/mesh_2D.c.o -o test_2D
