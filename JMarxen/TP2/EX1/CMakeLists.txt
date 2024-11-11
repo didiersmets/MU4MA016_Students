@@ -1,7 +1,0 @@
-cmake_minimum_required(VERSION 3.12)
-project(EX1)
-add_executable(test_2D src/test_2D.c src/mesh_2D.c)
-add_executable(test_3D src/test_3D.c src/mesh_3D.c)
-target_include_directories(test_2D PUBLIC include)
-target_include_directories(test_3D PUBLIC include)
-target_link_libraries(test_3D m)
