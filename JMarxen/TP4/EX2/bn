@@ -1,0 +1,7 @@
+#include "priority_queue.h"
+
+#include <stdbool.h>
+#include <stdlib.h>
+#include <string.h>
+
+int priority_queue_init(struct priority_queue *q) {}
