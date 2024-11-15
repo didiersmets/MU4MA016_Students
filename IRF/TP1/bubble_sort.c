@@ -15,7 +15,7 @@ void bubble_sort(int *A, int size)
 	}
 }
 
-int main
+	
 
 
 
