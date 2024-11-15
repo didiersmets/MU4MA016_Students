@@ -1,8 +1,6 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.22.1)
 
-project(TP0)
+project(Triangles)
 
 
-add_executable(hello hello.c)
-
-add_executable(PascalsTri PascalsTri.c)
+add_executable(triangle src/triangular_meshes.c)
