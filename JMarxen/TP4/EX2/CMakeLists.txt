@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.12)
-project(EX1)
-add_executable(test_queue src/test_queue.c src/priority_queue.c)
-target_include_directories(test_queue PUBLIC include)
+project(EX2)
+add_executable(test_tree src/test_tree.c src/avl_tree.c)
+target_include_directories(test_tree PUBLIC include)
+target_compile_options(test_tree PUBLIC -Wall -Wextra)

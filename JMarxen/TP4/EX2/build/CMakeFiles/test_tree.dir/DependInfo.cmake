@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/janmarxen/MU4MA016_Students/JMarxen/TP4/EX1/src/priority_queue.c" "CMakeFiles/test_queue.dir/src/priority_queue.c.o" "gcc" "CMakeFiles/test_queue.dir/src/priority_queue.c.o.d"
-  "/home/janmarxen/MU4MA016_Students/JMarxen/TP4/EX1/src/test_queue.c" "CMakeFiles/test_queue.dir/src/test_queue.c.o" "gcc" "CMakeFiles/test_queue.dir/src/test_queue.c.o.d"
+  "/home/janmarxen/MU4MA016_Students/JMarxen/TP4/EX2/src/avl_tree.c" "CMakeFiles/test_tree.dir/src/avl_tree.c.o" "gcc" "CMakeFiles/test_tree.dir/src/avl_tree.c.o.d"
+  "/home/janmarxen/MU4MA016_Students/JMarxen/TP4/EX2/src/test_tree.c" "CMakeFiles/test_tree.dir/src/test_tree.c.o" "gcc" "CMakeFiles/test_tree.dir/src/test_tree.c.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

@@ -57,10 +57,10 @@ RM = /snap/cmake/1425/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/janmarxen/MU4MA016_Students/JMarxen/TP4/EX1
+CMAKE_SOURCE_DIR = /home/janmarxen/MU4MA016_Students/JMarxen/TP4/EX2
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/janmarxen/MU4MA016_Students/JMarxen/TP4/EX1/build
+CMAKE_BINARY_DIR = /home/janmarxen/MU4MA016_Students/JMarxen/TP4/EX2/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/janmarxen/MU4MA016_Students/JMarxen/TP4/EX1/build/CMakeFiles /home/janmarxen/MU4MA016_Students/JMarxen/TP4/EX1/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/janmarxen/MU4MA016_Students/JMarxen/TP4/EX2/build/CMakeFiles /home/janmarxen/MU4MA016_Students/JMarxen/TP4/EX2/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/janmarxen/MU4MA016_Students/JMarxen/TP4/EX1/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/janmarxen/MU4MA016_Students/JMarxen/TP4/EX2/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -117,65 +117,65 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named test_queue
+# Target rules for targets named test_tree
 
 # Build rule for target.
-test_queue: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_queue
-.PHONY : test_queue
+test_tree: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_tree
+.PHONY : test_tree
 
 # fast build rule for target.
-test_queue/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_queue.dir/build.make CMakeFiles/test_queue.dir/build
-.PHONY : test_queue/fast
+test_tree/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_tree.dir/build.make CMakeFiles/test_tree.dir/build
+.PHONY : test_tree/fast
 
-src/priority_queue.o: src/priority_queue.c.o
-.PHONY : src/priority_queue.o
-
-# target to build an object file
-src/priority_queue.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_queue.dir/build.make CMakeFiles/test_queue.dir/src/priority_queue.c.o
-.PHONY : src/priority_queue.c.o
-
-src/priority_queue.i: src/priority_queue.c.i
-.PHONY : src/priority_queue.i
-
-# target to preprocess a source file
-src/priority_queue.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_queue.dir/build.make CMakeFiles/test_queue.dir/src/priority_queue.c.i
-.PHONY : src/priority_queue.c.i
-
-src/priority_queue.s: src/priority_queue.c.s
-.PHONY : src/priority_queue.s
-
-# target to generate assembly for a file
-src/priority_queue.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_queue.dir/build.make CMakeFiles/test_queue.dir/src/priority_queue.c.s
-.PHONY : src/priority_queue.c.s
-
-src/test_queue.o: src/test_queue.c.o
-.PHONY : src/test_queue.o
+src/avl_tree.o: src/avl_tree.c.o
+.PHONY : src/avl_tree.o
 
 # target to build an object file
-src/test_queue.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_queue.dir/build.make CMakeFiles/test_queue.dir/src/test_queue.c.o
-.PHONY : src/test_queue.c.o
+src/avl_tree.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_tree.dir/build.make CMakeFiles/test_tree.dir/src/avl_tree.c.o
+.PHONY : src/avl_tree.c.o
 
-src/test_queue.i: src/test_queue.c.i
-.PHONY : src/test_queue.i
+src/avl_tree.i: src/avl_tree.c.i
+.PHONY : src/avl_tree.i
 
 # target to preprocess a source file
-src/test_queue.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_queue.dir/build.make CMakeFiles/test_queue.dir/src/test_queue.c.i
-.PHONY : src/test_queue.c.i
+src/avl_tree.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_tree.dir/build.make CMakeFiles/test_tree.dir/src/avl_tree.c.i
+.PHONY : src/avl_tree.c.i
 
-src/test_queue.s: src/test_queue.c.s
-.PHONY : src/test_queue.s
+src/avl_tree.s: src/avl_tree.c.s
+.PHONY : src/avl_tree.s
 
 # target to generate assembly for a file
-src/test_queue.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_queue.dir/build.make CMakeFiles/test_queue.dir/src/test_queue.c.s
-.PHONY : src/test_queue.c.s
+src/avl_tree.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_tree.dir/build.make CMakeFiles/test_tree.dir/src/avl_tree.c.s
+.PHONY : src/avl_tree.c.s
+
+src/test_tree.o: src/test_tree.c.o
+.PHONY : src/test_tree.o
+
+# target to build an object file
+src/test_tree.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_tree.dir/build.make CMakeFiles/test_tree.dir/src/test_tree.c.o
+.PHONY : src/test_tree.c.o
+
+src/test_tree.i: src/test_tree.c.i
+.PHONY : src/test_tree.i
+
+# target to preprocess a source file
+src/test_tree.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_tree.dir/build.make CMakeFiles/test_tree.dir/src/test_tree.c.i
+.PHONY : src/test_tree.c.i
+
+src/test_tree.s: src/test_tree.c.s
+.PHONY : src/test_tree.s
+
+# target to generate assembly for a file
+src/test_tree.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_tree.dir/build.make CMakeFiles/test_tree.dir/src/test_tree.c.s
+.PHONY : src/test_tree.c.s
 
 # Help Target
 help:
@@ -185,13 +185,13 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... test_queue"
-	@echo "... src/priority_queue.o"
-	@echo "... src/priority_queue.i"
-	@echo "... src/priority_queue.s"
-	@echo "... src/test_queue.o"
-	@echo "... src/test_queue.i"
-	@echo "... src/test_queue.s"
+	@echo "... test_tree"
+	@echo "... src/avl_tree.o"
+	@echo "... src/avl_tree.i"
+	@echo "... src/avl_tree.s"
+	@echo "... src/test_tree.o"
+	@echo "... src/test_tree.i"
+	@echo "... src/test_tree.s"
 .PHONY : help
 
 
