@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/tp3.dir/src/tp3.c.o CMakeFiles/tp3.dir/src/mesh_3D.c.o CMakeFiles/tp3.dir/src/hash_tables.c.o -o tp3  -lm
