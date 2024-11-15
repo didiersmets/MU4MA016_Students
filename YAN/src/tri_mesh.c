@@ -112,5 +112,6 @@ int read_mesh2D(Mesh2D* m, const char* filename){
 	fclose(f);
 }
 
-
-			
+int write_mesh2D( Mesh2D* m, const char* filename){
+	FILE* f = fopen(filename, 'w');
+	char line[
