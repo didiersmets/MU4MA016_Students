@@ -1,4 +1,5 @@
 /users/home/28624202/MU4MA016_Students/ADrieux/TP1/build/CMakeFiles/bubble.dir
 /users/home/28624202/MU4MA016_Students/ADrieux/TP1/build/CMakeFiles/merge.dir
+/users/home/28624202/MU4MA016_Students/ADrieux/TP1/build/CMakeFiles/insertion.dir
 /users/home/28624202/MU4MA016_Students/ADrieux/TP1/build/CMakeFiles/edit_cache.dir
 /users/home/28624202/MU4MA016_Students/ADrieux/TP1/build/CMakeFiles/rebuild_cache.dir

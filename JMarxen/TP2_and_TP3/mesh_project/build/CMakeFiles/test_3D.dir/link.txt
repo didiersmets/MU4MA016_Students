@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/test_3D.dir/src/test_3D.c.o CMakeFiles/test_3D.dir/src/mesh_3D.c.o CMakeFiles/test_3D.dir/src/hash_tables.c.o -o test_3D  -lm

@@ -50,3 +50,13 @@ double area_triangle( Vertex A, Vertex B, Vertex C);
 
 double area_mesh2D( Mesh2D* m);
 
+int initialize_mesh3D( Mesh3D* m, int vtx_capacity, int tri_capacity);
+
+void dispose_mesh3D( Mesh3D* m);
+
+double area_triangle3D( Vertex3D A, Vertex3D B, Vertex3D C);
+
+double area_mesh3D( Mesh3D* m);
+
+int read_mesh2D(Mesh2D* m, const char* filename);
+

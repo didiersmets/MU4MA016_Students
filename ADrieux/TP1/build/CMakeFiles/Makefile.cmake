@@ -45,4 +45,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/bubble.dir/DependInfo.cmake"
   "CMakeFiles/merge.dir/DependInfo.cmake"
+  "CMakeFiles/insertion.dir/DependInfo.cmake"
   )

@@ -30,7 +30,7 @@ int main(int argc, char** argv)
 	N[4] = 200;
 	N[5] = 500;
 	N[6] = 1000;
-	N[7] = 1000000;
+	N[7] = 10000;
 	srand(time(NULL));
 	for (int i = 0; i<8; i++)
 	{

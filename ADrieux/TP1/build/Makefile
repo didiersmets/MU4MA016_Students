@@ -142,6 +142,19 @@ merge/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/merge.dir/build.make CMakeFiles/merge.dir/build
 .PHONY : merge/fast
 
+#=============================================================================
+# Target rules for targets named insertion
+
+# Build rule for target.
+insertion: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 insertion
+.PHONY : insertion
+
+# fast build rule for target.
+insertion/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/insertion.dir/build.make CMakeFiles/insertion.dir/build
+.PHONY : insertion/fast
+
 bubble_sort.o: bubble_sort.c.o
 .PHONY : bubble_sort.o
 
@@ -165,6 +178,30 @@ bubble_sort.s: bubble_sort.c.s
 bubble_sort.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/bubble.dir/build.make CMakeFiles/bubble.dir/bubble_sort.c.s
 .PHONY : bubble_sort.c.s
+
+insertion_sort.o: insertion_sort.c.o
+.PHONY : insertion_sort.o
+
+# target to build an object file
+insertion_sort.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/insertion.dir/build.make CMakeFiles/insertion.dir/insertion_sort.c.o
+.PHONY : insertion_sort.c.o
+
+insertion_sort.i: insertion_sort.c.i
+.PHONY : insertion_sort.i
+
+# target to preprocess a source file
+insertion_sort.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/insertion.dir/build.make CMakeFiles/insertion.dir/insertion_sort.c.i
+.PHONY : insertion_sort.c.i
+
+insertion_sort.s: insertion_sort.c.s
+.PHONY : insertion_sort.s
+
+# target to generate assembly for a file
+insertion_sort.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/insertion.dir/build.make CMakeFiles/insertion.dir/insertion_sort.c.s
+.PHONY : insertion_sort.c.s
 
 merge_sort.o: merge_sort.c.o
 .PHONY : merge_sort.o
@@ -199,10 +236,14 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... bubble"
+	@echo "... insertion"
 	@echo "... merge"
 	@echo "... bubble_sort.o"
 	@echo "... bubble_sort.i"
 	@echo "... bubble_sort.s"
+	@echo "... insertion_sort.o"
+	@echo "... insertion_sort.i"
+	@echo "... insertion_sort.s"
 	@echo "... merge_sort.o"
 	@echo "... merge_sort.i"
 	@echo "... merge_sort.s"

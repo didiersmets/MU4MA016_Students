@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/test_routines.dir/src/test_routines.c.o CMakeFiles/test_routines.dir/src/sorting.c.o -o test_routines

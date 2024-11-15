@@ -32,18 +32,30 @@ void insertion_sort(int *A, int size)
 
 void merge(int *T, int p, int q, int r)
 {
-	int *S = malloc((r - p + 1)
-
-
-
-
-
+	int Acount = 0;
+	int Bcount = 0;
+	int *S = malloc((r - p + 1)*sizeof(int));
+	for(int i = 0; i < r-p+1; i++){
+		if(T[p + Acount] < T[q + Bcount] | p + Bcount == r){
+			S[i] = T[p + Acount];
+			Acount += 1;
+		}
+		else if (T[p + Acount] > T[q + Bcount] | q + Acount == p){
+			S[i] = T[q + Bcount];
+			Bcount += 1;
+		}
+	}
+	for(int i = 0; i < r-p+1; i++){
+		T[i] = S[i];
+	}
+	free(S);
+}
 
 
 void merge_sort(int *T, int p, int r)
 {
 	if(p<r){
-		float q = ((p + r)/2);
+		float q = floor((p + r)/2);
 		merge_sort(T, p, q);
 		merge_sort(T, q+1, r);
 		merge(T, p, q, r);
@@ -51,6 +63,26 @@ void merge_sort(int *T, int p, int r)
 }
 
 	
+int main()
+{
+	FILE *file = fopen("data.txt", "w");
+	int N[7] = {10, 20, 50, 100, 200, 500, 1000};
+	for(int i = 0, i < 7, i++){
+		int *T = malloc(sizeof(int)*N[i]);
+		for(int j = 0, j < N[i], j++){
+			T[j] = rand();
+		}
+
+		clock_t t = clock();
+		merge_sort(T, 0, N[i]-1);
+		t = clock() - t;
+		double time_taken = ((double)t)/CLOCKS_PER_SEC; //para pasarlo a segundos
+
+		printf(file, "merge_sort() took %f seconds to sort", time_taken);
+	}
+
+	return 0;
+}
 
 
 
@@ -63,5 +95,19 @@ void merge_sort(int *T, int p, int r)
 
 
 
-int main
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

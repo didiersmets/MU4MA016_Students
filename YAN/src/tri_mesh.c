@@ -85,4 +85,32 @@ double area_mesh3D(struct Mesh3D* m){
 }
 
 
+int read_mesh2D(Mesh2D* m, const char* filename){
+	FILE* f = fopen(filename,'r');
+	char line[300];
+	int nv=0;
+	int nt=0;
+	while(!feof(f)){
+		fgets(line, 300, f);
+		if( sscanf(line, "Vertices %d", &nv)==1){
+			m->nv = nv;
+			m->vert = malloc(nv*sizeof(Vertex));
+			for(int i = 0, i<nv, i++){
+				fgets(line, 300,f);
+				sscanf(line, "%f %f", &m->vert[i].x, &m->vert[i].y);
+			}
+		}
+		else if( sscanf(line, "Triangles %d", &nt)==1){
+			m->nt = nt;
+			m->tri = malloc(nt*sizeof(Triangle));
+			for(int i = 0, i<nt, i++){
+				fgets(line, 300,f);
+				sscanf(line, "%f %f %f", &m->tri[i].a, &m->tri[i].b, &m->tri[i].c);
+			}
+		}
+	}
+	fclose(f);
+}
 
+
+			
