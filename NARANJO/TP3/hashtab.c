@@ -5,8 +5,8 @@
 #include <string.h>
 
 
-#include "../MU4MA016_Students/TP3/include/hash_tables.h"
-#include "../MU4MA016_Students/TP3/include/mesh.h"
+#include "hash_tables.h"
+#include "mesh.h"
 
 
 int edge_pos_in_tri ( int v1 , int v2 , struct Triangle t )
@@ -28,20 +28,19 @@ int edge_pos_in_tri ( int v1 , int v2 , struct Triangle t )
 
 int tris_are_neighbors(int tri1, int tri2, const struct Mesh *m)
 {
-	struct Vertex v1 = m->vert[(tri1.v1)];
-	struct Vertex v2 = m->vert[(tri1.v2)];
-	struct Vertex v3 = m->vert[(tri2.v3)];
+	struct Triangle t1 = m->triangles[tri1];
+	struct Triangle t2 = m->triangles[tri2];
 
-	if (edge_pos_in_tri(v1, v2, tri2) != -1){
-		return edge_pos_in_tri(v1, v2, tri2);
+	if (edge_pos_in_tri(t1.v1, t1.v2, t2) != -1){
+		return edge_pos_in_tri(t1.v1, t1.v2, t2);
 	}
 
-	if (edge_pos_in_tri(v2, v3, tri2) != -1){
-                return edge_pos_in_tri(v2, v3, tri2);
+	if (edge_pos_in_tri(t1.v2, t1.v3, t2) != -1){
+                return edge_pos_in_tri(t1.v2, t1.v3, t2);
         }
 
-	if (edge_pos_in_tri(v3, v1, tri2) != -1){
-                return edge_pos_in_tri(v3, v1, tri2);
+	if (edge_pos_in_tri(t1.v3, t1.v1, t2) != -1){
+                return edge_pos_in_tri(t1.v3, t1.v1, t2);
         }
 
 	else{
@@ -57,12 +56,10 @@ int *build_adjacency_table1(const struct Mesh *m)
 	}
 
 	for (int i = 0; i < m->ntri; i++){
-		struct Triangle tri = m->triangles[i];
 		for (int j = 0; j < 2; j++){
 			for (int k = 0; k < m->ntri; k++){
-				struct Triangle tri2 = m->triangles[k];
-				if (i != k && tris_are_neighbors(tri, tri2, m) != -1){
-					adj[3*i + j] = tris_are_neighbors(tri, tri2, m != -1);
+				if (i != k && tris_are_neighbors(i, k, m) != -1){
+					adj[3*i + j] = tris_are_neighbors(i, k, m);
 				}
 			
 			}
@@ -78,7 +75,7 @@ int *build_adjacency_table1(const struct Mesh *m)
 int main(){
 
 
-    	struct Mesh2D* mesh = initialize_mesh2D(5, 2);
+    	initialize_mesh(struct Mesh *mesh);
 
     	
     	mesh->vert[0] = (struct Vertex) {0.0, 0.0};
