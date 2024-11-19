@@ -54,11 +54,7 @@ int read_mesh2D(struct Mesh2D* m,const char* filename)
 	char strline[512];
 	while(!feof(f)){
 		fgets(strline,512,f);
-		printf("%s\n", strline);
 		if (sscanf(strline,"Vertices %d",&m->nv)==1){
-		        printf("coucou\n");
-		
-			
 			m->vert = malloc(m->nv*sizeof(struct Vertex));
 			printf("%d \n",m->nv);
 			for(int i=0;i<(m->nv);i++){
@@ -66,8 +62,7 @@ int read_mesh2D(struct Mesh2D* m,const char* filename)
 				sscanf(strline,"%lf %lf",&m->vert[i].x,&m->vert[i].y);
 			}
 		}
-		if (sscanf(strline,"Triangles %d",&m->nt)==1){
-			
+		if (sscanf(strline,"Triangles %d ",&m->nt)==1){
 			m->tri = malloc(m->nt*sizeof(struct Triangle));
 			printf("%d \n",m->nt);
 			for(int i=0;i<(m->nt);i++){

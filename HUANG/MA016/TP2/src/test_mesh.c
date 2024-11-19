@@ -7,7 +7,7 @@ int main()
 	
 	init_mesh2D(&mesh,0,0);
 	
-	read_mesh2D(&mesh,"mesh/mesh1-tp2.mesh");
+	read_mesh2D(&mesh,"mesh/mesh2-tp2.mesh");
 
 	mesh2D_to_gnuplot(&mesh,"mesh1_to_gnu");
 	
