@@ -5,17 +5,19 @@
 #include <string.h>
 
 
-#include "/root/MU4MA016_Students/NARANJO/TP2/tri_mesh.c"
+#include "hash_tables.h"
+#include "mesh.h"
+
 
 int edge_pos_in_tri ( int v1 , int v2 , struct Triangle t )
 {
-	if (v1 == t.alpha && v2 == t.beta){
+	if (v1 == t.v1 && v2 == t.v2){
 		return 0;
 	}
-	if  (v1 == t.beta && v2 == t.gamma){
+	if  (v1 == t.v2 && v2 == t.v3){
                 return 1;
         }
-	if (v1 == t.gamma && v2 == t.alpha){
+	if (v1 == t.v3 && v2 == t.v1){
                 return 2;
         }
 	else{
@@ -26,20 +28,19 @@ int edge_pos_in_tri ( int v1 , int v2 , struct Triangle t )
 
 int tris_are_neighbors(int tri1, int tri2, const struct Mesh *m)
 {
-	struct Vertex v1 = m->vert[(tri1.alpha)];
-	struct Vertex v2 = m->vert[(tri1.beta)];
-	struct Vertex v3 = m->vert[(tri2.gamma)];
+	struct Triangle t1 = m->triangles[tri1];
+	struct Triangle t2 = m->triangles[tri2];
 
-	if (edge_pos_in_tri(v1, v2, tri2) != -1){
-		return edge_pos_in_tri(v1, v2, tri2);
+	if (edge_pos_in_tri(t1.v1, t1.v2, t2) != -1){
+		return edge_pos_in_tri(t1.v1, t1.v2, t2);
 	}
 
-	if (edge_pos_in_tri(v2, v3, tri2) != -1){
-                return edge_pos_in_tri(v2, v3, tri2);
+	if (edge_pos_in_tri(t1.v2, t1.v3, t2) != -1){
+                return edge_pos_in_tri(t1.v2, t1.v3, t2);
         }
 
-	if (edge_pos_in_tri(v3, v1, tri2) != -1){
-                return edge_pos_in_tri(v3, v1, tri2);
+	if (edge_pos_in_tri(t1.v3, t1.v1, t2) != -1){
+                return edge_pos_in_tri(t1.v3, t1.v1, t2);
         }
 
 	else{
@@ -49,18 +50,16 @@ int tris_are_neighbors(int tri1, int tri2, const struct Mesh *m)
 
 int *build_adjacency_table1(const struct Mesh *m)
 {
-	int adj[3*m->nt];
-	for(int i = 0; i< 3*m->nt, i++){
+	int adj[3*m->ntri];
+	for(int i = 0; i< 3*m->ntri; i++){
 		adj[i] = -1;
 	}
 
-	for (int i = 0; i < m->nt, i++){
-		struct Triangle tri = m->tri[i];
+	for (int i = 0; i < m->ntri; i++){
 		for (int j = 0; j < 2; j++){
-			for (int k = 0; k < m->nt, k++){
-				struct Triangle tri2 = m->tri[k];
-				if (i != k && tris_are_neighbors(tri, tri2, m != -1)){
-					adj[3*i + j] = tris_are_neighbors(tri, tri2, m != -1);
+			for (int k = 0; k < m->ntri; k++){
+				if (i != k && tris_are_neighbors(i, k, m) != -1){
+					adj[3*i + j] = tris_are_neighbors(i, k, m);
 				}
 			
 			}
@@ -68,11 +67,30 @@ int *build_adjacency_table1(const struct Mesh *m)
 		}
 	}
 	return adj;
-		
-
-
 }
 
 
 
+
+int main(){
+
+
+    	initialize_mesh(struct Mesh *mesh);
+
+    	
+    	mesh->vert[0] = (struct Vertex) {0.0, 0.0};
+    	mesh->vert[1] = (struct Vertex) {1.0, 0.0};
+    	mesh->vert[2] = (struct Vertex) {1.0, 1.0};
+    	mesh->vert[3] = (struct Vertex) {0.0, 1.0};
+    	mesh->vert[4] = (struct Vertex) {0.5, 0.5};
+    	mesh->tri[0] = (struct Triangle) {0, 1, 4}; 
+    	mesh->tri[1] = (struct Triangle) {1, 2, 4}; 
+
+    	dispose_mesh2D(mesh);
+
+	int adj = *build_adjacency_table1;
+	printf(adj);
+
+    	return 0;
+}
 

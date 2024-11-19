@@ -36,7 +36,7 @@ void Insertion_sort(int *t,int l){
 	for (k=1; k<l; k++){
 
 		for(int j=k;j>0;j--){
-			
+
 			if (t[j]<t[j-1]){   //essaye avec un for   
 				int cp = t[j-1];
 				t[j] = t[j-1];
