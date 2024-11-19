@@ -54,20 +54,20 @@ RM = /snap/cmake/1425/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/janmarxen/MU4MA016_Students/JMarxen/TP4/EX1
+CMAKE_SOURCE_DIR = /home/janmarxen/MU4MA016_Students/JMarxen/TP4/EX2
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/janmarxen/MU4MA016_Students/JMarxen/TP4/EX1/build
+CMAKE_BINARY_DIR = /home/janmarxen/MU4MA016_Students/JMarxen/TP4/EX2/build
 
 #=============================================================================
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/test_queue.dir/all
+all: CMakeFiles/test_tree.dir/all
 .PHONY : all
 
 # The main recursive "codegen" target.
-codegen: CMakeFiles/test_queue.dir/codegen
+codegen: CMakeFiles/test_tree.dir/codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
@@ -75,39 +75,39 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/test_queue.dir/clean
+clean: CMakeFiles/test_tree.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/test_queue.dir
+# Target rules for target CMakeFiles/test_tree.dir
 
 # All Build rule for target.
-CMakeFiles/test_queue.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_queue.dir/build.make CMakeFiles/test_queue.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_queue.dir/build.make CMakeFiles/test_queue.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/janmarxen/MU4MA016_Students/JMarxen/TP4/EX1/build/CMakeFiles --progress-num=1,2,3 "Built target test_queue"
-.PHONY : CMakeFiles/test_queue.dir/all
+CMakeFiles/test_tree.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_tree.dir/build.make CMakeFiles/test_tree.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_tree.dir/build.make CMakeFiles/test_tree.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/janmarxen/MU4MA016_Students/JMarxen/TP4/EX2/build/CMakeFiles --progress-num=1,2,3 "Built target test_tree"
+.PHONY : CMakeFiles/test_tree.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/test_queue.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/janmarxen/MU4MA016_Students/JMarxen/TP4/EX1/build/CMakeFiles 3
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_queue.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/janmarxen/MU4MA016_Students/JMarxen/TP4/EX1/build/CMakeFiles 0
-.PHONY : CMakeFiles/test_queue.dir/rule
+CMakeFiles/test_tree.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/janmarxen/MU4MA016_Students/JMarxen/TP4/EX2/build/CMakeFiles 3
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_tree.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/janmarxen/MU4MA016_Students/JMarxen/TP4/EX2/build/CMakeFiles 0
+.PHONY : CMakeFiles/test_tree.dir/rule
 
 # Convenience name for target.
-test_queue: CMakeFiles/test_queue.dir/rule
-.PHONY : test_queue
+test_tree: CMakeFiles/test_tree.dir/rule
+.PHONY : test_tree
 
 # codegen rule for target.
-CMakeFiles/test_queue.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_queue.dir/build.make CMakeFiles/test_queue.dir/codegen
-.PHONY : CMakeFiles/test_queue.dir/codegen
+CMakeFiles/test_tree.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_tree.dir/build.make CMakeFiles/test_tree.dir/codegen
+.PHONY : CMakeFiles/test_tree.dir/codegen
 
 # clean rule for target.
-CMakeFiles/test_queue.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_queue.dir/build.make CMakeFiles/test_queue.dir/clean
-.PHONY : CMakeFiles/test_queue.dir/clean
+CMakeFiles/test_tree.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_tree.dir/build.make CMakeFiles/test_tree.dir/clean
+.PHONY : CMakeFiles/test_tree.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

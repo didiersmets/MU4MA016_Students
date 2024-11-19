@@ -4,7 +4,7 @@
 # compile C with /usr/bin/cc
 C_DEFINES = 
 
-C_INCLUDES = -I/home/janmarxen/MU4MA016_Students/JMarxen/TP4/EX1/include
+C_INCLUDES = -I/home/janmarxen/MU4MA016_Students/JMarxen/TP4/EX2/include
 
-C_FLAGS = 
+C_FLAGS = -Wall -Wextra
 

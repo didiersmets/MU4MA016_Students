@@ -1,6 +1,9 @@
-CMakeFiles/test_queue.dir/src/test_queue.c.o: \
- /home/janmarxen/MU4MA016_Students/JMarxen/TP4/EX1/src/test_queue.c \
- /usr/include/stdc-predef.h /usr/include/stdio.h \
+CMakeFiles/test_tree.dir/src/avl_tree.c.o: \
+ /home/janmarxen/MU4MA016_Students/JMarxen/TP4/EX2/src/avl_tree.c \
+ /usr/include/stdc-predef.h \
+ /home/janmarxen/MU4MA016_Students/JMarxen/TP4/EX2/include/avl_tree.h \
+ /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h \
+ /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h /usr/include/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
  /usr/include/x86_64-linux-gnu/bits/wordsize.h \
@@ -9,7 +12,6 @@ CMakeFiles/test_queue.dir/src/test_queue.c.o: \
  /usr/include/x86_64-linux-gnu/bits/long-double.h \
  /usr/include/x86_64-linux-gnu/gnu/stubs.h \
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h \
  /usr/include/x86_64-linux-gnu/bits/types.h \
  /usr/include/x86_64-linux-gnu/bits/typesizes.h \
@@ -47,6 +49,7 @@ CMakeFiles/test_queue.dir/src/test_queue.c.o: \
  /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h \
  /usr/include/x86_64-linux-gnu/bits/struct_mutex.h \
  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h /usr/include/alloca.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
- /home/janmarxen/MU4MA016_Students/JMarxen/TP4/EX1/include/priority_queue.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h
+ /usr/include/x86_64-linux-gnu/bits/stdlib-float.h /usr/include/string.h \
+ /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
+ /usr/include/strings.h
