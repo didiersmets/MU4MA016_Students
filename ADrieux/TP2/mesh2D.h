@@ -29,4 +29,6 @@ void dispose_mesh2D(struct Mesh2D* m);
 
 double area_mesh2D(struct Mesh2D* m);
 
+int read_mesh2D(struct Mesh2D* m, const char* filename);
+
 
