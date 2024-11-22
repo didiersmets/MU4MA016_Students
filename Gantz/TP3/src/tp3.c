@@ -7,8 +7,9 @@
 
 int main(){
 	struct Mesh *m = (struct Mesh*) malloc(sizeof(struct Mesh));
-	read_mesh_from_wavefront_file(m,"../data/bugatti.obj");
+	read_mesh_from_wavefront_file(m,"../data/bunny.obj");
 	
+	printf("# mesh read\n");
 	int* adjacency_table = (int*) malloc(3*m->ntri);
 	
 	clock_t start, end;
