@@ -84,6 +84,44 @@ double area_mesh3D(struct Mesh2D* m)
 }
 
 
+int read_mesh2D(struct Mesh2D* m, const char* filename)
+{
+	FILE *file = fopen("filename", "r");
+	char line[100];
+	if (file != NULL){
+		while(fgets(line, 100, file) != NULL){
+			if (sscanf(line, "Vertices %d", &m->nvert) == 1){
+				m->vert = (struct Vertex *)malloc(m->nvert*sizeof(struct Vertex));
+				for (int i = 0; i<m->nvert; i++){
+					fgets(line, 100, file);
+					sscanf(line, "%lf %lf", &m->vert[i].coord[0], &m->vert[i].coord[1]);
+				}
+			}
+	        	if (sscanf(line, "Triangle %d", &m->ntri) == 1){
+				m->tri = (struct Triangle *)malloc(m->ntri*sizeof(struct Triangle));
+				for (int i = 0; i<m->ntri; i++){
+					fgets(line, 100, file);
+					sscanf(line, "%d %d %d", &m->tri[i].idx[1], &m->tri[i].idx[2], &m->tri[i].idx[3]);
+				}
+			}
+		}
+	}
+	return 0;
+}
+
+
+int mesh2D_to_gnuplot(struct Mesh2D* m, const char* filename)
+{
+	FILE *file = fopen("filename", "w");
+	for (int i = 0; i < m->nvert; i++){
+		fprintf()
+
+
+
+
+
+
+
 
 
 

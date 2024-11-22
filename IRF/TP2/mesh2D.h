@@ -5,7 +5,7 @@ struct Vertex {
 		};
 		double coord[2];
 	};
-};strc
+};
 
 struct Triangle {
 	union {
