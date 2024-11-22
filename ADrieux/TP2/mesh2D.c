@@ -42,18 +42,46 @@ int read_mesh2D(struct Mesh2D* m, const char* filename)
 {
 	FILE *fichier = fopen("filename", "r");
 	char line[TAILLE_MAX];
-	int nv;
-	int nt;
-	double Vx;
-	double Vy;
 	if (fichier != NULL)
 	{
 		while(fgets(line, TAILLE_MAX, fichier) != NULL)
 		{
-			sscanf(line, "Vertices %d", &nv);
-			sscanf(line, "%f %f", &Vx, &Vy);
+			if (sscanf(line, "Vertices %d", &m->nv) == 1)
+			{
+				m->vert = (struct Vertex *)malloc(m->nv*sizeof(struct Vertex));
+				for (int i=0; i<m->nv; i++)
+				{
+					fgets(line, TAILLE_MAX, fichier);
+					sscanf(line, "%lf %lf", &m->vert[i].coord[0], &m->vert[i].coord[1]);
+				}
+			}
+			if (sscanf(line, "Triangles %d", &m->nt) == 1)
+			{ 
+				m->tri = (struct Triangle *)malloc(m->nt*sizeof(struct Triangle));
+				for (int i=0; i<m->nt; i++)
+				{
+					fgets(line, TAILLE_MAX, fichier);
+					sscanf(line, "%d %d %d", &m->tri[i].idx[0], &m->tri[i].idx[1], &m->tri[i].idx[2]);
+				}
+			}
+		}
+	}
+	fclose(fichier);
+	return 0;
+}
+
+int mesh2D_to_gnuplot(struct Mesh2D* m, const char* filename)
+{
+	FILE *fichier = fopen("filename", "w");
+	for (int i = 0; i<m->nt; i++)
+	{
+		fprintf(fichier, "lf", 
 
 
+								
+			
+
+	
 
 			
 
