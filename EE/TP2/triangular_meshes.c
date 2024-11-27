@@ -85,6 +85,7 @@ int read_mesh2D(struct Mesh2D *m, const char *file)
 			}
 		}
 	}
+	fclose(fp)
 	return 0;
 }
 
@@ -109,5 +110,35 @@ int mesh2D_to_gnuplot(struct Mesh2D* m, const char* filename)
 		fprintf(fp, "\n");
 		fprintf(fp, "\n");
 	}
+	fclose()
 	return 0;
+}
+
+int write_mesh2D(struct Mesh2D* m, const char* filename)
+{
+	FILE* fp = fopen(filename, "w");
+	if (m = NULL)
+		return -1
+	fprintf("Dimension 2\n");
+	fprintf("Vertex %d \n",m->nv);
+	for (int i = 0; i < nv; i++){
+		fprintf("%lf",m->vert[i].x);
+		fprintf("%lf\n",m->vert[i].y);
+	}
+	fprintf("Triangle %d \n",m->nt);
+	for (int i = 0; i < nt; i++){
+		fprintf("%lf",m->tri[i].A);
+		fprintf("%lf",m->tri[i].B);
+		fprintf("%lf\n",m->tri[i].C);
+	}
+	fprintf("end\n");
+	return 0;
+}
+
+int main(int argc, char**argv)
+{
+	struct Mesh2D* m;
+	read_mesh2D(m, argv[1]);
+	mesh2D_to_gnuplot(m, "triangle.txt");
+	return read_mesh2D(m, argv[1]);
 }

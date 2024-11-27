@@ -16,6 +16,7 @@ int main(int argc, char **argv)
 			printf ("%s", ligne);
 		}
 	}
+	fclose(fp)
 	return 0;
 }
 
