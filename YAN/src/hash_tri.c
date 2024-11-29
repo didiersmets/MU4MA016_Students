@@ -40,8 +40,8 @@ int tris_are_neighbors(int tri1, int tri2, const Mesh* m){
 int * build_adjacency_table1(const Mesh* m){
 
 	int adj[3*m->nt]={-1};
-	for(int i = 0, i<nt, i++){
-		for(int k=0, k<nt, k++){
+	for(int i = 0, i<m->nt, i++){
+		for(int k=0, k<m->nt, k++){
 			v = tris_are_neighbors(m->tri[i],m->tri[k],m);
 			if(v!=-1){
 				adj[3*i+v]=k;
@@ -53,5 +53,31 @@ int * build_adjacency_table1(const Mesh* m){
 
 
 Hashtable *build_edge_table1(const Mesh*m){
+	Hashtable* ht = hash_table_init(6*m->nt,sizeof(Edge),sizeof(int));
+	for(int i= 0,i <m->nt,i++){
+		Edge key;
+		int val;
+		key = (Edge){m->tri[i].a,m->tri[i].b};
+		val = 3 * i + 0;
+		hash_table_insert(ht,&key,&val);
+		key = (Edge){m->tri[i].b,m->tri[i].c};
+		val = 3 * i + 1;
+		hash_table_insert(ht,&key,&val);
+		key = (Edge){m->tri[i].c,m->tri[i].a};
+		val = 3 * i + 3;
+		hash_table_insert(ht,&key,&val);
+	
+	}
+	return ht;
+}
 
+int *build_adjacency_table2(const Mesh*m){
+	int adj[3*m->nt]={-1};
+	for( int i=0, i< m->nt,i++){
+		Edge key ;
+		key = (Edge){m->tri[i].b,m->tri[i].a};
+		Edge skey;
+		int val;
+		while (key != skey){
+			
 

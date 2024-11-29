@@ -4,10 +4,8 @@
 #include <stddef.h>
 #include <string.h>
 
-
-#include "hash_tables.h"
-#include "mesh.h"
-
+#include "hash_tables.c"
+#include "mesh.c"
 
 int edge_pos_in_tri ( int v1 , int v2 , struct Triangle t )
 {
@@ -74,21 +72,21 @@ int *build_adjacency_table1(const struct Mesh *m)
 
 int main(){
 
-
-    	initialize_mesh(struct Mesh *mesh);
+	struct Mesh* mesh;
+    	initialize_mesh(mesh);
 
     	
-    	mesh->vert[0] = (struct Vertex) {0.0, 0.0};
-    	mesh->vert[1] = (struct Vertex) {1.0, 0.0};
-    	mesh->vert[2] = (struct Vertex) {1.0, 1.0};
-    	mesh->vert[3] = (struct Vertex) {0.0, 1.0};
-    	mesh->vert[4] = (struct Vertex) {0.5, 0.5};
-    	mesh->tri[0] = (struct Triangle) {0, 1, 4}; 
-    	mesh->tri[1] = (struct Triangle) {1, 2, 4}; 
+    	mesh->vertices[0] = (struct Vertex) {0.0, 0.0};
+    	mesh->vertices[1] = (struct Vertex) {1.0, 0.0};
+    	mesh->vertices[2] = (struct Vertex) {1.0, 1.0};
+    	mesh->vertices[3] = (struct Vertex) {0.0, 1.0};
+    	mesh->vertices[4] = (struct Vertex) {0.5, 0.5};
+    	mesh->triangles[0] = (struct Triangle) {0, 1, 4}; 
+    	mesh->triangles[1] = (struct Triangle) {1, 2, 4}; 
 
-    	dispose_mesh2D(mesh);
+        dispose_mesh(mesh);
 
-	int adj = *build_adjacency_table1;
+	int adj = build_adjacency_table1;
 	printf(adj);
 
     	return 0;

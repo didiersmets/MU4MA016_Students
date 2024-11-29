@@ -73,9 +73,53 @@ int read_mesh2D(struct Mesh2D* m, const char* filename)
 int mesh2D_to_gnuplot(struct Mesh2D* m, const char* filename)
 {
 	FILE *fichier = fopen("filename", "w");
-	for (int i = 0; i<m->nt; i++)
+	if (fichier != NULL)
 	{
-		fprintf(fichier, "lf", 
+		for (int i = 0; i<m->nt; i++)
+		{
+			struct Vertex A = m->vert[(m->tri[i].idx[0])];
+			struct Vertex B = m->vert[(m->tri[i].idx[1])];
+			struct Vertex C = m->vert[(m->tri[i].idx[2])];	
+			fprintf(fichier, "%lf %lf", A.x, A.y);
+			fprintf(fichier, "\n");
+			fprintf(fichier, "%lf %lf", B.x, B.y);
+			fprintf(fichier, "\n");
+			fprintf(fichier, "%lf %lf", C.x, C.y);
+			fprintf(fichier, "\n");
+			fprintf(fichier, "\n");
+			fprintf(fichier, "\n");
+		}
+	}
+	fclose(fichier);
+	return 0;
+}
+
+int write_mesh2D(struct Mesh2D* m, const char* filename)
+{
+	FILE *fichier = fopen("filename", "w");
+	if (fichier != NULL)
+	{
+		fprintf(fichier, "MeshVersionFormatted 2\n");
+		fprintf(fichier, "Dimension 2\n");
+		fprintf(fichier, "Vertices %d\n", m->nv);
+		for (int i = 0; i < m->nv; i++)
+		{
+			fprintf(fichier, "%lf %lf\n", m->vert[i].coord[0], m->vert[i].coord[1]);
+		}
+		fprintf(fichier, "Triangles %d\n", m->nt);
+		for (int j = 0; j < m->nt; j++)
+		{
+			fprintf(fichier, "%d %d %d\n", m->tri[j].idx[0], m->tri[j].idx[1], m->tri[j].idx[2]);
+		}
+		fprintf(fichier, "End\n");
+	}
+	fclose(fichier);
+	return 0; 
+}
+
+
+
+
 
 
 								
