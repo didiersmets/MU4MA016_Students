@@ -10,6 +10,6 @@ struct priority_queue {
 	int* pos_in_heap;
 };
 
-int priority_queue_init(struct priority_queue *q);
+int priority_queue_init(struct priority_queue *q, int max_id);
 void priority_queue_push(struct priority_queue *q, int d, float val);
 struct priority_data priority_queue_pop(struct priority_queue *q);

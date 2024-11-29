@@ -5,17 +5,26 @@
 int priority_queue_init(struct priority_queue *q, int max_id){
 	q->size = 0;
 	q->capacity = 2;
-	q->pos_in_heap = (int*) malloc(max_id*sizeof(int));
+	q->pos_in_heap = (int*) malloc((max_id+1)*sizeof(int));
+	for(int i=0; i<max_id+1; i++) q->pos_in_heap[i]=-1;
 	q->heap = (struct priority_data*) malloc(q->capacity*sizeof(struct priority_data));
 	return 0;
 }
 
-// TODO: adapt with new pos_in_heap array
 static void swap(struct priority_queue *q, int pos1, int pos2){
 	struct priority_data* h = q->heap;
-	struct priority_data tmp = h[pos1];
-	h[pos1] = h[pos2];
-	h[pos2] = tmp;
+	
+	struct priority_data val1 = h[pos1];
+	struct priority_data val2 = h[pos2];
+	
+	int id1 = val1.id;
+	int id2 = val2.id;
+
+	h[pos1] = val2;
+	h[pos2] = val1;
+
+	q->pos_in_heap[id1] = pos2;
+	q->pos_in_heap[id2] = pos1;
 }
 
 static void sift_up(struct priority_queue *q, int pos){
@@ -27,7 +36,6 @@ static void sift_up(struct priority_queue *q, int pos){
 	}
 }
 
-// TODO: adapt with new pos_in_heap array (pos is qt the end)
 void priority_queue_push(struct priority_queue *q, int id, float val){
 	if(q->size==q->capacity){
 		q->capacity *= 2;
@@ -37,6 +45,7 @@ void priority_queue_push(struct priority_queue *q, int id, float val){
 	data.id = id;
 	data.val = val;
 	q->heap[q->size] = data;
+	q->pos_in_heap[id] = q->size;
 	sift_up(q,q->size);
 	q->size++;
 }
@@ -69,10 +78,15 @@ static void sift_down(struct priority_queue *q, int pos){
 struct priority_data priority_queue_pop(struct priority_queue *q){
 	struct priority_data* h = q->heap;
 	struct priority_data root = h[0];
+	q->pos_in_heap[root.id] = -1;
 	swap(q,0,q->size);
 	q->size--;
 	sift_down(q,0);
 	return root;
+}
+
+void priority_queue_update(struct priority_queue *q, int key, float new_val){
+	q->heap[q->pos_in_heap[key]].val = new_val;
 }
 
 
