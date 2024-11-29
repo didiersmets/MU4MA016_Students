@@ -109,21 +109,64 @@ int read_mesh2D(struct Mesh2D* m, const char* filename)
 	return 0;
 }
 
-
 int mesh2D_to_gnuplot(struct Mesh2D* m, const char* filename)
 {
 	FILE *file = fopen("filename", "w");
+	if (file != NULL){
+		for (int i = 0; i<m->ntri; i++){
+			fprintf(file, "%lf", m->vert[(m->tri[i].v1)].x);
+			fprintf(file, "%lf", m->vert[(m->tri[i].v1)].y);
+			fprintf(file, "\n");
+			fprintf(file, "%lf", m->vert[(m->tri[i].v2)].x);
+			fprintf(file, "%lf", m->vert[(m->tri[i].v2)].y);
+			fprintf(file, "\n");
+			fprintf(file, "%lf", m->vert[(m->tri[i].v3)].x);
+			fprintf(file, "%lf", m->vert[(m->tri[i].v3)].y);
+			fprintf(file, "\n");	
+			fprintf(file, "%lf", m->vert[(m->tri[i].v1)].x);	
+			fprintf(file, "%lf", m->vert[(m->tri[i].v1)].y);
+			fprintf(file, "\n");	
+			fprintf(file, "\n");	
+			fprintf(file, "\n");	
+		}
+	}
+	fclose(file);
+	return 0;
+}
+
+
+
+
+
+int write_mesh2D(struct Mesh2D* m, const char* filename)
+{
+	FILE *file = fopen("filename", "w");
+	fprintf(file, "MeshVersionFormatted 2\n");
+	fprintf(file, "Dimension 2\n");
+	fprintf(file, "Vertices %d", m->nvert);
 	for (int i = 0; i < m->nvert; i++){
-		fprintf()
+		struct Vertex vert = (m->vert)[i];
+		fprintf(file, "%lf %lf\n", vert.x, vert.y);
+	}
+	fprintf(file, "Triangle %d", m->ntri);
+	for (int i = 0; i < m->ntri; i++){
+		struct Triangle tri = (m->tri)[i];
+		fprintf(file, "%d %d %d\n", tri.v1, tri.v2, tri.v3);
+	}
+	fprintf(file, "End");
+}
 
 
-
-
-
-
-
-
-
+//int main(int argc, char* argv[])
+//{
+//	char* filename = argv[1];
+//	struct Mesh2D* m = read_mesh2D(m,filename);
+//	printf("m->nvert: %d\n", m->nvert);
+//	printf("m->ntri: %d\n", m->ntri);
+//	write_mesh2D(m, strcat(filename, "_copy"));
+//	dispose_mesh2D(m);
+//	return 0;
+//}
 
 
 
