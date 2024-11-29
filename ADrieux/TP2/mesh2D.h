@@ -29,4 +29,7 @@ void dispose_mesh2D(struct Mesh2D* m);
 
 double area_mesh2D(struct Mesh2D* m);
 
+int read_mesh2D(struct Mesh2D* m, const char* filename);
+
+int mesh2D_to_gnuplot(struct Mesh2D* m, const char* filename);
 

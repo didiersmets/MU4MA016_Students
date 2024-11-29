@@ -60,13 +60,12 @@ void queue_enqueue(struct Queue *q, const void *src)
 	void *dest = (char *)q->data+(tail*q->elem_size);
 	memcpy (dest, src,q->elem_size);
 	q->length++;
-	return;
 }
+
 void queue_dequeue(struct Queue *q, void *dest)
 {
 	if (is_empty(q))
 		return;
 	q->length-=1;
 	q->front=(q->front+1)%q->capacity;
-	return;
 }
