@@ -27,14 +27,17 @@ int main() {
     addEdge(graph, 5, 6);
     addEdge(graph, 5, 8);
 
-    finalizeGraph(graph);
-
     printf("Testing BFS starting from vertex 0:\n");
     BFS(graph, 0);
 
     printf("Testing BFS starting from vertex 8:\n");
     BFS(graph, 8);
-
+    
+    printf("Graph's edges: \n");
+    for(int i =0; i<graph->ne * 2;i++){
+    	printf("%d,", graph->edges[i]);
+    }
+    printf("\n");
     freeGraph(graph);
 
     return 0;

@@ -19,10 +19,10 @@ struct Graph* initgraph(int nv_capacity, int ne_capacity){
 	struct Graph* graph = (struct Graph*)malloc(sizeof(struct Graph));
 	graph->nv = nv_capacity;
 	graph->ne = 0;
-	graph->edge_capacity = ne_capacity;
+	graph->edge_capacity = ne_capacity * nv_capacity;
 	graph->counts = (int*)malloc(nv_capacity * sizeof(int));
 	graph->offsets = (int*)malloc(nv_capacity * sizeof(int));
-	graph->edges = (int*)malloc(ne_capacity * sizeof(int));
+	graph->edges = (int*)malloc(ne_capacity * nv_capacity * sizeof(int));
 	
 	for(int i=0;i<nv_capacity;i++){
 		 graph->counts[i] = 0;
@@ -30,6 +30,15 @@ struct Graph* initgraph(int nv_capacity, int ne_capacity){
 	}
 
 	return graph;
+}
+
+void insertG(int** arr, int* size, int value, int position) {
+
+    for (int i = *size; i > position; i--) {
+        (*arr)[i] = (*arr)[i - 1];
+    }
+
+    (*arr)[position] = value;
 }
 
 void addEdge(struct Graph* graph, int src, int dest){
@@ -43,17 +52,17 @@ void addEdge(struct Graph* graph, int src, int dest){
 		graph->edges = (int*)realloc(graph->edges, (graph->edge_capacity) * sizeof(int));
 	}
 
-	
-	graph->edges[graph->ne] = dest;
+	insertG(&(graph->edges), &(graph->edge_capacity), dest, graph->offsets[src]+graph->counts[src]);
 	graph->ne++;
 	graph->counts[src]++;
-}
-
-void finalizeGraph(struct Graph* graph) {
-    graph->offsets[0] = 0;
-    for (int i = 1; i < graph->nv; i++) {
-        graph->offsets[i] = graph->offsets[i - 1] + graph->counts[i - 1];
-    }
+	for(int i = src + 1; i < graph->nv; i++){
+		graph->offsets[i]++;
+	}
+	insertG(&(graph->edges), &(graph->edge_capacity), src, graph->offsets[dest]+graph->counts[dest]);
+        graph->counts[dest]++;
+        for(int i = dest + 1; i < graph->nv; i++){
+                graph->offsets[i]++;
+        }
 }
 
 void freeGraph(struct Graph* graph) {
@@ -80,9 +89,22 @@ bool isEmpty(struct Queue* q){
 	return (q->length == 0);
 }
 
-static void enlarge_queue(struct Queue* q){
-    	q -> capacity *= 2;
+static void enlarge_queue(struct Queue* q) {
+    int new_capacity = q->capacity * 2;
+    int* new_array = (int*)malloc(new_capacity * sizeof(int));
+    assert(new_array != NULL); // Ensure memory allocation succeeded
+
+    // Copy elements to new array
+    for (int i = 0; i < q->length; i++) {
+        new_array[i] = q->array[(q->front + i) % q->capacity];
+    }
+
+    free(q->array);
+    q->array = new_array;
+    q->capacity = new_capacity;
+    q->front = 0;
 }
+
 
 struct Queue *init_queue(int capacity){
 	struct Queue *q = malloc(sizeof(struct Queue));
