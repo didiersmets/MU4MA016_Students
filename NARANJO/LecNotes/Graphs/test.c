@@ -1,25 +1,38 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <limits.h>
 #include <stdbool.h>
+#include <assert.h>
+#include <stddef.h>
+#include <string.h>
+
 
 #include "GraphPoly.c"
 
 
 int main() {
-    struct Graph* graph = createTestGraph();
+    struct Graph* graph = initgraph(15, 15);
+
+    addEdge(graph, 1, 2);
+    addEdge(graph, 1, 4);
+    addEdge(graph, 4, 3);
+    addEdge(graph, 3, 10);
+    addEdge(graph, 3, 9);
+    addEdge(graph, 2, 3);
+    addEdge(graph, 2, 7);
+    addEdge(graph, 2, 8);
+    addEdge(graph, 2, 5);
+    addEdge(graph, 8, 7);
+    addEdge(graph, 5, 7);
+    addEdge(graph, 5, 6);
+    addEdge(graph, 5, 8);
 
     printf("Testing BFS starting from vertex 0:\n");
     BFS(graph, 0);
 
-    printf("Testing BFS starting from vertex 2:\n");
-    BFS(graph, 2);
+    printf("Testing BFS starting from vertex 8:\n");
+    BFS(graph, 8);
 
-    // Free graph memory
-    free(graph->counts);
-    free(graph->offsets);
-    free(graph->edges);
-    free(graph);
+    freeGraph(graph);
 
     return 0;
 }

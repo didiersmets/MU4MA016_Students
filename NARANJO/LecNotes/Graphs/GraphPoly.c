@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <assert.h>
+#include <stddef.h>
+#include <string.h>
 
 struct Graph {
 	int nv;
@@ -8,13 +11,15 @@ struct Graph {
 	int* counts;
 	int* offsets;
 	int* edges;
-};
+	int edge_capacity;
+}Graph;
 
 
-Graph* initgraph(int nv_capacity, int ne_capacity){
-	Graph* graph = (Graph*)malloc(sizeof(Graph));
+struct Graph* initgraph(int nv_capacity, int ne_capacity){
+	struct Graph* graph = (struct Graph*)malloc(sizeof(struct Graph));
 	graph->nv = nv_capacity;
 	graph->ne = 0;
+	graph->edge_capacity = ne_capacity;
 	graph->counts = (int*)malloc(nv_capacity * sizeof(int));
 	graph->offsets = (int*)malloc(nv_capacity * sizeof(int));
 	graph->edges = (int*)malloc(ne_capacity * sizeof(int));
@@ -27,18 +32,18 @@ Graph* initgraph(int nv_capacity, int ne_capacity){
 	return graph;
 }
 
-void addEdge(Graph* graph, int src, int dest, int* ne_capacity){
-	if (src >= graph->nv || dest >= graph->){
+void addEdge(struct Graph* graph, int src, int dest){
+	if (src >= graph->nv || dest >= graph->nv){
 		printf("Error: Vertex out of range. \n");
 		return;
 	}
 
-	if(graph->ne >= *ne_capacity){
-		*ne_capacity *= 2;
-		graph->edges = (int*)realloc(graph->edges, (*ne_capacity) * sizeof(int));
+	if(graph->ne >= graph->edge_capacity){
+		graph->edge_capacity *= 2;
+		graph->edges = (int*)realloc(graph->edges, (graph->edge_capacity) * sizeof(int));
 	}
 
-	int index = graph->offset[src] + graph->count[src];
+	int index = graph->offsets[src] + graph->counts[src];
 	graph->edges[index] = dest;
 
 	graph->ne++;
@@ -49,7 +54,7 @@ void addEdge(Graph* graph, int src, int dest, int* ne_capacity){
 	}
 }
 
-void freeGraph(Graph* graph) {
+void freeGraph(struct Graph* graph) {
 	free(graph->counts);
 	free(graph->offsets);
 	free(graph->edges);
@@ -132,7 +137,7 @@ void BFS(struct Graph* graph, int srs){
 
 	struct Queue* q = init_queue(graph->nv);
 	visited[srs] = true;
-	enqueue(q, srs);
+	enqueue(q, &srs);
 
 	printf("BFS Order: \n");
 	while(!isEmpty(q)){
@@ -142,7 +147,7 @@ void BFS(struct Graph* graph, int srs){
 			int explore = graph->edges[k];
 			if(!visited[explore]){
 				visited[explore] = true;
-				enqueue(q, explore);
+				enqueue(q, &explore);
 			}
 		}
 	}
