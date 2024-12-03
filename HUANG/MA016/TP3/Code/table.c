@@ -46,5 +46,6 @@ int *build_adjacency_table1(const struct Mesh *m)
 }
 
 struct HashTable *build_edge_table1(const struct Mesh *m){
-
+	struct HashTable *ht = malloc(sizeof(struct HashTable);
+	return ht;
 }
