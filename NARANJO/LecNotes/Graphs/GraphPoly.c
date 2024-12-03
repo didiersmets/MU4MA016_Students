@@ -173,4 +173,91 @@ void BFS(struct Graph* graph, int srs){
 	dispose_queue(q);
 }
 
+struct Stack{
+        int top; // index of the first element in the stack
+        int length; // number of items presently in the stack
+        int capacity; // capacity of the stack (in nbr of items)
+        int* array; // array
+};
+
+struct Stack *init_stack(int capacity){
+        struct Stack *s = malloc(sizeof(struct Stack));
+        if (s != NULL){
+                s -> top = -1;
+                s -> length = 0;
+                s -> capacity = capacity;
+                s -> array = (int*)malloc(capacity * sizeof(int));
+        }
+        return (s);
+}
+
+bool isFullStack(struct Stack* stack){
+    	return stack->top == stack->capacity - 1;
+}
+
+bool isEmptyStack(struct Stack* stack){
+    	return stack->top == -1;
+}
+
+void enlarge_stack(struct Stack* stack) {
+    	int new_capacity = stack->capacity * 2;  
+    	int* new_array = (int*)malloc(new_capacity * sizeof(int));
+    	if (new_array != NULL) {
+        	for (int i = 0; i <= stack->top; i++) {
+            	new_array[i] = stack->array[i];
+        	}
+        free(stack->array);
+        stack->array = new_array;
+        stack->capacity = new_capacity;
+    	}
+}
+
+void dispose_stack(struct Stack* stack){
+	if(stack != NULL){
+		free(stack->array);
+		free(stack);
+	}
+}
+
+void push(struct Stack* stack, int item){
+    	if (isFullStack(stack))
+        	return;
+    	stack->array[++stack->top] = item;
+}
+
+int pop(struct Stack* stack){
+    	if (isEmptyStack(stack))
+        	return -10;
+    	return stack->array[stack->top--];
+}
+
+void DFS_Rec(struct Graph* graph, bool visited[], int srs){
+	visited[srs] = true;
+	printf("%d, ", srs);
+	
+	if(graph->counts[srs] != 0){
+		for(int k = graph->offsets[srs]; k < graph->offsets[srs] + graph->counts[srs]; k++){
+			int explore = graph->edges[k];
+			if (!visited[explore]){
+				DFS_Rec(graph, visited, explore);
+			}
+		}
+	}else{
+		return;
+	}
+}
+
+void DFS(struct Graph* graph, int srs){
+	bool* visited = (bool*)malloc(graph->nv * sizeof(bool));
+	
+	for(int i = 0; i < graph->nv; i++) {
+		visited[i] = false;
+	}
+
+	DFS_Rec(graph, visited, srs);
+		
+        printf("\n");
+
+        free(visited);
+}
 
