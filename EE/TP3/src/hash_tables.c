@@ -1,4 +1,4 @@
-#include "hash_tables.h"
+#include "../EE/TP3/include/hash_tables.h"
 
 #include <stdint.h>
 #include <stdlib.h>
