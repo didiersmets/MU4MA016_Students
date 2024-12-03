@@ -11,14 +11,14 @@ struct avl_tree {
 };
 
 struct user_data{
-	int data1;
+	int d1;
 	struct avl_node node;
-	float data2;
+	float d2;
 };
 
 void avl_tree_initialize(struct avl_tree *t ,int (*cmp)(const void* , const void*), int offset);
 void* avl_tree_find(struct avl_tree *t, const void *data);
-void avl_tree_insert(struct avl_tree *t, void *data);
+struct avl_node *avl_tree_insert(struct avl_tree *t, struct avl_node *current_node, void *data);
 
 
 
