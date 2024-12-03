@@ -43,15 +43,17 @@ void addEdge(struct Graph* graph, int src, int dest){
 		graph->edges = (int*)realloc(graph->edges, (graph->edge_capacity) * sizeof(int));
 	}
 
-	int index = graph->offsets[src] + graph->counts[src];
-	graph->edges[index] = dest;
-
+	
+	graph->edges[graph->ne] = dest;
 	graph->ne++;
 	graph->counts[src]++;
+}
 
-	for(int j = src+1; j < graph->nv; j++){
-		graph->offsets[j]++;
-	}
+void finalizeGraph(struct Graph* graph) {
+    graph->offsets[0] = 0;
+    for (int i = 1; i < graph->nv; i++) {
+        graph->offsets[i] = graph->offsets[i - 1] + graph->counts[i - 1];
+    }
 }
 
 void freeGraph(struct Graph* graph) {
@@ -97,7 +99,7 @@ void enqueue(struct Queue* q,int* item){
     	if(isFull(q)){
         	enlarge_queue(q);
     	}
-    	memcpy(&q->array[q->front+q->length],item,sizeof(int));
+    	q->array[(q->front + q->length) % q->capacity] = *item;
     	q->length += 1;
 }
 
@@ -110,14 +112,6 @@ int dequeue(struct Queue* q){
     	q->front = (q->front + 1 )%q->capacity;
     	q->length -= 1;
     	return dest;
-}
-
-int front(struct Queue* q){
-    	return q->array[q->front];
-}
-
-int rear(struct Queue* q){
-    	return q->array[q->front +q->length - 1 ];
 }
 
 void dispose_queue(struct Queue* q){

@@ -11,7 +11,8 @@
 
 int main() {
     struct Graph* graph = initgraph(15, 15);
-
+    
+    addEdge(graph, 0, 2);
     addEdge(graph, 1, 2);
     addEdge(graph, 1, 4);
     addEdge(graph, 4, 3);
@@ -25,6 +26,8 @@ int main() {
     addEdge(graph, 5, 7);
     addEdge(graph, 5, 6);
     addEdge(graph, 5, 8);
+
+    finalizeGraph(graph);
 
     printf("Testing BFS starting from vertex 0:\n");
     BFS(graph, 0);
