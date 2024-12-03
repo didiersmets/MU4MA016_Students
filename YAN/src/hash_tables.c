@@ -8,10 +8,10 @@
 #define OCCUPIED_SLOT 1
 #define DELETED_SLOT 2
 
-struct HashTable *hash_table_init(size_t capacity, size_t key_len,
+HashTable *hash_table_init(size_t capacity, size_t key_len,
 				  size_t val_len)
 {
-	struct HashTable *ht = malloc(sizeof(struct HashTable));
+	HashTable *ht = malloc(sizeof(HashTable));
 	if (!ht)
 		return ht;
 	ht->key_len = key_len;
@@ -41,7 +41,7 @@ uint32_t hash_key(void *key, unsigned key_len)
 	return hash;
 }
 
-void *hash_table_find(const struct HashTable *ht, void *key)
+void *hash_table_find(const HashTable *ht, void *key)
 {
 	if (!ht || !ht->capacity)
 		return NULL;
@@ -64,7 +64,7 @@ void *hash_table_find(const struct HashTable *ht, void *key)
 	return NULL;
 }
 
-void hash_table_insert(struct HashTable *ht, void *key, void *val)
+void hash_table_insert(HashTable *ht, void *key, void *val)
 {
 	if (ht->size >= 2 * ht->capacity / 3) {
 		size_t new_cap = ht->capacity < 4 ? 8 : 2 * ht->capacity;
@@ -80,7 +80,9 @@ void hash_table_insert(struct HashTable *ht, void *key, void *val)
 			memcpy(p + 1, key, ht->key_len);
 			memcpy(p + 1 + ht->key_len, val, ht->val_len);
 			ht->size++;
-			p[0] = OCCUPIED_SLOT;
+		val3;
+        }
+	p[0] = OCCUPIED_SLOT;
 			return;
 		} else {
 			pos++;
@@ -92,7 +94,7 @@ void hash_table_insert(struct HashTable *ht, void *key, void *val)
 	abort();
 }
 
-static void hash_table_grow(struct HashTable *ht, size_t new_cap)
+static void hash_table_grow( HashTable *ht, size_t new_cap)
 {
 	// Homework ! Note: requires rehashing all keys.
 	// 1. Save the address ht->data for later use.
@@ -103,12 +105,12 @@ static void hash_table_grow(struct HashTable *ht, size_t new_cap)
 	// 4. When done, free the old data
 }
 
-void hash_table_delete(const struct HashTable *ht, void *key)
+void hash_table_delete(const HashTable *ht, void *key)
 {
 	// Homework !
 }
 
-void hash_table_fini(struct HashTable *ht)
+void hash_table_fini( HashTable *ht)
 {
 	ht->size = 0;
 	ht->capacity = 0;

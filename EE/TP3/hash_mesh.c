@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <FILE.h>
-#include "hash_tables.h"
+#include "include/hash_tables.h"
 
 struct Vertex{
 	union{
@@ -64,34 +63,34 @@ double area_mesh2D(struct Mesh2D* m)
 int edge_pos_in_tri(int v1, int v2, struct Triangle t)
 {
 	for (int i = 0; i < 3; i ++){
-		if (v1 == t.idx[i])&&(v2 == t.idx[(i+1)%3])
+		if ((v1 == t.idx[i])&&(v2 == t.idx[(i+1)%3]))
 			return i;
 	}
 	return -1;
 }
 
-int tris_are_neighbors(int tri1, int tri2, struct Mesh2D* m)
+int tris_are_neighbors(int tri1, int tri2,const struct Mesh2D* m)
 {
 	for (int i = 0; i < 3; i++){
-		if(edge_pos_in_tri(m->tri[tri1].idx[(i+1)%3],m->tri[tri].idx[i],m->tri[tri2]) != -1)
+		if(edge_pos_in_tri(m->tri[tri1].idx[(i+1)%3],m->tri[tri1].idx[i],m->tri[tri2]) != -1)
 			return i;
 	}
 	return -1;
 }
 
-int *build_adjacency_table1(const struct Mesh* m)
+int *build_adjacency_table1(const struct Mesh2D* m)
 {
-	int *adj = malloc(3*m->nt*size(int));
+	int *adj = (int*)malloc(3*(m->nt)*sizeof(int));
 	for (int i = 0; i < m->nt; i ++){
 		for (int k = 3 * i; k < 3 * (i + 1); k ++){
 			adj[k] = -1;
 		}
 		for (int j = i + 1; j < m->nt; j ++){
-			t = tris_are_neighbors(m->tri[i], m->tri[j], m);
-			u = tris_are_neighbors(m->tri[j], m->tri[i], m);
+			int t = tris_are_neighbors(i, j, m);
+			int u = tris_are_neighbors(j, i, m);
 			if (t != -1){
-				agj[3 * i + t] = j;
-				adj[3 * j + u] = i;
+				adj[3 * i + t] = 3 * j + u;
+				adj[3 * j + u] = 3 * i + t;
 			}
 		}
 	}
@@ -100,3 +99,24 @@ int *build_adjacency_table1(const struct Mesh* m)
 
 struct HashTable *build_edge_table1(const struct Mesh2D* m)
 {
+	HashTable* ht = hash_table_init(3*m->nt, sizeof(Edge), 2*sizeof(int));
+	for (int i = 0; i < m->nt; i ++){
+		for (int j = 0; j < 3; j++){
+			if (hash_table_find(ht, m->tri[i].idx[j]) == NULL){
+				hash_table_insert(ht, m->tri[i].idx[j], i);
+			}else{
+				/*comment ajouter une nouvelle val ??????????*/
+			}
+		}
+	}
+	return ht;
+}
+
+
+
+
+
+
+
+
+

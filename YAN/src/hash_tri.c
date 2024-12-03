@@ -64,7 +64,7 @@ Hashtable *build_edge_table1(const Mesh*m){
 		val = 3 * i + 1;
 		hash_table_insert(ht,&key,&val);
 		key = (Edge){m->tri[i].c,m->tri[i].a};
-		val = 3 * i + 3;
+		val = 3 * i + 2;
 		hash_table_insert(ht,&key,&val);
 	
 	}
@@ -73,11 +73,26 @@ Hashtable *build_edge_table1(const Mesh*m){
 
 int *build_adjacency_table2(const Mesh*m){
 	int adj[3*m->nt]={-1};
+	Hashtable* ht = build_edge_table1(m);
 	for( int i=0, i< m->nt,i++){
-		Edge key ;
-		key = (Edge){m->tri[i].b,m->tri[i].a};
-		Edge skey;
-		int val;
-		while (key != skey){
-			
+		Edge key = {m->tri[i].b,m->tri[i].a};
+		int val = *(int *)hash_table_find(ht,&key);
+		adj[3*i+0]=val;
+		Edge key2 = {m->tri[i].c,m->tri[i].b};
+		int val2 = *(int *)hash_table_find(ht,&key2);
+		adj[3*i+1]=val2;
+		Edge key3 = {m->tri[i].a,m->tri[i].c};
+		int val3 = *(int *)hash_table_find(ht,&key3);
+		adj[3*i+2]=val3;
+	}
+	hash_table_fini(ht);
+	free(ht);
+	return adj;
+}
+
+void edge_table_initialize(EdgeTable * et, int nv, int nt){
+	et->head = malloc(nv*sizeof(int));
+	et->next = malloc(nt*3*sizeof(int));
+}
+
 
