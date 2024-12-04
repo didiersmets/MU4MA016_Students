@@ -63,7 +63,69 @@ int *build_adjacency_table1(const struct Mesh *m)
 
 struct HashTable *build_edge_table1(const struct Mesh *m)
 {
-	struct HashTable *ht = hash_table_init(
+	struct HashTable *ht = hash_table_init(2*m->ntri, sizeof(struct Edge), sizeof(int));
+	for (int i = 0; i<m->ntri; i++)
+	{
+		struct Triangle t = m->triangles[i];
+		struct Edge edges[3] = {{t.idx[0],t.idx[1]}, {t.idx[1], t.idx[2]}, {t.idx[2], t.idx[0]}};
+		hash_table_insert(ht, &edges[0], &i);
+		hash_table_insert(ht, &edges[1], &i);
+		hash_table_insert(ht, &edges[2], &i);
+	}
+	return(ht);
+}
+
+int *build_adjacency_table2(const struct Mesh *m)
+{
+	int *adj = (int *)malloc(3*m->ntri*sizeof(int));
+	struct HashTable *ht = build_edge_table1(m);
+	for (int i = 0; i<m->ntri; i++)
+	{
+		struct Triangle t = m->triangles[i];
+		struct Edge edges[3] = {{t.idx[0],t.idx[1]}, {t.idx[1], t.idx[2]}, {t.idx[2], t.idx[0]}};
+		for (int j = 0; j<3; j++)
+		{
+			struct Edge opposite_edge {
+				edges[j].v2;
+				edges[j].v1;
+			}
+			if (hash_table_find(ht, &opposite_edge) != NULL)
+			{
+				adj[3*i + j] = (int *)hash_table_find(ht, &opposite_edge);
+			}else {
+				adj[3*i + j] = -1;
+			}
+		}
+	}
+	hash_table_fini(ht);
+	return adj;
+}
+
+void edge_table_initialize(struct EdgeTable *et, int nvert, int ntri)
+{
+	et->head = (int *)malloc(nvert*sizeof(int));
+	et->next = (int *)malloc(3*ntri*sizeof(int));
+}
+
+void edge_table_dispose(strut EdgeTable *et)
+{
+	free(et->head);
+	free(et->next);
+}
+
+void edge_table_insert(int v1, int edge_code, struct EdgeTable *et)
+{
+	int tmp = 0;
+	if (et->head[v1] == -1)
+	{
+		et->head[v1] = edge_code;
+	} else {
+		tmp = et->head[v1];
+		et->head[v1] = edge_code;
+		next[edge_code] = tmp;
+	}
+}
+
 
 
 

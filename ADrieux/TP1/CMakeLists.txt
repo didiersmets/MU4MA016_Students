@@ -4,3 +4,4 @@ add_executable(bubble bubble_sort.c)
 add_executable(merge merge_sort.c)
 add_executable(insertion insertion_sort.c)
 
+

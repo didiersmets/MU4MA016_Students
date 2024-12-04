@@ -19,6 +19,7 @@ void insertion_sort(int *A, int size)
 
 int main(int argc, char** argv)
 {
+	FILE *fptr = fopen("insertion_data.txt", "w");
 	int N[8];
 	N[0] = 10;
 	N[1] = 20;
@@ -39,10 +40,14 @@ int main(int argc, char** argv)
 		clock_t begin = clock();
 		insertion_sort(A,N[i]);
 		clock_t end = clock();
-		unsigned long time_spent = (end - begin)*1000/CLOCKS_PER_SEC;
-		printf("insertion_sort : %ld ms\n", time_spent);
+		double time_spent = (double)(end - begin)/CLOCKS_PER_SEC;
+		fprintf(fptr, "%d", N[i]);
+		fprintf(fptr, "%f", time_spent);
+		fprintf(fptr,"\n");
+		printf("insertion_sort : %f\n", time_spent);
 		free(A);
 	}
+	fclose(fptr);
 	return 0;
 
 }
