@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <priority_queue.h>
+#include <../EE/TP4/priority_queue.h>
 
 int priority_queue_init(struct priority_queue* q, int max_id)
 {

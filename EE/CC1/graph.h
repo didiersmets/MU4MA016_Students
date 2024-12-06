@@ -15,7 +15,7 @@ struct Edge {
 struct EdgeList {
 	int nverts;
 	int nedges;
-	Edge *edges;
+	struct Edge *edges;
 };
 
 /* An half-edge is an edge without the information about 'orig',
@@ -34,7 +34,7 @@ struct Graph {
 	int nverts;
 	int nedges;
 	int *offsets; /* of size nverts + 1 */
-	HEdge *edges; /* of size nedges     */
+	struct HEdge *edges; /* of size nedges     */
 };
 
 /* Read a graph data file (formated as the provided .dta sample files)

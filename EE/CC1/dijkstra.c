@@ -18,6 +18,7 @@ struct DijkstraHeap {
 /* You should implement these two ONLY if you have already implemented
  * Dijkstra_solve. */
 static void heap_push(struct DijkstraHeap *heap, struct HEdge edge);
+
 static struct HEdge heap_pop(struct DijkstraHeap *heap);
 /* Implement them here. Worth 5 points in total */
 
@@ -36,7 +37,24 @@ static struct HEdge heap_pop(struct DijkstraHeap *heap);
  *    Each time some half edge is pushed into heap, DijkstraSol should be
  *    updated accordingly.
  */
-struct DijkstraSol *Dijkstra_solve(struct Graph *G, int source);
+struct DijkstraSol *Dijkstra_solve(struct Graph *G, int source)
+{
+	struct DijkstraSol* ds = (DijkstraSol*)malloc(sizeof(DijkstraSol));
+	ds->pred = (int*)malloc(sizeof(int) * G->nvert);
+	ds->cost = (int*)malloc(sizeof(int) * G->nvert);
+	ds->pred[source] = source;
+	ds->pred[cost] = 0;
+	struct DijkstraHeap* dh = (DijkstraHeap*)malloc(sizeof(DijkstraHeap));
+	dh->size = 0;
+	dh->capacity = G->nedges;
+	dh->data = G->data;
+	while (dh->size != 0){
+		HEdge he = heap_pop(dh);
+		if (){
+			___;
+		}else{
+			for (int i = offsets[he.dest]; i < G->offsets[he.dest + 1]; i ++){
+
 /* Implement me here. Worth 5 points */
 
 /* Follow predecessors back from dest until source and (pretty) print them */
