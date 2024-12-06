@@ -1,5 +1,7 @@
 #pragma once
 
+#include "graph.h"
+
 /* For any 0 <= dest < nverts :
  * - pred[dest] should eventually contain the predecessor of vertex
  *   dest along a shortest path from source to dest.
