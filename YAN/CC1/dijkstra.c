@@ -36,7 +36,42 @@ static struct HEdge heap_pop(struct DijkstraHeap *heap);
  *    Each time some half edge is pushed into heap, DijkstraSol should be
  *    updated accordingly.
  */
-struct DijkstraSol *Dijkstra_solve(struct Graph *G, int source);
+struct DijkstraSol *Dijkstra_solve(struct Graph *G, int source){
+	struct DijkstraSol* dij = malloc(sizeof(struct DijkstraSol));
+	dij->pred = malloc(G->nverts*sizeof(int));
+	dij->cost = malloc(G->nverts*sizeof(int));
+	for(int i = 0, i< G->nverts, i++){
+		dij->pred[i]=-1;
+	}
+	struct DijkstraHeap* heap = mallox(sizeof(struct DijkstrHeap));
+	heap->size = G->nverts;
+	heap->capacity = G->nverts;
+	heap->data = malloc(g->nverts*sizeof(struct HEdge));
+	dij->pred[source]=source;
+	dij->cost[source]=0;
+	struct HEdge next;
+	struct HEdge he;
+	he.dest = source;
+	he.cost = 0;
+	heap_push(heap,he);
+	while (heap->capacity != G->nverts){
+		he = heap_pop(heap);
+		if(dij->cost[he.dest]>he.cost){
+			for(int i= G->offsets[dest], i<G->offssts[dest+1], i++){
+				next->dest= G->edges[i].dest;
+				next->cost = he.cost+G->edges[i].cost;
+				if(dij->pred[next->dest]=-1 || dij->cost[next->dest]>next->cost){
+					heap_push(heap, next);
+					dij->pred[he.dest]=next->dest;
+					dij->pred[he.cost]=next->cost;
+				}
+			}
+		}
+	}
+	return dij;
+}
+
+	
 /* Implement me here. Worth 5 points */
 
 /* Follow predecessors back from dest until source and (pretty) print them */
