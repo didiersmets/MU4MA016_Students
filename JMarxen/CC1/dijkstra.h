@@ -1,4 +1,5 @@
 #pragma once
+#include "graph.h"
 
 /* For any 0 <= dest < nverts :
  * - pred[dest] should eventually contain the predecessor of vertex
@@ -9,8 +10,8 @@
  * candidate yet'.
  */
 struct DijkstraSol {
-	int *pred; /* size = nverts */
-	int *cost; /* size = nverts */
+	int *pred;   /* size = nverts */
+	float *cost; /* size = nverts */
 };
 
 struct DijkstraSol *Dijkstra_solve(const struct Graph *G, int source);
