@@ -3,6 +3,9 @@
 #include "dijkstra.h"
 #include "graph.h"
 
+#include <stdio.h>
+#include <stdlib.h>
+
 /* A heap containing half edges. The .cost field
  * will contain the accumulated cost from source up to dest,
  * not just the cost of that particular edge.
@@ -36,8 +39,21 @@ static struct HEdge heap_pop(struct DijkstraHeap *heap);
  *    Each time some half edge is pushed into heap, DijkstraSol should be
  *    updated accordingly.
  */
-struct DijkstraSol *Dijkstra_solve(struct Graph *G, int source);
-/* Implement me here. Worth 5 points */
+struct DijkstraSol *Dijkstra_solve(struct Graph *G, int source)
+{
+	struct DijkstraSol *DjS = (struct DijkstraSol *)malloc(sizeof(struct DijkstraSol));
+	struct DijkstraHeap *heap = (struct DijkstraHeap *)malloc(10*sizeof(struct DijkstraHeap));
+	heap->size = 0;
+	heap->capacity = 10;
+	Djs->pred = (int *)malloc(G->nverts*sizeof(int));
+	for (int i = 0; i<G->nverts; i ++)
+	{
+		Djs->pred[i] = -1;
+	}
+	Djs->cost = (int *)malloc(G->nverts*sizeof(int));
+	Djs->cost[source] = 0;
+	Djs->pred[source] = NULL;
+
 
 /* Follow predecessors back from dest until source and (pretty) print them */
 void print_minimal_path(int source, int dest, struct DijkstraSol *sol);
