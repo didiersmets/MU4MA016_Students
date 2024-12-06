@@ -59,7 +59,7 @@ struct DijkstraSol *Dijkstra_solve(struct Graph *G, int source) {
     for (int i = G->offsets[e.dest]; i<G->offsets[e.dest+1]; i++){
       heap_push(H, G->edges[i]);                                     //G->edges[i] is the outgoing halfedge from dest
       if (Sol->cost[source] + e.cost < Sol->cost[?]) {
-	Sol->pred[source+1] = e.dest;
+	Sol->pred[source+1] = e.dest
 	Sol->cost[source+1] = Sol->cost[source] + e.cost;
       }
     }

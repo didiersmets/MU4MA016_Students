@@ -10,7 +10,7 @@
  */
 struct DijkstraSol {
 	int *pred; /* size = nverts */
-	int *cost; /* size = nverts */
+	int *cost; /* size = nverts *
 };
 
 struct DijkstraSol *Dijkstra_solve(const struct Graph *G, int source);
