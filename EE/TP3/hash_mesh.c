@@ -1,64 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "include/hash_tables.h"
-
-struct Vertex{
-	union{
-		struct{
-			double x, y;
-		};
-		double coord[2];
-	};
-};
-
-struct Triangle{
-	union{
-		struct{
-			int A, B, C;
-		};
-		int idx[3];
-	};
-};
-
-struct Mesh2D{
-	int nv; /*number of vertices in the mesh*/
-	struct Vertex* vert;/*array of vertices*/
-	int nt; /*number of triangles*/
-	struct Triangle* tri; /*array of triangles*/
-};
-
-struct Edge{
-	int v1;
-	int v2;
-};
-
-int initialise_mesh2D(int vtx_capacity, int tri_capacity)
-{
-	struct Mesh2D* m = (struct Mesh2D*)malloc(sizeof(Mesh2D));
-	m->nv = vtx_capacity;
-	m->vert = (struct Vertex*)malloc(vtx_capacity*sizeof(struct Vertex));
-	m->nt = tri_capacity;
-	m->tri = (struct Triangle*)malloc(tri_capacity*sizeof(struct Triangle));
-	return 0;
-}
-
-void dispose_mesh2D(struct Mesh2D* m)
-{
-	free(m->vert);
-	free(m->tri);
-}
-
-double area_mesh2D(struct Mesh2D* m)
-{
-	double res = 0;
-	for (int i = 0; i < m->nt; i++){
-		struct Vertex v1 = m->vert[m->tri[i].A];
-		struct Vertex v2 = m->vert[m->tri[i].B];
-		struct Vertex v3 = m->vert[m->tri[i].C];
-		res += ((v1.x - v2.x) * (v3.y - v2.y) - (v1.y - v2.y) * (v3.x - v1.x))/2;
-	}
-	return res;
-}
+#include "../TP3/include/hash_tables.h"
+#include "assert.h"
+#include "../TP3/include/mesh_adjacency.h"
 
 int edge_pos_in_tri(int v1, int v2, struct Triangle t)
 {
@@ -69,23 +13,23 @@ int edge_pos_in_tri(int v1, int v2, struct Triangle t)
 	return -1;
 }
 
-int tris_are_neighbors(int tri1, int tri2,const struct Mesh2D* m)
+int tris_are_neighbors(int tri1, int tri2,const struct Mesh* m)
 {
 	for (int i = 0; i < 3; i++){
-		if(edge_pos_in_tri(m->tri[tri1].idx[(i+1)%3],m->tri[tri1].idx[i],m->tri[tri2]) != -1)
+		if(edge_pos_in_tri(m->triangles[tri1].idx[(i+1)%3],m->triangles[tri1].idx[i],m->triangles[tri2]) != -1)
 			return i;
 	}
 	return -1;
 }
 
-int *build_adjacency_table1(const struct Mesh2D* m)
+int *build_adjacency_table1(const struct Mesh* m)
 {
-	int *adj = (int*)malloc(3*(m->nt)*sizeof(int));
-	for (int i = 0; i < m->nt; i ++){
+	int *adj = (int*)malloc(3*(m->ntri)*sizeof(int));
+	for (int i = 0; i < m->ntri; i ++){
 		for (int k = 3 * i; k < 3 * (i + 1); k ++){
 			adj[k] = -1;
 		}
-		for (int j = i + 1; j < m->nt; j ++){
+		for (int j = i + 1; j < m->ntri; j ++){
 			int t = tris_are_neighbors(i, j, m);
 			int u = tris_are_neighbors(j, i, m);
 			if (t != -1){
@@ -97,20 +41,63 @@ int *build_adjacency_table1(const struct Mesh2D* m)
 	return adj;
 }
 
-struct HashTable *build_edge_table1(const struct Mesh2D* m)
+struct HashTable *build_edge_table1(const struct Mesh* m)
 {
-	HashTable* ht = hash_table_init(3*m->nt, sizeof(Edge), 2*sizeof(int));
-	for (int i = 0; i < m->nt; i ++){
+	HashTable* ht = hash_table_init(6*m->ntri, sizeof(Edge), 2*sizeof(int));
+	for (int i = 0; i < m->ntri; i ++){
 		for (int j = 0; j < 3; j++){
-			if (hash_table_find(ht, m->tri[i].idx[j]) == NULL){
-				hash_table_insert(ht, m->tri[i].idx[j], i);
-			}else{
-				/*comment ajouter une nouvelle val ??????????*/
-			}
+			struct Edge v;
+			v.v1 = m->triangles[i].idx[j];
+			v.v2 = m->triangles[i].idx[(j + 1) % 3];
+			assert (hash_table_find(ht, &v) == NULL);
+			hash_table_insert(ht, &v, &i);
 		}
 	}
 	return ht;
 }
+
+int *build_adjacency_table2(const struct Mesh* m)
+{
+	int* adj = (int *)malloc(3 * m->ntri * sizeof(int));
+	struct HashTable* ht = build_edge_table1(m);
+	for (int i = 0; i < m->ntri; i ++){
+		for (int j = 0; j < 3; j ++){
+			struct Edge e;
+			e.v2 = m->triangles[i].idx[j];
+			e.v1 = m->triangles[i].idx[(j + 1) % 3];
+			if (hash_table_find(ht, &e) == NULL){
+				adj[3 * i + j] = *(int *)hash_table_find(ht, &e);
+			}else{
+				adj[3 * i + j] = -1;
+			}
+		}
+	}
+	return adj;
+}
+
+void edge_table_initialize(struct EdgeTable* et, int nvert, int ntri)
+{
+	et->head = (int*)malloc(nvert * sizeof(int));
+	et->next = (int*)malloc(3 * ntri * sizeof(int));
+}
+
+void edge_table_dispose(struct EdgeTable* et)
+{
+	free(et->head);
+	et->head = NULL;
+	free(et->next);
+	et->next = NULL;
+}
+
+void edge_table_insert(int v1, int edge_code, struct EdgeTable* et)
+{
+	int temp = 0;
+	if (et->head[v1] == -1){
+		et->head[v1] = edge_code;
+	}else{
+		temp = et->head[v1];
+
+	}
 
 
 

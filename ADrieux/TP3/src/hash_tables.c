@@ -1,4 +1,4 @@
-#include "../EE/TP3/include/hash_tables.h"
+#include "hash_tables.h"
 
 #include <stdint.h>
 #include <stdlib.h>
@@ -101,6 +101,18 @@ static void hash_table_grow(struct HashTable *ht, size_t new_cap)
 	// 3. Traverse the old table, read its data and insert it
 	//    (e.g. through hash_table_insert) into the new table.
 	// 4. When done, free the old data
+	
+	void *old_data = ht->data;
+	unsigned old_capacity = ht->capacity;
+	unsigned slot_len = 1 + ht->key_len + ht->val_len;
+	ht->data = realloc(ht->data, new_cap*slot_len);
+	ht->capacity = new_cap;
+	for (unsigned i = 0; i<old_capacity; i++)
+	{
+		unsigned char *p = (unsigned char *)old_data + i*slot_len;
+		hash_table_insert(ht, p + 1, p + 1 + ht->key_len);
+	}
+	free(old_data);
 }
 
 void hash_table_delete(const struct HashTable *ht, void *key)

@@ -51,6 +51,7 @@ void merge_sort(int *T, int p, int r)
 
 int main(int argc, char** argv)
 {
+	FILE *fptr = fopen("merge_data.txt", "w");
 	int N[8];
 	N[0] = 10;
 	N[1] = 20;
@@ -71,10 +72,14 @@ int main(int argc, char** argv)
 		clock_t begin = clock();
 		merge_sort(T, 0, N[i] - 1);
 		clock_t end = clock();
-		unsigned long time_spent = (end - begin)*1000/CLOCKS_PER_SEC;
-		printf("merge_sort : %ld ms\n", time_spent);
+		double time_spent =(double)(end - begin)/CLOCKS_PER_SEC;
+		fprintf(fptr, "%d", N[i]);
+		fprintf(fptr, "%f", time_spent);
+		fprintf(fptr, "\n");
+		printf("merge_sort : %f\n", time_spent);
 		free(T);
 	}
+	fclose(fptr);
 	return 0;
 }
 
