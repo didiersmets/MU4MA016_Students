@@ -1,1 +1,0 @@
-/usr/bin/cc CMakeFiles/tp0.sin.dir/sinx.c.o -o tp0.sin  -lm 

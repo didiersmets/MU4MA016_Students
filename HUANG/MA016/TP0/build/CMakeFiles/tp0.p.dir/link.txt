@@ -1,1 +1,0 @@
-/usr/bin/cc CMakeFiles/tp0.p.dir/pascal.c.o -o tp0.p 

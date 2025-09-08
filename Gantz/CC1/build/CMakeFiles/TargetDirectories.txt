@@ -1,3 +1,0 @@
-/users/home/21109004/MU4MA016_Students/Gantz/CC1/build/CMakeFiles/main.dir
-/users/home/21109004/MU4MA016_Students/Gantz/CC1/build/CMakeFiles/edit_cache.dir
-/users/home/21109004/MU4MA016_Students/Gantz/CC1/build/CMakeFiles/rebuild_cache.dir

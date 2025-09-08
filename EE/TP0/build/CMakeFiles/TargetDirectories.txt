@@ -1,5 +1,0 @@
-/users/home/21106595/MU4MA016_Students/EE/TP0/build/CMakeFiles/hello.dir
-/users/home/21106595/MU4MA016_Students/EE/TP0/build/CMakeFiles/triangle.dir
-/users/home/21106595/MU4MA016_Students/EE/TP0/build/CMakeFiles/readline.dir
-/users/home/21106595/MU4MA016_Students/EE/TP0/build/CMakeFiles/edit_cache.dir
-/users/home/21106595/MU4MA016_Students/EE/TP0/build/CMakeFiles/rebuild_cache.dir

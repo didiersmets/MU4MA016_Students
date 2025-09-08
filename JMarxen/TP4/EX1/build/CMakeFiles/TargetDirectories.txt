@@ -1,3 +1,0 @@
-/home/janmarxen/MU4MA016_Students/JMarxen/TP4/EX1/build/CMakeFiles/test_queue.dir
-/home/janmarxen/MU4MA016_Students/JMarxen/TP4/EX1/build/CMakeFiles/edit_cache.dir
-/home/janmarxen/MU4MA016_Students/JMarxen/TP4/EX1/build/CMakeFiles/rebuild_cache.dir

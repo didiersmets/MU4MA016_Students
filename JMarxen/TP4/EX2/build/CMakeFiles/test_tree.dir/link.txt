@@ -1,1 +1,0 @@
-/usr/bin/cc CMakeFiles/test_tree.dir/src/test_tree.c.o CMakeFiles/test_tree.dir/src/avl_tree.c.o -o test_tree

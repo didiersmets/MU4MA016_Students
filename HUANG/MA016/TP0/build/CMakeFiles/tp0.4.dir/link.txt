@@ -1,1 +1,0 @@
-/usr/bin/cc CMakeFiles/tp0.4.dir/sinx.c.o -o tp0.4  -lm 

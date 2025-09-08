@@ -1,6 +1,0 @@
-#include <stdio.h>
-
-void bubble_sort(int* adress, int n)//adress if the array and the number of elements
-{
-  
-};

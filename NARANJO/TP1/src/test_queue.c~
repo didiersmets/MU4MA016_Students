@@ -1,5 +1,0 @@
-#include <stdio.h>
-
-int random_queue(int n){
-	queue.init
-}
