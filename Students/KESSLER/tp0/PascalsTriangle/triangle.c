@@ -1,28 +1,45 @@
 #include <stdio.h>
+#include <stdlib.h>
+
+void printPascalTriangle(int n);
+int calculatePascalValue(int line, int position);
 
 int main(int argc, char *argv[]) {
-
     if (argc != 2) {
-        printf("Please provide exactly 1 argument.");
+        printf("Please provide exactly 1 positive integer.\n");
         return 1;
     }
 
-    triangle(argv[1]);
+    int n = atoi(argv[1]);
+    if (n <= 0) {
+        printf("Please enter a positive number.\n");
+        return 1;
+    }
+
+    printPascalTriangle(n);
     return 0;
 }
 
-void triangle(int numberOfLines) {
+// Calculates the value at a specific position in Pascal's Triangle
+int calculatePascalValue(int line, int position) {
+    if (position == 0 || position == line)
+        return 1;
+    
+    return calculatePascalValue(line - 1, position - 1) + calculatePascalValue(line - 1, position);
+}
 
-    int one = 1;
-    int two = 1;
-
-    for (int lineIndex = 0; lineIndex < numberOfLines; lineIndex++) {
-        printf(1);
-
-        for (int columnIndex = 1, columnIndex < lineIndex; columnIndex++) {
-
+// Prints Pascal's Triangle with n lines
+void printPascalTriangle(int n) {
+    for (int line = 0; line < n; line++) {
+        // Add indentation
+        for (int space = 0; space < n - line - 1; space++) {
+            printf("  ");
         }
 
-        printf(1);
+        // Calculate and print the values in this line
+        for (int position = 0; position <= line; position++) {
+            printf("%4d", calculatePascalValue(line, position));
+        }
+        printf("\n");
     }
 }
