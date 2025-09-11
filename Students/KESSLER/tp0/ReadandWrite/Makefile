@@ -129,6 +129,19 @@ read_file/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/read_file.dir/build.make CMakeFiles/read_file.dir/build
 .PHONY : read_file/fast
 
+#=============================================================================
+# Target rules for targets named write_file
+
+# Build rule for target.
+write_file: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 write_file
+.PHONY : write_file
+
+# fast build rule for target.
+write_file/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/write_file.dir/build.make CMakeFiles/write_file.dir/build
+.PHONY : write_file/fast
+
 read.o: read.c.o
 .PHONY : read.o
 
@@ -153,6 +166,30 @@ read.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/read_file.dir/build.make CMakeFiles/read_file.dir/read.c.s
 .PHONY : read.c.s
 
+write.o: write.c.o
+.PHONY : write.o
+
+# target to build an object file
+write.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/write_file.dir/build.make CMakeFiles/write_file.dir/write.c.o
+.PHONY : write.c.o
+
+write.i: write.c.i
+.PHONY : write.i
+
+# target to preprocess a source file
+write.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/write_file.dir/build.make CMakeFiles/write_file.dir/write.c.i
+.PHONY : write.c.i
+
+write.s: write.c.s
+.PHONY : write.s
+
+# target to generate assembly for a file
+write.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/write_file.dir/build.make CMakeFiles/write_file.dir/write.c.s
+.PHONY : write.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -162,9 +199,13 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... read_file"
+	@echo "... write_file"
 	@echo "... read.o"
 	@echo "... read.i"
 	@echo "... read.s"
+	@echo "... write.o"
+	@echo "... write.i"
+	@echo "... write.s"
 .PHONY : help
 
 
