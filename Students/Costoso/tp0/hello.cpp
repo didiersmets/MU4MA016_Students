@@ -14,6 +14,7 @@ Construire cmake liste
     cmake --build build
 4) Executer avec:
     ./build/hello
+
 */
 int Pascal_formula(int i,int j){ 
     if( j>0 && j<i ){
