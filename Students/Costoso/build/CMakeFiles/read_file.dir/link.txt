@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/read_file.dir/read_file.cpp.o -o read_file 

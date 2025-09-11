@@ -54,10 +54,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/Thanh-Long/Documents/M1/S1/4MA316/tp0
+CMAKE_SOURCE_DIR = /home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/Thanh-Long/Documents/M1/S1/4MA316/tp0/build
+CMAKE_BINARY_DIR = /home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0/build
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -65,11 +65,15 @@ CMAKE_BINARY_DIR = /home/Thanh-Long/Documents/M1/S1/4MA316/tp0/build
 # The main recursive "all" target.
 all: CMakeFiles/hello.exe.dir/all
 all: CMakeFiles/pascal.exe.dir/all
+all: CMakeFiles/read_file.exe.dir/all
+all: CMakeFiles/sin.exe.dir/all
 .PHONY : all
 
 # The main recursive "codegen" target.
 codegen: CMakeFiles/hello.exe.dir/codegen
 codegen: CMakeFiles/pascal.exe.dir/codegen
+codegen: CMakeFiles/read_file.exe.dir/codegen
+codegen: CMakeFiles/sin.exe.dir/codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
@@ -79,6 +83,8 @@ preinstall:
 # The main recursive "clean" target.
 clean: CMakeFiles/hello.exe.dir/clean
 clean: CMakeFiles/pascal.exe.dir/clean
+clean: CMakeFiles/read_file.exe.dir/clean
+clean: CMakeFiles/sin.exe.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -88,14 +94,14 @@ clean: CMakeFiles/pascal.exe.dir/clean
 CMakeFiles/hello.exe.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/hello.exe.dir/build.make CMakeFiles/hello.exe.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/hello.exe.dir/build.make CMakeFiles/hello.exe.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/Thanh-Long/Documents/M1/S1/4MA316/tp0/build/CMakeFiles --progress-num=1,2 "Built target hello.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0/build/CMakeFiles --progress-num=1,2 "Built target hello.exe"
 .PHONY : CMakeFiles/hello.exe.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/hello.exe.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/Thanh-Long/Documents/M1/S1/4MA316/tp0/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0/build/CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/hello.exe.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/Thanh-Long/Documents/M1/S1/4MA316/tp0/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0/build/CMakeFiles 0
 .PHONY : CMakeFiles/hello.exe.dir/rule
 
 # Convenience name for target.
@@ -105,7 +111,7 @@ hello.exe: CMakeFiles/hello.exe.dir/rule
 # codegen rule for target.
 CMakeFiles/hello.exe.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/hello.exe.dir/build.make CMakeFiles/hello.exe.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/Thanh-Long/Documents/M1/S1/4MA316/tp0/build/CMakeFiles --progress-num=1,2 "Finished codegen for target hello.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0/build/CMakeFiles --progress-num=1,2 "Finished codegen for target hello.exe"
 .PHONY : CMakeFiles/hello.exe.dir/codegen
 
 # clean rule for target.
@@ -120,14 +126,14 @@ CMakeFiles/hello.exe.dir/clean:
 CMakeFiles/pascal.exe.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pascal.exe.dir/build.make CMakeFiles/pascal.exe.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pascal.exe.dir/build.make CMakeFiles/pascal.exe.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/Thanh-Long/Documents/M1/S1/4MA316/tp0/build/CMakeFiles --progress-num=3,4 "Built target pascal.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0/build/CMakeFiles --progress-num=3,4 "Built target pascal.exe"
 .PHONY : CMakeFiles/pascal.exe.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/pascal.exe.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/Thanh-Long/Documents/M1/S1/4MA316/tp0/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0/build/CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/pascal.exe.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/Thanh-Long/Documents/M1/S1/4MA316/tp0/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0/build/CMakeFiles 0
 .PHONY : CMakeFiles/pascal.exe.dir/rule
 
 # Convenience name for target.
@@ -137,13 +143,77 @@ pascal.exe: CMakeFiles/pascal.exe.dir/rule
 # codegen rule for target.
 CMakeFiles/pascal.exe.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pascal.exe.dir/build.make CMakeFiles/pascal.exe.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/Thanh-Long/Documents/M1/S1/4MA316/tp0/build/CMakeFiles --progress-num=3,4 "Finished codegen for target pascal.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0/build/CMakeFiles --progress-num=3,4 "Finished codegen for target pascal.exe"
 .PHONY : CMakeFiles/pascal.exe.dir/codegen
 
 # clean rule for target.
 CMakeFiles/pascal.exe.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pascal.exe.dir/build.make CMakeFiles/pascal.exe.dir/clean
 .PHONY : CMakeFiles/pascal.exe.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/read_file.exe.dir
+
+# All Build rule for target.
+CMakeFiles/read_file.exe.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/read_file.exe.dir/build.make CMakeFiles/read_file.exe.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/read_file.exe.dir/build.make CMakeFiles/read_file.exe.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0/build/CMakeFiles --progress-num=5,6 "Built target read_file.exe"
+.PHONY : CMakeFiles/read_file.exe.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/read_file.exe.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/read_file.exe.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0/build/CMakeFiles 0
+.PHONY : CMakeFiles/read_file.exe.dir/rule
+
+# Convenience name for target.
+read_file.exe: CMakeFiles/read_file.exe.dir/rule
+.PHONY : read_file.exe
+
+# codegen rule for target.
+CMakeFiles/read_file.exe.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/read_file.exe.dir/build.make CMakeFiles/read_file.exe.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0/build/CMakeFiles --progress-num=5,6 "Finished codegen for target read_file.exe"
+.PHONY : CMakeFiles/read_file.exe.dir/codegen
+
+# clean rule for target.
+CMakeFiles/read_file.exe.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/read_file.exe.dir/build.make CMakeFiles/read_file.exe.dir/clean
+.PHONY : CMakeFiles/read_file.exe.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/sin.exe.dir
+
+# All Build rule for target.
+CMakeFiles/sin.exe.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sin.exe.dir/build.make CMakeFiles/sin.exe.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sin.exe.dir/build.make CMakeFiles/sin.exe.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0/build/CMakeFiles --progress-num=7,8 "Built target sin.exe"
+.PHONY : CMakeFiles/sin.exe.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/sin.exe.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/sin.exe.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0/build/CMakeFiles 0
+.PHONY : CMakeFiles/sin.exe.dir/rule
+
+# Convenience name for target.
+sin.exe: CMakeFiles/sin.exe.dir/rule
+.PHONY : sin.exe
+
+# codegen rule for target.
+CMakeFiles/sin.exe.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sin.exe.dir/build.make CMakeFiles/sin.exe.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0/build/CMakeFiles --progress-num=7,8 "Finished codegen for target sin.exe"
+.PHONY : CMakeFiles/sin.exe.dir/codegen
+
+# clean rule for target.
+CMakeFiles/sin.exe.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sin.exe.dir/build.make CMakeFiles/sin.exe.dir/clean
+.PHONY : CMakeFiles/sin.exe.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.
