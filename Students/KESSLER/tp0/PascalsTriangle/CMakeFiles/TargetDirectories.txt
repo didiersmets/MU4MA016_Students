@@ -1,0 +1,3 @@
+/Users/pascalkessler/Studium/PARIS/Data Structures/MU4MA016_Students/Students/KESSLER/tp0/PascalsTriangle/CMakeFiles/triangle.dir
+/Users/pascalkessler/Studium/PARIS/Data Structures/MU4MA016_Students/Students/KESSLER/tp0/PascalsTriangle/CMakeFiles/edit_cache.dir
+/Users/pascalkessler/Studium/PARIS/Data Structures/MU4MA016_Students/Students/KESSLER/tp0/PascalsTriangle/CMakeFiles/rebuild_cache.dir

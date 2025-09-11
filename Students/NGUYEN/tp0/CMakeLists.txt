@@ -1,0 +1,4 @@
+cmake_minimum_required(VERSION 3.10)
+project(tp0)
+add_executable(hello.exe hello.c)
+add_executable(pascal.exe pascal.c)
