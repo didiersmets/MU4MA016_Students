@@ -1,3 +1,0 @@
-/users/home/21516914/MA016/tp0/CMakeFiles/hello.dir
-/users/home/21516914/MA016/tp0/CMakeFiles/edit_cache.dir
-/users/home/21516914/MA016/tp0/CMakeFiles/rebuild_cache.dir
