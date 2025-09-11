@@ -155,6 +155,19 @@ read_file.exe/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/read_file.exe.dir/build.make CMakeFiles/read_file.exe.dir/build
 .PHONY : read_file.exe/fast
 
+#=============================================================================
+# Target rules for targets named sin.exe
+
+# Build rule for target.
+sin.exe: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sin.exe
+.PHONY : sin.exe
+
+# fast build rule for target.
+sin.exe/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sin.exe.dir/build.make CMakeFiles/sin.exe.dir/build
+.PHONY : sin.exe/fast
+
 hello.o: hello.c.o
 .PHONY : hello.o
 
@@ -227,6 +240,30 @@ read_file.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/read_file.exe.dir/build.make CMakeFiles/read_file.exe.dir/read_file.c.s
 .PHONY : read_file.c.s
 
+sin.o: sin.c.o
+.PHONY : sin.o
+
+# target to build an object file
+sin.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sin.exe.dir/build.make CMakeFiles/sin.exe.dir/sin.c.o
+.PHONY : sin.c.o
+
+sin.i: sin.c.i
+.PHONY : sin.i
+
+# target to preprocess a source file
+sin.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sin.exe.dir/build.make CMakeFiles/sin.exe.dir/sin.c.i
+.PHONY : sin.c.i
+
+sin.s: sin.c.s
+.PHONY : sin.s
+
+# target to generate assembly for a file
+sin.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sin.exe.dir/build.make CMakeFiles/sin.exe.dir/sin.c.s
+.PHONY : sin.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -238,6 +275,7 @@ help:
 	@echo "... hello.exe"
 	@echo "... pascal.exe"
 	@echo "... read_file.exe"
+	@echo "... sin.exe"
 	@echo "... hello.o"
 	@echo "... hello.i"
 	@echo "... hello.s"
@@ -247,6 +285,9 @@ help:
 	@echo "... read_file.o"
 	@echo "... read_file.i"
 	@echo "... read_file.s"
+	@echo "... sin.o"
+	@echo "... sin.i"
+	@echo "... sin.s"
 .PHONY : help
 
 

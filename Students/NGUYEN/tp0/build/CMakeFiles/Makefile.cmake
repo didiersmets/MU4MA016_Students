@@ -57,4 +57,5 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/hello.exe.dir/DependInfo.cmake"
   "CMakeFiles/pascal.exe.dir/DependInfo.cmake"
   "CMakeFiles/read_file.exe.dir/DependInfo.cmake"
+  "CMakeFiles/sin.exe.dir/DependInfo.cmake"
   )

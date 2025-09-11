@@ -66,12 +66,14 @@ CMAKE_BINARY_DIR = /home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Stu
 all: CMakeFiles/hello.exe.dir/all
 all: CMakeFiles/pascal.exe.dir/all
 all: CMakeFiles/read_file.exe.dir/all
+all: CMakeFiles/sin.exe.dir/all
 .PHONY : all
 
 # The main recursive "codegen" target.
 codegen: CMakeFiles/hello.exe.dir/codegen
 codegen: CMakeFiles/pascal.exe.dir/codegen
 codegen: CMakeFiles/read_file.exe.dir/codegen
+codegen: CMakeFiles/sin.exe.dir/codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
@@ -82,6 +84,7 @@ preinstall:
 clean: CMakeFiles/hello.exe.dir/clean
 clean: CMakeFiles/pascal.exe.dir/clean
 clean: CMakeFiles/read_file.exe.dir/clean
+clean: CMakeFiles/sin.exe.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -179,6 +182,38 @@ CMakeFiles/read_file.exe.dir/codegen:
 CMakeFiles/read_file.exe.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/read_file.exe.dir/build.make CMakeFiles/read_file.exe.dir/clean
 .PHONY : CMakeFiles/read_file.exe.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/sin.exe.dir
+
+# All Build rule for target.
+CMakeFiles/sin.exe.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sin.exe.dir/build.make CMakeFiles/sin.exe.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sin.exe.dir/build.make CMakeFiles/sin.exe.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0/build/CMakeFiles --progress-num=7,8 "Built target sin.exe"
+.PHONY : CMakeFiles/sin.exe.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/sin.exe.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/sin.exe.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0/build/CMakeFiles 0
+.PHONY : CMakeFiles/sin.exe.dir/rule
+
+# Convenience name for target.
+sin.exe: CMakeFiles/sin.exe.dir/rule
+.PHONY : sin.exe
+
+# codegen rule for target.
+CMakeFiles/sin.exe.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sin.exe.dir/build.make CMakeFiles/sin.exe.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0/build/CMakeFiles --progress-num=7,8 "Finished codegen for target sin.exe"
+.PHONY : CMakeFiles/sin.exe.dir/codegen
+
+# clean rule for target.
+CMakeFiles/sin.exe.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sin.exe.dir/build.make CMakeFiles/sin.exe.dir/clean
+.PHONY : CMakeFiles/sin.exe.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

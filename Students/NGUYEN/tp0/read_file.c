@@ -9,7 +9,8 @@ int main(int argc, char **argv) {
 		return EXIT_FAILURE;
 	}
 
-	FILE *f = fopen(argv[1], "r"); // to open the file put as the first argument "./read_file ../test-tp0.txt"
+	FILE *f = fopen(argv[1], "r"); // "r" for reading, "w" for writing
+    // to open the file put as the first argument "./read_file ../test-tp0.txt"
 	if (!f) return EXIT_FAILURE;
 
 #define CHUNK 256
