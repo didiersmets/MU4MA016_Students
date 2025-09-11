@@ -142,6 +142,19 @@ pascal.exe/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pascal.exe.dir/build.make CMakeFiles/pascal.exe.dir/build
 .PHONY : pascal.exe/fast
 
+#=============================================================================
+# Target rules for targets named read_file.exe
+
+# Build rule for target.
+read_file.exe: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 read_file.exe
+.PHONY : read_file.exe
+
+# fast build rule for target.
+read_file.exe/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/read_file.exe.dir/build.make CMakeFiles/read_file.exe.dir/build
+.PHONY : read_file.exe/fast
+
 hello.o: hello.c.o
 .PHONY : hello.o
 
@@ -190,6 +203,30 @@ pascal.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pascal.exe.dir/build.make CMakeFiles/pascal.exe.dir/pascal.c.s
 .PHONY : pascal.c.s
 
+read_file.o: read_file.c.o
+.PHONY : read_file.o
+
+# target to build an object file
+read_file.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/read_file.exe.dir/build.make CMakeFiles/read_file.exe.dir/read_file.c.o
+.PHONY : read_file.c.o
+
+read_file.i: read_file.c.i
+.PHONY : read_file.i
+
+# target to preprocess a source file
+read_file.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/read_file.exe.dir/build.make CMakeFiles/read_file.exe.dir/read_file.c.i
+.PHONY : read_file.c.i
+
+read_file.s: read_file.c.s
+.PHONY : read_file.s
+
+# target to generate assembly for a file
+read_file.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/read_file.exe.dir/build.make CMakeFiles/read_file.exe.dir/read_file.c.s
+.PHONY : read_file.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -200,12 +237,16 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... hello.exe"
 	@echo "... pascal.exe"
+	@echo "... read_file.exe"
 	@echo "... hello.o"
 	@echo "... hello.i"
 	@echo "... hello.s"
 	@echo "... pascal.o"
 	@echo "... pascal.i"
 	@echo "... pascal.s"
+	@echo "... read_file.o"
+	@echo "... read_file.i"
+	@echo "... read_file.s"
 .PHONY : help
 
 

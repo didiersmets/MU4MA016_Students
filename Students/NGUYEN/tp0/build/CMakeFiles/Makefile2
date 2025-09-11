@@ -65,11 +65,13 @@ CMAKE_BINARY_DIR = /home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Stu
 # The main recursive "all" target.
 all: CMakeFiles/hello.exe.dir/all
 all: CMakeFiles/pascal.exe.dir/all
+all: CMakeFiles/read_file.exe.dir/all
 .PHONY : all
 
 # The main recursive "codegen" target.
 codegen: CMakeFiles/hello.exe.dir/codegen
 codegen: CMakeFiles/pascal.exe.dir/codegen
+codegen: CMakeFiles/read_file.exe.dir/codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
@@ -79,6 +81,7 @@ preinstall:
 # The main recursive "clean" target.
 clean: CMakeFiles/hello.exe.dir/clean
 clean: CMakeFiles/pascal.exe.dir/clean
+clean: CMakeFiles/read_file.exe.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -144,6 +147,38 @@ CMakeFiles/pascal.exe.dir/codegen:
 CMakeFiles/pascal.exe.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pascal.exe.dir/build.make CMakeFiles/pascal.exe.dir/clean
 .PHONY : CMakeFiles/pascal.exe.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/read_file.exe.dir
+
+# All Build rule for target.
+CMakeFiles/read_file.exe.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/read_file.exe.dir/build.make CMakeFiles/read_file.exe.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/read_file.exe.dir/build.make CMakeFiles/read_file.exe.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0/build/CMakeFiles --progress-num=5,6 "Built target read_file.exe"
+.PHONY : CMakeFiles/read_file.exe.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/read_file.exe.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/read_file.exe.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0/build/CMakeFiles 0
+.PHONY : CMakeFiles/read_file.exe.dir/rule
+
+# Convenience name for target.
+read_file.exe: CMakeFiles/read_file.exe.dir/rule
+.PHONY : read_file.exe
+
+# codegen rule for target.
+CMakeFiles/read_file.exe.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/read_file.exe.dir/build.make CMakeFiles/read_file.exe.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0/build/CMakeFiles --progress-num=5,6 "Finished codegen for target read_file.exe"
+.PHONY : CMakeFiles/read_file.exe.dir/codegen
+
+# clean rule for target.
+CMakeFiles/read_file.exe.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/read_file.exe.dir/build.make CMakeFiles/read_file.exe.dir/clean
+.PHONY : CMakeFiles/read_file.exe.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.
