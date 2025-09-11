@@ -15,6 +15,13 @@ Construire cmake liste
 4) Executer avec:
     ./build/hello
 
+
+Modifier le Github
+1) Faire: "git pull"
+2) Faire: "git add fichier" pour ajouter/modifier les fichier que on veut
+3) Faire: "git rm fichier" pour supprimer les fichier que on veut
+4) Faire "git commit -m "Message"" pour un commit du dossier
+5) Faire "git push"
 */
 int Pascal_formula(int i,int j){ 
     if( j>0 && j<i ){
