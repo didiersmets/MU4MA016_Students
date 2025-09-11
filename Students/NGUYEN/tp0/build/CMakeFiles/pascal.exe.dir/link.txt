@@ -1,0 +1,1 @@
+/usr/bin/cc -Wl,--dependency-file=CMakeFiles/pascal.exe.dir/link.d CMakeFiles/pascal.exe.dir/pascal.c.o -o pascal.exe

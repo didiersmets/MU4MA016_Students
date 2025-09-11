@@ -1,0 +1,1 @@
+/usr/bin/cc -Wl,--dependency-file=CMakeFiles/hello.exe.dir/link.d CMakeFiles/hello.exe.dir/hello.c.o -o hello.exe
