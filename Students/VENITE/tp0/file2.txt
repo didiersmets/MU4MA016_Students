@@ -1,0 +1,10 @@
+Bureau
+Documents
+file1.txt
+Images
+Modèles
+Musique
+Public
+Téléchargements
+Vidéos
+test
