@@ -1,5 +1,5 @@
 CMakeFiles/hello.exe.dir/hello.c.o: \
- /home/Thanh-Long/Documents/M1/S1/4MA316/tp0/hello.c \
+ /home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0/hello.c \
  /usr/include/stdc-predef.h /usr/include/stdio.h \
  /usr/include/bits/libc-header-start.h /usr/include/features.h \
  /usr/include/features-time64.h /usr/include/bits/wordsize.h \

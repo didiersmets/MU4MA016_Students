@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/Thanh-Long/Documents/M1/S1/4MA316/tp0/hello.c" "CMakeFiles/hello.exe.dir/hello.c.o" "gcc" "CMakeFiles/hello.exe.dir/hello.c.o.d"
+  "/home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0/hello.c" "CMakeFiles/hello.exe.dir/hello.c.o" "gcc" "CMakeFiles/hello.exe.dir/hello.c.o.d"
   "" "hello.exe" "gcc" "CMakeFiles/hello.exe.dir/link.d"
   )
 

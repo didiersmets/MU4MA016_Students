@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/Thanh-Long/Documents/M1/S1/4MA316/tp0/pascal.c" "CMakeFiles/pascal.exe.dir/pascal.c.o" "gcc" "CMakeFiles/pascal.exe.dir/pascal.c.o.d"
+  "/home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0/pascal.c" "CMakeFiles/pascal.exe.dir/pascal.c.o" "gcc" "CMakeFiles/pascal.exe.dir/pascal.c.o.d"
   "" "pascal.exe" "gcc" "CMakeFiles/pascal.exe.dir/link.d"
   )
 

@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/Thanh-Long/Documents/M1/S1/4MA316/tp0
+CMAKE_SOURCE_DIR = /home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/Thanh-Long/Documents/M1/S1/4MA316/tp0/build
+CMAKE_BINARY_DIR = /home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/Thanh-Long/Documents/M1/S1/4MA316/tp0/build/CMakeFiles /home/Thanh-Long/Documents/M1/S1/4MA316/tp0/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0/build/CMakeFiles /home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/Thanh-Long/Documents/M1/S1/4MA316/tp0/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -142,6 +142,32 @@ pascal.exe/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pascal.exe.dir/build.make CMakeFiles/pascal.exe.dir/build
 .PHONY : pascal.exe/fast
 
+#=============================================================================
+# Target rules for targets named read_file.exe
+
+# Build rule for target.
+read_file.exe: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 read_file.exe
+.PHONY : read_file.exe
+
+# fast build rule for target.
+read_file.exe/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/read_file.exe.dir/build.make CMakeFiles/read_file.exe.dir/build
+.PHONY : read_file.exe/fast
+
+#=============================================================================
+# Target rules for targets named sin.exe
+
+# Build rule for target.
+sin.exe: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sin.exe
+.PHONY : sin.exe
+
+# fast build rule for target.
+sin.exe/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sin.exe.dir/build.make CMakeFiles/sin.exe.dir/build
+.PHONY : sin.exe/fast
+
 hello.o: hello.c.o
 .PHONY : hello.o
 
@@ -190,6 +216,54 @@ pascal.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pascal.exe.dir/build.make CMakeFiles/pascal.exe.dir/pascal.c.s
 .PHONY : pascal.c.s
 
+read_file.o: read_file.c.o
+.PHONY : read_file.o
+
+# target to build an object file
+read_file.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/read_file.exe.dir/build.make CMakeFiles/read_file.exe.dir/read_file.c.o
+.PHONY : read_file.c.o
+
+read_file.i: read_file.c.i
+.PHONY : read_file.i
+
+# target to preprocess a source file
+read_file.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/read_file.exe.dir/build.make CMakeFiles/read_file.exe.dir/read_file.c.i
+.PHONY : read_file.c.i
+
+read_file.s: read_file.c.s
+.PHONY : read_file.s
+
+# target to generate assembly for a file
+read_file.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/read_file.exe.dir/build.make CMakeFiles/read_file.exe.dir/read_file.c.s
+.PHONY : read_file.c.s
+
+sin.o: sin.c.o
+.PHONY : sin.o
+
+# target to build an object file
+sin.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sin.exe.dir/build.make CMakeFiles/sin.exe.dir/sin.c.o
+.PHONY : sin.c.o
+
+sin.i: sin.c.i
+.PHONY : sin.i
+
+# target to preprocess a source file
+sin.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sin.exe.dir/build.make CMakeFiles/sin.exe.dir/sin.c.i
+.PHONY : sin.c.i
+
+sin.s: sin.c.s
+.PHONY : sin.s
+
+# target to generate assembly for a file
+sin.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sin.exe.dir/build.make CMakeFiles/sin.exe.dir/sin.c.s
+.PHONY : sin.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -200,12 +274,20 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... hello.exe"
 	@echo "... pascal.exe"
+	@echo "... read_file.exe"
+	@echo "... sin.exe"
 	@echo "... hello.o"
 	@echo "... hello.i"
 	@echo "... hello.s"
 	@echo "... pascal.o"
 	@echo "... pascal.i"
 	@echo "... pascal.s"
+	@echo "... read_file.o"
+	@echo "... read_file.i"
+	@echo "... read_file.s"
+	@echo "... sin.o"
+	@echo "... sin.i"
+	@echo "... sin.s"
 .PHONY : help
 
 
