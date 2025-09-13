@@ -1,0 +1,1 @@
+/usr/bin/cc -Wl,--dependency-file=CMakeFiles/read_file.exe.dir/link.d CMakeFiles/read_file.exe.dir/read_file.c.o -o read_file.exe
