@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <assert.h>
 //#include <stdbool.h> 
 //#include <stddef.h>
@@ -47,7 +48,7 @@ void queue_enqueue(struct Queue *q, const void *src){
         enlarge_queue_capacity(q);
     };
 
-    void *dest = (const char*)q->data + ((q->front + q->length)%q->capacity)*q->elem_size; // so that we can do pointer arithmetics
+    void *dest = (char*)q->data + ((q->front + q->length)%q->capacity)*q->elem_size; // so that we can do pointer arithmetics
     // %q->capacity is for the "circular" feature, to restart at the beginning if (q->front + q->length) is greater than the capacity
     memcpy(dest, src, q->elem_size);
     q->length += 1;
@@ -55,7 +56,7 @@ void queue_enqueue(struct Queue *q, const void *src){
 };
 
 void queue_dequeue(struct Queue *q, void *dest){
-    void *src = (const char*)q->data + (q->front * q->elem_size); // of course not summing the q->length
+    const void *src = (const char*)q->data + (q->front * q->elem_size); // of course not summing the q->length
     memcpy(dest, src, q->elem_size);
     q->front += 1;
     q->length -= 1;
