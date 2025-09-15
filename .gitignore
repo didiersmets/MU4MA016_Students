@@ -4,4 +4,7 @@ HUN/tp0/build/
 *.aux
 *.out
 
+*.exe
+.vscode/
+
 Devora/.DS_Store

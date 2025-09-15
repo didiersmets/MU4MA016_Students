@@ -10,9 +10,9 @@ int pascal_num (int i, int j)
 }
 
 int pascal_triange(int n){
-    for (int i=0;i<n;i++){
+    for (int i=0;i<=n;i++){
         printf("\n");
-        for(int j=0;j<i;j++){
+        for(int j=0;j<=i;j++){
             printf("%d\t", pascal_num(i,j));
         }
     }
