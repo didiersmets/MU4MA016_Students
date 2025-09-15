@@ -5,6 +5,7 @@
 #include <functional>
 #include <chrono>
 #include <iostream>
+#include <fstream>
 
 #include "bubble_sort.hpp"
 #include "insertion_sort.hpp"
@@ -34,10 +35,17 @@ std::chrono::duration<double> time_size(std::function<void (int*, size_t)> algor
 constexpr int sizes[] = {10, 20, 50, 100, 200, 500, 1000};
 
 void time_algorithm(std::function<void (int*, size_t)> algorithm, const std::string& name) {
+    // create file name.txt and write the results in it
+    std::ofstream file(name + ".txt");
+
     for (size_t n : sizes) {
         auto duration = time_size(algorithm, n);
         std::cout << name << " with size " << n << " took " << duration.count() << " seconds." << std::endl;
+        file << n << " " << duration.count() << std::endl;
     }
+    file.close();
+
+    system(("gnuplot -e \"set terminal png; set output '" + name + ".png'; set logscale x; set xlabel 'Array size'; set logscale y; set ylabel 'Time (s)'; plot '" + name + ".txt' using 1:2 with linespoints title '" + name + "'\"").c_str());
 }
 
 
