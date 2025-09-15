@@ -1,0 +1,1 @@
+/usr/bin/cc -Wl,--dependency-file=CMakeFiles/sin.exe.dir/link.d CMakeFiles/sin.exe.dir/sin.c.o -o sin.exe
