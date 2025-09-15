@@ -1,4 +1,4 @@
-// g++ src/test_sort.cpp src/bubble_sort.cpp src/insertion_sort.cpp -I include -o test_queue -std=c++17
+// g++ src/test_sort.cpp src/bubble_sort.cpp src/insertion_sort.cpp src/merge_sort.cpp -I include -o test_queue -std=c++17
 
 #include <utility>
 #include <string>
@@ -9,10 +9,12 @@
 
 #include "bubble_sort.hpp"
 #include "insertion_sort.hpp"
+#include "merge_sort.hpp"
 
 std::pair<std::function<void (int*, size_t)>, std::string> algorithms[] = {
     std::make_pair(bubble_sort, "Bubble sort"), 
-    std::make_pair(insertion_sort, "Insertion sort")
+    std::make_pair(insertion_sort, "Insertion sort"),
+    std::make_pair(merge_sort, "Merge sort")
 };
 
 int* init_array(size_t n) {
@@ -23,11 +25,19 @@ int* init_array(size_t n) {
     return array;
 }
 
+void printArray(int* array, int count) {
+    for (int i =0; i < count; i++) {
+        printf("%i ", array[i]);
+    }
+    printf("\n");
+}
+
 std::chrono::duration<double> time_size(std::function<void (int*, size_t)> algorithm, size_t n) {
     int* array = init_array(n);
     auto start = std::chrono::high_resolution_clock::now();
     algorithm(array, n);
     auto end = std::chrono::high_resolution_clock::now();
+    //printArray(array, n);
     delete[] array;
     return end - start;
 }
