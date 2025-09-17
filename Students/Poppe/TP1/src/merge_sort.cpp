@@ -2,6 +2,7 @@
 #include <string>
 
 #include "merge_sort.hpp"
+#include "insertion_sort.hpp"
 
 void merge_sort_old(int* array, size_t size) {
     int* temp = new int[size];
@@ -66,8 +67,13 @@ void merge(int* array, size_t l, size_t l_end, size_t r, size_t r_end, int* outp
     }
 }
 
+const size_t MERGE_SORT_THRESHOLD = 32;
+
 void merge_sort(int* array, size_t size) {
-    if (size <= 1) return;
+    if (size <= MERGE_SORT_THRESHOLD) {
+        insertion_sort(array, size);
+        return;
+    }
     size_t sorted = size;
 
     while (sorted > 1) {
