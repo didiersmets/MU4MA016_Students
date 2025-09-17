@@ -2,8 +2,9 @@
 #include <string>
 
 #include "merge_sort.hpp"
+#include "insertion_sort.hpp"
 
-void merge_sort(int* array, size_t size) {
+void merge_sort_old(int* array, size_t size) {
     int* temp = new int[size];
     int* from = array;
     int* into = temp;
@@ -39,5 +40,62 @@ void merge_sort(int* array, size_t size) {
     if (into == from) {
         //memcopy back since odd transfer count
         memcpy(array, temp, size * sizeof(int));
+    }
+}
+
+void merge(int* array, size_t l, size_t l_end, size_t r, size_t r_end, int* output) {
+    while(l < l_end && r < r_end) {
+        if(array[l] < array[r]) {
+            std::swap(*output, array[l]);
+            l++;
+            output++;
+        } else {
+            std::swap(*output, array[r]);
+            r++;
+            output++;
+        }
+    }
+    while(l < l_end) {
+        std::swap(*output, array[l]);
+        l++;
+        output++;
+    }
+    if(array + r == output) {
+        return;
+    }
+    while(r < r_end) {
+        std::swap(*output, array[r]);
+        r++;
+        output++;
+    }
+}
+
+const size_t MERGE_SORT_THRESHOLD = 32;
+
+void merge_sort(int* array, size_t size) {
+    if (size <= MERGE_SORT_THRESHOLD) {
+        insertion_sort(array, size);
+        return;
+    }
+    size_t sorted = size;
+
+    while (sorted > 1) {
+        size_t halved = sorted / 2;
+        size_t quarter = halved / 2;
+        merge_sort(array + halved, quarter);
+        merge_sort(array + halved + quarter, halved - quarter);
+        merge(array + halved, 0, quarter, quarter, halved, array);
+
+        merge(array, 0, halved, sorted, size, array + sorted - halved);
+        sorted -= halved;
+    }
+    if (sorted == 1) {
+        for (size_t i = 0; i < size - 1; i++) {
+            if (array[i] > array[i + 1]) {
+                std::swap(array[i], array[i + 1]);
+            } else {
+                break;
+            }
+        }
     }
 }

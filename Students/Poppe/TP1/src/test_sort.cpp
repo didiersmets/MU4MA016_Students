@@ -32,12 +32,21 @@ void printArray(int* array, int count) {
     printf("\n");
 }
 
+void verifyArray(int* array, int count) {
+    for (int i = 1; i < count; i++) {
+        if (array[i - 1] > array[i]) {
+            printf("Array is not sorted at index %i an %i: %i > %i\n", i - 1, i, array[i - 1], array[i]);
+        }
+    }
+}
+
 std::chrono::duration<double> time_size(std::function<void (int*, size_t)> algorithm, size_t n) {
     int* array = init_array(n);
     auto start = std::chrono::high_resolution_clock::now();
     algorithm(array, n);
     auto end = std::chrono::high_resolution_clock::now();
     //printArray(array, n);
+    verifyArray(array, n);
     delete[] array;
     return end - start;
 }
