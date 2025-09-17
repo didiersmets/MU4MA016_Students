@@ -3,7 +3,7 @@
 
 #include "merge_sort.hpp"
 
-void merge_sort(int* array, size_t size) {
+void merge_sort_old(int* array, size_t size) {
     int* temp = new int[size];
     int* from = array;
     int* into = temp;
@@ -39,5 +39,59 @@ void merge_sort(int* array, size_t size) {
     if (into == from) {
         //memcopy back since odd transfer count
         memcpy(array, temp, size * sizeof(int));
+    }
+}
+
+void merge(int* array, size_t l, size_t l_end, size_t r, size_t r_end, int* output) {
+    while(l < l_end && r < r_end) {
+        if(array[l] < array[r]) {
+            std::swap(*output, array[l]);
+            l++;
+            output++;
+        } else {
+            std::swap(*output, array[r]);
+            r++;
+            output++;
+        }
+    }
+    while(l < l_end) {
+        std::swap(*output, array[l]);
+        l++;
+        output++;
+    }
+    while(r < r_end) {
+        std::swap(*output, array[r]);
+        r++;
+        output++;
+    }
+}
+
+void merge_sort_buffered(int* array, size_t size, int* output) {
+    if (size <= 0) return;
+    size_t halved = size / 2;
+    merge_sort(array, halved);
+    merge_sort(array + halved, size - halved);
+    merge(array, 0, halved, halved, size, output);
+}
+
+void merge_sort(int* array, size_t size) {
+    size_t halved = size / 2;
+    size_t sorted = size - halved;
+    merge_sort_buffered(array, halved, array + sorted);
+    
+    while (sorted > 1) {
+        size_t halved = sorted / 2;
+        merge_sort_buffered(array + halved, halved, array);
+        merge(array, 0, halved, sorted, size, array + sorted - halved);
+        sorted -= halved;
+    }
+    if (sorted == 1) {
+        for (size_t i = 0; i < size - 1; i++) {
+            if (array[i] > array[i + 1]) {
+                std::swap(array[i], array[i + 1]);
+            } else {
+                break;
+            }
+        }
     }
 }
