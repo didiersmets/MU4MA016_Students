@@ -66,22 +66,17 @@ void merge(int* array, size_t l, size_t l_end, size_t r, size_t r_end, int* outp
     }
 }
 
-void merge_sort_buffered(int* array, size_t size, int* output) {
-    if (size <= 0) return;
-    size_t halved = size / 2;
-    merge_sort(array, halved);
-    merge_sort(array + halved, size - halved);
-    merge(array, 0, halved, halved, size, output);
-}
-
 void merge_sort(int* array, size_t size) {
-    size_t halved = size / 2;
-    size_t sorted = size - halved;
-    merge_sort_buffered(array, halved, array + sorted);
-    
+    if (size <= 1) return;
+    size_t sorted = size;
+
     while (sorted > 1) {
         size_t halved = sorted / 2;
-        merge_sort_buffered(array + halved, halved, array);
+        size_t quarter = halved / 2;
+        merge_sort(array + halved, quarter);
+        merge_sort(array + halved + quarter, halved - quarter);
+        merge(array + halved, 0, quarter, quarter, halved, array);
+
         merge(array, 0, halved, sorted, size, array + sorted - halved);
         sorted -= halved;
     }
