@@ -60,6 +60,9 @@ void merge(int* array, size_t l, size_t l_end, size_t r, size_t r_end, int* outp
         l++;
         output++;
     }
+    if(array + r == output) {
+        return;
+    }
     while(r < r_end) {
         std::swap(*output, array[r]);
         r++;
