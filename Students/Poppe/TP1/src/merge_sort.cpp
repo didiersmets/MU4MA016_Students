@@ -4,11 +4,17 @@
 #include "merge_sort.hpp"
 #include "insertion_sort.hpp"
 
-void merge_sort_old(int* array, size_t size) {
+const size_t MERGE_SORT_THRESHOLD = 32;
+
+void merge_sort(int* array, size_t size) {
     int* temp = new int[size];
     int* from = array;
     int* into = temp;
-    for(size_t width = 1; width < size; width*=2) {
+    for(size_t l=0; l < size; l += MERGE_SORT_THRESHOLD) {
+        size_t len = std::min(MERGE_SORT_THRESHOLD, size - l);
+        insertion_sort(array + l, len);
+    }
+    for(size_t width = MERGE_SORT_THRESHOLD; width < size; width*=2) {
         for(size_t l=0; l < size; l += width * 2) {
             size_t l_len = std::min(width, size - l);
             size_t l_i = 0;
@@ -37,10 +43,11 @@ void merge_sort_old(int* array, size_t size) {
         }
         std::swap(from, into);
     }
-    if (into == from) {
+    if (from == temp) {
         //memcopy back since odd transfer count
         memcpy(array, temp, size * sizeof(int));
     }
+    delete[] temp;
 }
 
 void merge(int* array, size_t l, size_t l_end, size_t r, size_t r_end, int* output) {
@@ -70,9 +77,7 @@ void merge(int* array, size_t l, size_t l_end, size_t r, size_t r_end, int* outp
     }
 }
 
-const size_t MERGE_SORT_THRESHOLD = 32;
-
-void merge_sort(int* array, size_t size) {
+void merge_sort_inplace(int* array, size_t size) {
     if (size <= MERGE_SORT_THRESHOLD) {
         insertion_sort(array, size);
         return;
@@ -82,20 +87,18 @@ void merge_sort(int* array, size_t size) {
     while (sorted > 1) {
         size_t halved = sorted / 2;
         size_t quarter = halved / 2;
-        merge_sort(array + halved, quarter);
-        merge_sort(array + halved + quarter, halved - quarter);
+        merge_sort_inplace(array + halved, quarter);
+        merge_sort_inplace(array + halved + quarter, halved - quarter);
         merge(array + halved, 0, quarter, quarter, halved, array);
 
         merge(array, 0, halved, sorted, size, array + sorted - halved);
         sorted -= halved;
     }
-    if (sorted == 1) {
-        for (size_t i = 0; i < size - 1; i++) {
-            if (array[i] > array[i + 1]) {
-                std::swap(array[i], array[i + 1]);
-            } else {
-                break;
-            }
+    for (size_t i = 0; i < size - 1; i++) {
+        if (array[i] > array[i + 1]) {
+            std::swap(array[i], array[i + 1]);
+        } else {
+            break;
         }
     }
 }

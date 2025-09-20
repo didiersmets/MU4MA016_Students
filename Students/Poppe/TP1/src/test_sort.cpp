@@ -10,11 +10,14 @@
 #include "bubble_sort.hpp"
 #include "insertion_sort.hpp"
 #include "merge_sort.hpp"
+#include "std_sort.hpp"
 
 std::pair<std::function<void (int*, size_t)>, std::string> algorithms[] = {
-    std::make_pair(bubble_sort, "Bubble sort"), 
-    std::make_pair(insertion_sort, "Insertion sort"),
-    std::make_pair(merge_sort, "Merge sort")
+    //std::make_pair(bubble_sort, "Bubble sort"), 
+    //std::make_pair(insertion_sort, "Insertion sort"),
+    std::make_pair(merge_sort, "Merge sort"),
+    std::make_pair(merge_sort_inplace, "Merge sort (in-place)"),
+    std::make_pair(std_sort, "Std sort")
 };
 
 int* init_array(size_t n) {
@@ -51,7 +54,7 @@ std::chrono::duration<double> time_size(std::function<void (int*, size_t)> algor
     return end - start;
 }
 
-constexpr int sizes[] = {10, 20, 50, 100, 200, 500, 1000};
+constexpr int sizes[] = {10, 20, 50, 100, 200, 500, 1000, 10000, 100000, 1000000};
 
 void time_algorithm(std::function<void (int*, size_t)> algorithm, const std::string& name) {
     // create file name.txt and write the results in it
