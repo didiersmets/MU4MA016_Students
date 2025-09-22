@@ -28,7 +28,6 @@ int main(){
 
         for (int j = 0; j < N; j++){
             int r = rand();
-            r = r % 271;
             T[j] = r; 
         }
 
