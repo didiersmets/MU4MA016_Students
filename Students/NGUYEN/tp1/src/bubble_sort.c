@@ -16,11 +16,12 @@ void bubble_sort(int *t, int l){ //t = address and l = number of elements
             }
         }
     }
+    return;
 }
 
 int main(){
     int array_N[7] = {10, 20, 50, 100, 200, 500, 1000};
-    FILE *bubble = fopen("bubble_sort.dat", "w");
+    FILE *bubble = fopen("../bubble_sort.dat", "w");
 
     for (int i = 0; i < 7; i++){
         int N = array_N[i];
@@ -28,7 +29,6 @@ int main(){
 
         for (int j = 0; j < N; j++){
             int r = rand();
-            r = r % 271;
             T[j] = r; 
         }
 
