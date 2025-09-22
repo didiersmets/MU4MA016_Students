@@ -1,18 +1,22 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 int main(int argc, char* argv[]){
 
-    int n = *argv[1] - 48;
-    printf("n : %d", n);
+    int n = atoi(argv[1]);
+    printf("### n : %d \n", n);
 
-    for(int i = 0; i < n; i++){
+    int pasc[n+1][n+1];
+
+    for(int i = 0; i <= n; i++){
         for(int j = 0; j <= i; j++){
 
             if((j == 0) || (i == j)) {
-                printf("1 ");
+                pasc[i][j] = 1;
             }else{
-                printf( " ");
+                pasc[i][j] = pasc[i-1][j-1] + pasc[i-1][j];
             }
+            printf("%d ", pasc[i][j]);
         }
         printf("\n");
     }
