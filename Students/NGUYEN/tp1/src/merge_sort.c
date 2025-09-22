@@ -5,23 +5,27 @@
 #include <stdbool.h>
 #include <assert.h>
 
-void bubble_sort(int *t, int l){ //t = address and l = number of elements
-    
-    for (int i = 0; i < l-1; i++){
-        for (int j = 0; j < l-1; j++){
+void merge_sort(int *t, int l){ // t = address of the array and l = number of elements
+
+    /*
+    for (int i = 1; i < l-1; i++){
+        for (int j = i; j > 0; j--){ // decreasing from i (the current sequence)
             if (t[j] > t[j+1]){
                 int temp = t[j];
                 t[j] = t[j+1];
                 t[j+1] = temp;
+            } else {
+                break; // if we don't need to swap we break the loop to go to the next sequence
             }
         }
     }
+    */
     return;
 }
 
 int main(){
     int array_N[7] = {10, 20, 50, 100, 200, 500, 1000};
-    FILE *bubble = fopen("../bubble_sort.dat", "w");
+    FILE *merge = fopen("../merge_sort.dat", "w");
 
     for (int i = 0; i < 7; i++){
         int N = array_N[i];
@@ -32,18 +36,18 @@ int main(){
             T[j] = r; 
         }
 
-        int *tab_bubble = malloc(N*sizeof(int));
+        int *tab_merge = malloc(N*sizeof(int));
         for (int k = 0; k < N; k++){
-            tab_bubble[k] = T[k];
+            tab_merge[k] = T[k];
         }
         clock_t time = clock();
-        bubble_sort(tab_bubble, N);
+        merge_sort(tab_merge, N);
         time = clock() - time;
         double time_in_sec = ((double)time)/ CLOCKS_PER_SEC;
-        fprintf(bubble, "%d\t%f\n", N, time_in_sec);
-        free(tab_bubble);
+        fprintf(merge, "%d\t%f\n", N, time_in_sec);
+        free(tab_merge);
         free(T);
     }
-    fclose(bubble);
+    fclose(merge);
     return 0;
 }
