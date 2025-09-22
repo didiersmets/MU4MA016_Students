@@ -22,7 +22,7 @@ struct Queue *queue_init(size_t elem_size, size_t capacity){
     q->elem_size = elem_size;
     q->front = 0; // first element in the queue is index 0
     q->length = 0; // not 1 
-    //q->data = malloc(sizeof(elem_size*capacity)); // already allocated in the first malloc
+    q->data = malloc(elem_size*capacity); // important, that was not allocated in the first malloc
     return q;
 };
 
@@ -34,13 +34,14 @@ void queue_dispose(struct Queue *q){
 
 static void enlarge_queue_capacity(struct Queue *q){
     if (q->capacity != 0){
-        q->capacity = 2 * q->capacity; // geometrical (good complexity cf courses notes)
+        q->capacity = 2 * q->capacity; // geometrical (good complexity cf course notes)
     } else {
         q->capacity = 1; // not sure if that is wise
     }
-     
+    void *datacopy = q->data; // copy
     free(q->data); // to allocate the new capacity after
     q->data = malloc(q->elem_size * q->capacity);
+    q->data = datacopy;
     return;
 };
 
@@ -57,6 +58,7 @@ void queue_enqueue(struct Queue *q, const void *src){
 };
 
 void queue_dequeue(struct Queue *q, void *dest){
+    if (!q->length) {return;} 
     const void *src = (const char*)q->data + (q->front * q->elem_size); // of course not summing the q->length
     memcpy(dest, src, q->elem_size);
     q->front = (q->front + 1) % q->capacity;;
