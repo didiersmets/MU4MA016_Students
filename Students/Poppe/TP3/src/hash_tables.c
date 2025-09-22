@@ -76,7 +76,7 @@ void hash_table_insert(struct HashTable *ht, void *key, void *val)
 	for (size_t probe = 0; probe < ht->capacity; probe++) {
 		pos = pos % ht->capacity;
 		unsigned char *p = data + pos * slot_len;
-		if (p[0] == FREE_SLOT) {
+		if (p[0] == FREE_SLOT || p[0] == DELETED_SLOT) {
 			memcpy(p + 1, key, ht->key_len);
 			memcpy(p + 1 + ht->key_len, val, ht->val_len);
 			ht->size++;
@@ -105,7 +105,12 @@ static void hash_table_grow(struct HashTable *ht, size_t new_cap)
 
 void hash_table_delete(const struct HashTable *ht, void *key)
 {
-	// Homework !
+	void *val = hash_table_find(ht, key);
+	if (!val)
+		return;
+	// Mark the slot as deleted
+	unsigned char *p = (unsigned char *)val - 1 - ht->key_len;
+	p[0] = DELETED_SLOT;
 }
 
 void hash_table_fini(struct HashTable *ht)
