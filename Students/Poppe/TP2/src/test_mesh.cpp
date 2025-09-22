@@ -1,3 +1,5 @@
+//  g++ src/mesh.cpp src/test_mesh.cpp -I include -o test_mesh -std=c++20 -O3
+
 #include "mesh.hpp"
 #include <math.h>
 #include <cassert>
@@ -65,8 +67,48 @@ void test_mesh3D() {
     dispose_mesh3D(&mesh);
 }
 
+void plot_mesh(const std::string& filename) {
+    std::string name = filename;
+    name = name.substr(0, name.find_last_of('.'));
+    system(("gnuplot -e \"set terminal png; set output '" + name + ".png'; set xlabel 'x'; set ylabel 'y'; plot '" + filename + "' with lines  title ''\"").c_str());
+}
+
+void test_read_mesh2D() {
+    struct Mesh2D mesh;
+
+    if (read_mesh2D(&mesh, "./mesh1-tp2-2D.mesh") != 0) {
+        std::cerr << "Failed to read mesh from file." << std::endl;
+        dispose_mesh2D(&mesh);
+        return;
+    }
+
+    double area = area_mesh2D(&mesh);
+    std::cout << "Area of the read mesh: " << area << std::endl;
+    // Expected area is 1.0
+    assert(abs(area - 1.0) < 1e-6);
+
+    mesh2D_to_gnuplot(&mesh, "mesh2D.gnuplot");
+    plot_mesh("mesh2D.gnuplot");
+
+    write_mesh2D(&mesh, "output.mesh");
+
+    dispose_mesh2D(&mesh);
+
+    if (read_mesh2D(&mesh, "./mesh2-tp2-2D.mesh") != 0) {
+        std::cerr << "Failed to read mesh from file." << std::endl;
+        dispose_mesh2D(&mesh);
+        return;
+    }
+
+    mesh2D_to_gnuplot(&mesh, "mesh2D_full.gnuplot");
+    plot_mesh("mesh2D_full.gnuplot");
+
+    dispose_mesh2D(&mesh);
+}
+
 int main() {
     test_mesh2D();
     test_mesh3D();
+    test_read_mesh2D();
     return 0;
 }

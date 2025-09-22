@@ -8,6 +8,11 @@ int initialize_mesh3D(struct Mesh3D* m, int vtx_capacity, int tri_capacity);
 void dispose_mesh3D(struct Mesh3D* m);
 double volume_mesh3D(struct Mesh3D* m);
 
+int read_mesh2D(struct Mesh2D* m, const char* filename);
+int write_mesh2D(struct Mesh2D* m, const char* filename);
+int mesh2D_to_gnuplot(struct Mesh2D* m, const char* filename);
+
+
 struct Vertex2D {
     double x, y;
 };
