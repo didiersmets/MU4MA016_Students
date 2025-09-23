@@ -101,24 +101,92 @@ int *build_adjacency_table2(const struct Mesh *m) {
 	}
 }
 
-struct HashTable *build_edge_table2(const struct Mesh *m);
-
 struct EdgeTable {
 	int *head;
 	int *next;
 };
 
-void edge_table_initialize(struct EdgeTable *et, int nvert, int ntri);
+void edge_table_init(struct EdgeTable *et, int nvert, int ntri) {
+	et->head = malloc(nvert * sizeof(int));
+	et->next = malloc(ntri * 3 * sizeof(int));
+	for(int i=0; i < nvert; i++) {
+		et->head[i] = -1;
+	}
+}
 
-void edge_table_dispose(struct EdgeTable *et);
+void edge_table_dispose(struct EdgeTable *et) {
+	free(et->head);
+	free(et->next);
+	free(et);
+}
 
-void edge_table_insert(int v1, int edge_code, struct EdgeTable *et);
+void edge_table_insert(struct EdgeTable *et, int v1, int edge_code) {
+	int temp = et->head[v1];
+	et->head[v1] = v1 * 3 + edge_code;
+	et->next[v1 * 3 + edge_code] = temp;
+}
 
-int  edge_table_find(int v1, int v2, const struct EdgeTable *et, 
-                                                const struct Mesh *m);
+int  edge_table_find(const struct EdgeTable *et, int v1, int v2, 
+                                                const struct Mesh *m) {
+	int current = et->head[v1];
+	while(current != -1) {
+		int tri_idx = current / 3;
+		int match = 0;
+		switch (current % 3)
+		{
+		case 0:
+			match = (m->triangles[tri_idx].v2 == v2);
+			break;
 
-struct EdgeTable *build_edge_table3(const struct Mesh *m);
+		case 1:
+			match = (m->triangles[tri_idx].v3 == v2);
+			break;
 
-int *build_adjacency_table3(const struct Mesh *m);
+		case 2:
+			match = (m->triangles[tri_idx].v1 == v2);
+			break;
+		}
+		if(match) {
+			return tri_idx;
+		}
+		current = et->next[current];
+	}
+}
+
+struct EdgeTable *build_edge_table3(const struct Mesh *m) {
+	struct EdgeTable *et = malloc(sizeof(struct EdgeTable));
+	edge_table_init(et, m->nvert, m->ntri);
+	for(int i=0; i < m->ntri; i++) {
+		edge_table_insert(et, m->triangles[i].v1, 0);
+		edge_table_insert(et, m->triangles[i].v2, 1);
+		edge_table_insert(et, m->triangles[i].v3, 2);
+	}
+	return et;
+}
+
+int *build_adjacency_table3(const struct Mesh *m) {
+	struct EdgeTable *et = build_edge_table3(m);
+	int* table = malloc(m->ntri * 3 * sizeof(int));
+	for(int i=0; i < m->ntri; i++) {
+		int* neighbor = edge_table_find(et, m->triangles[i].v2, m->triangles[i].v1, m);
+		if(neighbor) {
+			table[i * 3 + 0] = *neighbor;
+		} else {
+			table[i * 3 + 0] = -1;
+		}
+		int* neighbor = edge_table_find(et, m->triangles[i].v3, m->triangles[i].v2, m);
+		if(neighbor) {
+			table[i * 3 + 1] = *neighbor;
+		} else {
+			table[i * 3 + 1] = -1;
+		}
+		int* neighbor = edge_table_find(et, m->triangles[i].v1, m->triangles[i].v3, m);
+		if(neighbor) {
+			table[i * 3 + 2] = *neighbor;
+		} else {
+			table[i * 3 + 2] = -1;
+		}
+	}
+}
 
 #endif
