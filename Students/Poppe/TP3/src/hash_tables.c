@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 #define FREE_SLOT 0
 #define OCCUPIED_SLOT 1
@@ -64,33 +65,6 @@ void *hash_table_find(const struct HashTable *ht, void *key)
 	return NULL;
 }
 
-void hash_table_insert(struct HashTable *ht, void *key, void *val)
-{
-	if (ht->size >= 2 * ht->capacity / 3) {
-		size_t new_cap = ht->capacity < 4 ? 8 : 2 * ht->capacity;
-		hash_table_grow(ht, new_cap);
-	}
-	uint32_t pos = hash_key(key, ht->key_len);
-	unsigned slot_len = 1 + ht->key_len + ht->val_len;
-	unsigned char *data = ht->data;
-	for (size_t probe = 0; probe < ht->capacity; probe++) {
-		pos = pos % ht->capacity;
-		unsigned char *p = data + pos * slot_len;
-		if (p[0] == FREE_SLOT || p[0] == DELETED_SLOT) {
-			memcpy(p + 1, key, ht->key_len);
-			memcpy(p + 1 + ht->key_len, val, ht->val_len);
-			ht->size++;
-			p[0] = OCCUPIED_SLOT;
-			return;
-		} else {
-			pos++;
-		}
-	}
-	/* Hash table is full */
-	printf("Hash table is full !\n");
-	abort();
-}
-
 static void hash_table_grow(struct HashTable *ht, size_t new_cap)
 {
 	void *old_data = ht->data;
@@ -118,6 +92,33 @@ static void hash_table_grow(struct HashTable *ht, size_t new_cap)
 	}
 
 	free(old_data);
+}
+
+void hash_table_insert(struct HashTable *ht, void *key, void *val)
+{
+	if (ht->size >= 2 * ht->capacity / 3) {
+		size_t new_cap = ht->capacity < 4 ? 8 : 2 * ht->capacity;
+		hash_table_grow(ht, new_cap);
+	}
+	uint32_t pos = hash_key(key, ht->key_len);
+	unsigned slot_len = 1 + ht->key_len + ht->val_len;
+	unsigned char *data = ht->data;
+	for (size_t probe = 0; probe < ht->capacity; probe++) {
+		pos = pos % ht->capacity;
+		unsigned char *p = data + pos * slot_len;
+		if (p[0] == FREE_SLOT || p[0] == DELETED_SLOT) {
+			memcpy(p + 1, key, ht->key_len);
+			memcpy(p + 1 + ht->key_len, val, ht->val_len);
+			ht->size++;
+			p[0] = OCCUPIED_SLOT;
+			return;
+		} else {
+			pos++;
+		}
+	}
+	/* Hash table is full */
+	printf("Hash table is full !\n");
+	abort();
 }
 
 void hash_table_delete(const struct HashTable *ht, void *key)

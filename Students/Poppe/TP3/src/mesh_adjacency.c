@@ -3,6 +3,7 @@
 
 #include "mesh.h"
 #include "hash_tables.h"
+#include <stdlib.h>
 
 struct Edge {
 	int v1;
@@ -38,6 +39,8 @@ int tris_are_neighbors(int tri1, int tri2, const struct Mesh *m) {
 	}
 }
 
+#include <stdio.h>
+
 int *build_adjacency_table1(const struct Mesh *m) {
 	int* table = malloc(m->ntri * 3 * sizeof(int));
 	for(int i=0; i < m->ntri * 3; i++) {
@@ -52,13 +55,13 @@ int *build_adjacency_table1(const struct Mesh *m) {
 				}
 			}
 		}
+		if (i % 1000 == 0) {
+			printf("Processed %d / %d triangles\n", i, m->ntri);
+		}
 	}
+	return table;
 }
 
-struct Edge {
-	int v1;
-	int v2;
-};
 
 struct HashTable *build_edge_table1(const struct Mesh *m) {
 	struct HashTable* ht = hash_table_init(m->ntri * 3 * 2, sizeof(struct Edge), sizeof(int));
@@ -74,6 +77,7 @@ struct HashTable *build_edge_table1(const struct Mesh *m) {
 		edge.v2 = m->triangles[i].v1;
 		hash_table_insert(ht, &edge, &i);
 	}
+	return ht;
 }
 
 int *build_adjacency_table2(const struct Mesh *m) {
@@ -86,19 +90,22 @@ int *build_adjacency_table2(const struct Mesh *m) {
 		} else {
 			table[i * 3 + 0] = -1;
 		}
-		int* neighbor = hash_table_find(ht, &(struct Edge){m->triangles[i].v3, m->triangles[i].v2});
+		neighbor = hash_table_find(ht, &(struct Edge){m->triangles[i].v3, m->triangles[i].v2});
 		if(neighbor) {
 			table[i * 3 + 1] = *neighbor;
 		} else {
 			table[i * 3 + 1] = -1;
 		}
-		int* neighbor = hash_table_find(ht, &(struct Edge){m->triangles[i].v1, m->triangles[i].v3});
+		neighbor = hash_table_find(ht, &(struct Edge){m->triangles[i].v1, m->triangles[i].v3});
 		if(neighbor) {
 			table[i * 3 + 2] = *neighbor;
 		} else {
 			table[i * 3 + 2] = -1;
 		}
 	}
+
+	hash_table_fini(ht);
+	return table;
 }
 
 struct EdgeTable {
@@ -122,11 +129,11 @@ void edge_table_dispose(struct EdgeTable *et) {
 
 void edge_table_insert(struct EdgeTable *et, int v1, int edge_code) {
 	int temp = et->head[v1];
-	et->head[v1] = v1 * 3 + edge_code;
-	et->next[v1 * 3 + edge_code] = temp;
+	et->head[v1] = edge_code;
+	et->next[edge_code] = temp;
 }
 
-int  edge_table_find(const struct EdgeTable *et, int v1, int v2, 
+int edge_table_find(const struct EdgeTable *et, int v1, int v2, 
                                                 const struct Mesh *m) {
 	int current = et->head[v1];
 	while(current != -1) {
@@ -151,15 +158,16 @@ int  edge_table_find(const struct EdgeTable *et, int v1, int v2,
 		}
 		current = et->next[current];
 	}
+	return -1;
 }
 
 struct EdgeTable *build_edge_table3(const struct Mesh *m) {
 	struct EdgeTable *et = malloc(sizeof(struct EdgeTable));
 	edge_table_init(et, m->nvert, m->ntri);
 	for(int i=0; i < m->ntri; i++) {
-		edge_table_insert(et, m->triangles[i].v1, 0);
-		edge_table_insert(et, m->triangles[i].v2, 1);
-		edge_table_insert(et, m->triangles[i].v3, 2);
+		edge_table_insert(et, m->triangles[i].v1, 3*i + 0);
+		edge_table_insert(et, m->triangles[i].v2, 3*i + 1);
+		edge_table_insert(et, m->triangles[i].v3, 3*i + 2);
 	}
 	return et;
 }
@@ -168,25 +176,28 @@ int *build_adjacency_table3(const struct Mesh *m) {
 	struct EdgeTable *et = build_edge_table3(m);
 	int* table = malloc(m->ntri * 3 * sizeof(int));
 	for(int i=0; i < m->ntri; i++) {
-		int* neighbor = edge_table_find(et, m->triangles[i].v2, m->triangles[i].v1, m);
-		if(neighbor) {
-			table[i * 3 + 0] = *neighbor;
+		int neighbor = edge_table_find(et, m->triangles[i].v2, m->triangles[i].v1, m);
+		if(neighbor != -1) {
+			table[i * 3 + 0] = neighbor;
 		} else {
 			table[i * 3 + 0] = -1;
 		}
-		int* neighbor = edge_table_find(et, m->triangles[i].v3, m->triangles[i].v2, m);
-		if(neighbor) {
-			table[i * 3 + 1] = *neighbor;
+		neighbor = edge_table_find(et, m->triangles[i].v3, m->triangles[i].v2, m);
+		if(neighbor != -1) {
+			table[i * 3 + 1] = neighbor;
 		} else {
 			table[i * 3 + 1] = -1;
 		}
-		int* neighbor = edge_table_find(et, m->triangles[i].v1, m->triangles[i].v3, m);
-		if(neighbor) {
-			table[i * 3 + 2] = *neighbor;
+		neighbor = edge_table_find(et, m->triangles[i].v1, m->triangles[i].v3, m);
+		if(neighbor != -1) {
+			table[i * 3 + 2] = neighbor;
 		} else {
 			table[i * 3 + 2] = -1;
 		}
 	}
+
+	edge_table_dispose(et);
+	return table;
 }
 
 #endif
