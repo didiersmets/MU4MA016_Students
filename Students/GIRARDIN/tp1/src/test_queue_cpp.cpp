@@ -1,12 +1,18 @@
-#include "../include/circular_buffer_queue.h"
+#include "../include/circular_buffer_queue_cpp.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
 int main(int argc, char **argv){
 
-    int n = atoi(argv[1]);
-    struct Queue *q = queue_init(sizeof(int), n);
+    if(argc < 2){
+        printf("Please give an integer ! \n");
+        return 1;
+    }
+
+    size_t n = atoi(argv[1]);
+
+    struct Queue<int> *q = queue_init<int>(n);
 
     size_t l_max = queue_length(q);
     srand(time(NULL));

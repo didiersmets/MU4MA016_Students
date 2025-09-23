@@ -6,7 +6,13 @@
 int main(){
 	Queue<int> q;
 	int p = q[rand() % q.lenght];
-	queue_enqueue(q,src);
-
+  if (p%2==0) {
+    queue_enqueue(q,p);
+  	}	
+  else {
+    queue_dequeue();
+  }
+  return 0;
+}
 
 
