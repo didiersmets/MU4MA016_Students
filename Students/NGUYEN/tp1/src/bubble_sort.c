@@ -20,7 +20,7 @@ void bubble_sort(int *t, int l){ //t = address and l = number of elements
 }
 
 int main(){
-    int array_N[7] = {10, 20, 50, 100, 200, 500, 1000};
+    int array_N[7] = {10, 20, 50, 100, 200, 1000, 50000};
     FILE *bubble = fopen("../bubble_sort.dat", "w");
 
     for (int i = 0; i < 7; i++){
