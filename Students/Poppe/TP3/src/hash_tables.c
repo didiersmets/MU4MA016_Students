@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 #define FREE_SLOT 0
 #define OCCUPIED_SLOT 1
@@ -64,6 +65,35 @@ void *hash_table_find(const struct HashTable *ht, void *key)
 	return NULL;
 }
 
+static void hash_table_grow(struct HashTable *ht, size_t new_cap)
+{
+	void *old_data = ht->data;
+	unsigned int old_cap = ht->capacity;
+	ht->capacity = new_cap;
+
+	unsigned int slot_len = 1 + ht->key_len + ht->val_len;
+	ht->data = malloc(new_cap * slot_len);
+	if (!ht->data) {
+		ht->data = old_data;
+		ht->capacity = old_cap;
+		return;
+	}
+
+	for (unsigned i = 0; i < ht->capacity; i++) {
+		unsigned char *p = (unsigned char *)ht->data + i * slot_len;
+		p[0] = FREE_SLOT;
+	}
+
+	for (size_t i = 0; i < old_cap; i++) {
+		unsigned char *p = (unsigned char *)old_data + i * slot_len;
+		if(p[0] == OCCUPIED_SLOT) {
+			hash_table_insert(ht, p + 1, p + 1 + ht->key_len);
+		}
+	}
+
+	free(old_data);
+}
+
 void hash_table_insert(struct HashTable *ht, void *key, void *val)
 {
 	if (ht->size >= 2 * ht->capacity / 3) {
@@ -87,20 +117,8 @@ void hash_table_insert(struct HashTable *ht, void *key, void *val)
 		}
 	}
 	/* Hash table is full */
-	printf("Hash table is full ! Implement hash_table_grow "
-	       "or initialize with a larger capacity.\n");
+	printf("Hash table is full !\n");
 	abort();
-}
-
-static void hash_table_grow(struct HashTable *ht, size_t new_cap)
-{
-	// Homework ! Note: requires rehashing all keys.
-	// 1. Save the address ht->data for later use.
-	// 2. Init a new table with new_cap capacity (that will
-	//    overwrite	ht->data)
-	// 3. Traverse the old table, read its data and insert it
-	//    (e.g. through hash_table_insert) into the new table.
-	// 4. When done, free the old data
 }
 
 void hash_table_delete(const struct HashTable *ht, void *key)

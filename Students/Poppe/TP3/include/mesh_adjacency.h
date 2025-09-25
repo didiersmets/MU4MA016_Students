@@ -19,20 +19,18 @@ struct HashTable *build_edge_table1(const struct Mesh *m);
 
 int *build_adjacency_table2(const struct Mesh *m);
 
-struct HashTable *build_edge_table2(const struct Mesh *m);
-
 struct EdgeTable {
 	int *head;
 	int *next;
 };
 
-void edge_table_initialize(struct EdgeTable *et, int nvert, int ntri);
+void edge_table_init(struct EdgeTable *et, int nvert, int ntri);
 
 void edge_table_dispose(struct EdgeTable *et);
 
-void edge_table_insert(int v1, int edge_code, struct EdgeTable *et);
+void edge_table_insert(struct EdgeTable *et, int v1, int edge_code);
 
-int  edge_table_find(int v1, int v2, const struct EdgeTable *et, 
+int  edge_table_find(const struct EdgeTable *et, int v1, int v2,  
                                                 const struct Mesh *m);
 
 struct EdgeTable *build_edge_table3(const struct Mesh *m);
