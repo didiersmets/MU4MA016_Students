@@ -4,4 +4,13 @@ HUN/tp0/build/
 *.aux
 *.out
 
+*.exe
+.vscode/
+
 Devora/.DS_Store
+Students/GIRARDIN/tp1/Test_queue
+Students/GIRARDIN/tp1/Test_queue_cpp
+Students/GIRARDIN/tp1/test_queue_cpp.o
+Students/GIRARDIN/tp1/test_queue.o
+Students/GIRARDIN/tp1/circular_buffer_queue.o
+.gitignore

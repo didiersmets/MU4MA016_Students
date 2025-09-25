@@ -1,0 +1,3 @@
+/home/elias/MA016/tp0/hello_projects/build/CMakeFiles/hello.dir
+/home/elias/MA016/tp0/hello_projects/build/CMakeFiles/edit_cache.dir
+/home/elias/MA016/tp0/hello_projects/build/CMakeFiles/rebuild_cache.dir

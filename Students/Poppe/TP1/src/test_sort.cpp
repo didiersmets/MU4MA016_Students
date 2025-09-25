@@ -1,0 +1,79 @@
+// g++ src/test_sort.cpp src/bubble_sort.cpp src/insertion_sort.cpp src/merge_sort.cpp -I include -o test_queue -std=c++17
+
+#include <utility>
+#include <string>
+#include <functional>
+#include <chrono>
+#include <iostream>
+#include <fstream>
+
+#include "bubble_sort.hpp"
+#include "insertion_sort.hpp"
+#include "merge_sort.hpp"
+#include "std_sort.hpp"
+
+std::pair<std::function<void (int*, size_t)>, std::string> algorithms[] = {
+    //std::make_pair(bubble_sort, "Bubble sort"), 
+    //std::make_pair(insertion_sort, "Insertion sort"),
+    std::make_pair(merge_sort, "Merge sort"),
+    std::make_pair(merge_sort_inplace, "Merge sort (in-place)"),
+    std::make_pair(std_sort, "Std sort")
+};
+
+int* init_array(size_t n) {
+    int* array = new int[n];
+    for (size_t i=0;i<n;i++) {
+        array[i] = rand() % 1000;
+    }
+    return array;
+}
+
+void printArray(int* array, int count) {
+    for (int i =0; i < count; i++) {
+        printf("%i ", array[i]);
+    }
+    printf("\n");
+}
+
+void verifyArray(int* array, int count) {
+    for (int i = 1; i < count; i++) {
+        if (array[i - 1] > array[i]) {
+            printf("Array is not sorted at index %i an %i: %i > %i\n", i - 1, i, array[i - 1], array[i]);
+        }
+    }
+}
+
+std::chrono::duration<double> time_size(std::function<void (int*, size_t)> algorithm, size_t n) {
+    int* array = init_array(n);
+    auto start = std::chrono::high_resolution_clock::now();
+    algorithm(array, n);
+    auto end = std::chrono::high_resolution_clock::now();
+    //printArray(array, n);
+    verifyArray(array, n);
+    delete[] array;
+    return end - start;
+}
+
+constexpr int sizes[] = {10, 20, 50, 100, 200, 500, 1000, 10000, 100000, 1000000};
+
+void time_algorithm(std::function<void (int*, size_t)> algorithm, const std::string& name) {
+    // create file name.txt and write the results in it
+    std::ofstream file(name + ".txt");
+
+    for (size_t n : sizes) {
+        auto duration = time_size(algorithm, n);
+        std::cout << name << " with size " << n << " took " << duration.count() << " seconds." << std::endl;
+        file << n << " " << duration.count() << std::endl;
+    }
+    file.close();
+
+    system(("gnuplot -e \"set terminal png; set output '" + name + ".png'; set logscale x; set xlabel 'Array size'; set logscale y; set ylabel 'Time (s)'; plot '" + name + ".txt' using 1:2 with linespoints title '" + name + "'\"").c_str());
+}
+
+
+int main() {
+    for (const auto& [algorithm, name] : algorithms) {
+        time_algorithm(algorithm, name);
+    }
+    return 0;
+}

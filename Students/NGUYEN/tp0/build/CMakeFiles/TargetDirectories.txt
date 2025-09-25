@@ -1,0 +1,6 @@
+/home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0/build/CMakeFiles/hello.exe.dir
+/home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0/build/CMakeFiles/pascal.exe.dir
+/home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0/build/CMakeFiles/read_file.exe.dir
+/home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0/build/CMakeFiles/sin.exe.dir
+/home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0/build/CMakeFiles/edit_cache.dir
+/home/Thanh-Long/Documents/M1/S1/4MA316/MU4MA016_Students/Students/NGUYEN/tp0/build/CMakeFiles/rebuild_cache.dir
