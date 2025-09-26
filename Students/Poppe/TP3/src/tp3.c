@@ -1,4 +1,5 @@
 // gcc -o tp3 src/tp3.c src/mesh_io.c src/mesh_adjacency.c src/hash_tables.c src/mesh.c -Iinclude -std=c11
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
@@ -25,6 +26,8 @@ int verify_table(int* table, int* actual, int ntri) {
     for (int i = 0; i < ntri * 3; i++) {
         if (table[i] != actual[i]) {
             printf("Mismatch at index %d: expected %d, got %d\n", i, actual[i], table[i]);
+            //for bugatti.obj,
+            // "36362 36361" occurs twice, causing Mismatch at index 206818: expected 73504, got 87800
             return 0;
         }
     }
