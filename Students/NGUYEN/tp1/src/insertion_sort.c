@@ -5,7 +5,7 @@
 #include <stdbool.h>
 #include <assert.h>
 
-void insertion_sort(int *t, int l){ // t = address of the array and l = number of elements
+void insertion_sort(int *t, int l){ // t = address of the array, l = number of elements
 
     for (int i = 1; i < l-1; i++){
         for (int j = i; j > 0; j--){ // decreasing from i (the current sequence)
@@ -22,7 +22,7 @@ void insertion_sort(int *t, int l){ // t = address of the array and l = number o
 }
 
 int main(){
-    int array_N[7] = {10, 20, 50, 100, 200, 500, 1000};
+    int array_N[7] = {10, 20, 50, 100, 200, 1000, 50000};
     FILE *insertion = fopen("../insertion_sort.dat", "w");
 
     for (int i = 0; i < 7; i++){

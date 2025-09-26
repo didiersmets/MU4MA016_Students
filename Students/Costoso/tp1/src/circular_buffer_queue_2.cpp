@@ -1,13 +1,15 @@
-#include "circular_buffer_queue.hpp"
+#include "circular_buffer_queue_2.h"
 #include <cstring>
 #include <cstdlib>
+template <typename T>
+bool is_empty(const struct Queue<T> *q){return q->length==0;}
 
-bool is_empty(const struct Queue *q){return q->length==0;}
+template <typename T>
+size_t queue_length(const struct Queue<T> *q){return q->length;}
 
-size_t queue_length(const struct Queue *q){return q->length;}
-
-struct Queue *queue_init(size_t capacity){
-    Queue *q=(struct Queue *)malloc(capacity);
+template <typename T>
+struct Queue<T> *queue_init(size_t capacity){
+    Queue<T> *q=(struct Queue<T> *)malloc(capacity);
     q->capacity=capacity;
     q->length=0;
     q->data=(char*) malloc(capacity);
@@ -15,31 +17,33 @@ struct Queue *queue_init(size_t capacity){
     return q;
 }
 
-void queue_enqueue(struct Queue *q,const void *src){
+template <typename T>
+void queue_enqueue(struct Queue<T> *q,const void *src){
     q->data[(q->front + q->length) % q->capacity]=src;
     q->length++;
 }
 
-void queue_dequeue(struct Queue *q,void *dest){
+template <typename T>
+void queue_dequeue(struct Queue<T> *q,void *dest){
     if(q->front!=q->capacity){q->front++;}
     q->length--;
 }
 
-static void enlarge_queue_capacity ( struct Queue * q ){
-    Queue* Res=queue_init(q->elem_size,q->capacity*2);
-    size_t Pos=q->front;
-    for(int i=0;i<q->length;i++){
-        memcpy((char*)Res->data+Res->elem_size*i,(char*)q->data+q->elem_size*Pos,q->elem_size);
-        Pos+=q->elem_size;
+template <typename T>
+static void enlarge_queue_capacity ( struct Queue<T> * q ){
+    size_t new_cap = q->capacity ? 2 * q->capacity : 1;
+    T *next_data = (char*)malloc(new_cap);
+    q->capacity=new_cap;
+    size_t Pos = 0;
+    for (int i = 0; i < q->length; i++) {
+        next_data[Pos]=q->data[Pos];
+        Pos ++;
     }
-    Pos=0;
-    for(int i=q->data;i<q->front;i++){
-        memcpy((char*)Res->data+Res->elem_size*(q->length-q->front+i),(char*)q->data+q->elem_size*Pos,q->elem_size);
-        Pos+=q->elem_size;
-    }
-    q->data=Res->data;
+    free(q->data);
+    q->data=next_data;
 }
 
-void queue_dispose(struct Queue *q){
+template <typename T>
+void queue_dispose(struct Queue<T> *q){
     free(q);
 }
