@@ -26,10 +26,8 @@ struct Queue *queue_init(size_t elem_size, size_t capacity){
 }
 
 void queue_dispose(struct Queue *q){
-    if(q->length > 0){
-        q->length = q->length - 1;
-        q->front = (q->front + 1)%q->capacity;
-    }
+    free(q->data);
+    free(q);
 }
 
 static void enlarge_queue_capacity (struct Queue *q){
@@ -55,9 +53,9 @@ void queue_enqueue(struct Queue *q, const void *src){
 }
 
 void queue_dequeue(struct Queue *q, void *dest){
-    void *src = (char *)q->data +(q->front%q->capacity) * q->elem_size;
-    memcpy(dest, src, q->elem_size);
     if(q->length > 0){
+        void *src = (char *)q->data +(q->front%q->capacity) * q->elem_size;
+        memcpy(dest, src, q->elem_size);
         q->length = q->length - 1;
         q->front = (q->front + 1)%q->capacity;
     }

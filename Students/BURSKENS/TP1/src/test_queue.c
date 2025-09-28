@@ -15,12 +15,14 @@ int main(int argc, char* argv[]){
             queue_enqueue(q, &p);
         }
         else{
-            queue_dispose(q);
+            int g = 0;
+            queue_dequeue(q, &g);
         }
         if(q->length > l_max){
             l_max = q->length;
         }
     }
-    printf("l_max %d\n",l_max);
+    printf("l_max: %d\n",l_max);
+    queue_dispose(q);
     return l_max;
 }
