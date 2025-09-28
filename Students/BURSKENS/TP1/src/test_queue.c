@@ -7,12 +7,8 @@
 
 int main(int argc, char* argv[]){
     int l_max = 0;
-    int n = argv[1]; //number of random integers
+    int n = atoi(argv[1]); //number of random integers
     struct Queue *q = queue_init(sizeof(int), n);
-    int p = rand();
-    printf("p %d\n",p);
-    queue_enqueue(q, &p);
-    /*
     for(int i=0; i < n; i++){
         int p = rand();
         if(p%2 == 0){
@@ -26,6 +22,5 @@ int main(int argc, char* argv[]){
         }
     }
     printf("l_max %d\n",l_max);
-    */
     return l_max;
 }
