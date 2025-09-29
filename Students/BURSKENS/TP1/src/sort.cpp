@@ -46,12 +46,6 @@ int main(int argc, char* argv[]){
             after = clock();
             exec_time = ((double) (after - now)) / CLOCKS_PER_SEC;
             fprintf(fp, "%d %40f\n", N, exec_time);
-            if(N < 100){
-                for(int k = 0; k < N; k++){
-                    fprintf(fp, "%10d", array[k]);
-                    }
-                fprintf(fp,"\n");
-            }
         }
         if(!strncmp(argv[1], "insertion", strlen("insertion"))){
             clock_t now, after;

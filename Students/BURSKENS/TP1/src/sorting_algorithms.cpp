@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
+#include <stdio.h>
 
 void swap(int* a, int* b){
     int temp = *a;
@@ -61,20 +62,24 @@ void merge(int* from, int* to, size_t begin, size_t middle, size_t end){
 void merge_sort_recursive(int* from, int* to, size_t begin, size_t end){
     if(end != begin){
         int middle = floor((begin+end)/2);
-        merge_sort_recursive(from,to,begin,middle);
-        merge_sort_recursive(from,to,middle+1,end);
-        merge(to,from,begin,middle,end);
+        merge_sort_recursive(to,from,begin,middle);
+        merge_sort_recursive(to,from,middle+1,end);
+        merge(from,to,begin,middle,end);
     }
 }
 
-void merge_sort(int* A, size_t length){
-    int *B = (int*)malloc(length*sizeof(int));
-    memcpy(B,A,length*sizeof(int));
+void merge_sort(int* B, size_t length){
+    int *A = (int*)malloc(length*sizeof(int));
+    memcpy(A,B,length*sizeof(int));
     int begin = 0;
     int end = length - 1;
     int middle = floor((begin+end)/2);
-    merge_sort_recursive(A,B,begin,middle);
-    merge_sort_recursive(A,B,middle+1,end);
-    merge(B,A,begin,middle,end);
-    free(B);
+    merge_sort_recursive(B,A,begin,middle);
+    merge_sort_recursive(B,A,middle+1,end);
+    merge(A,B,begin,middle,end);
+    for (int i = begin; i <= end; i++) {
+        printf("%d ", B[i]);
+    }
+    printf("\n");
+    free(A);
 }
