@@ -1,7 +1,8 @@
 #include <stddef.h> // for size_t
-#include <circular_buffer_queue.h>
+#include <sorting_algorithms.hpp>
 #include <string.h>
 #include <stdlib.h>
+#include <math.h>
 
 void swap(int* a, int* b){
     int temp = *a;
@@ -31,26 +32,6 @@ void insertion_sort(int* array, int length){
 }
 
 
-void merge_sort(int* A, int length){
-    int *B = malloc(length*sizeof(int));
-    memcpy(B,A,length*sizeof(int));
-    int begin = 0;
-    int end = length - 1;
-    int middle = floor((begin+end)/2);
-    merge_sort_recursive(A,B,begin,middle);
-    merge_sort_recursive(A,B,middle+1,end);
-    merge(B,A,begin,middle,end);
-}
-
-void merge_sort_recursive(int* from, int* to, size_t begin, size_t end){
-    if(end != begin){
-        int middle = floor((begin+end)/2);
-        merge_sort_recursive(A,B,begin,middle);
-        merge_sort_recursive(A,B,middle+1,end);
-        merge(B,A,begin,middle,end);
-    }
-}
-
 void merge(int* from, int* to, size_t begin, size_t middle, size_t end){
     int i=0;
     int j=0;
@@ -65,13 +46,35 @@ void merge(int* from, int* to, size_t begin, size_t middle, size_t end){
                 j++;
             }
         }
-        elif(begin+i > middle){
+        else if(begin+i > middle){
             to[n] = from[middle+1+j];
                 j++;
         }
-        elif(middle+1+j > end){
+        else if(middle+1+j > end){
             to[n] = from[begin+i];
                 i++;
         }
     }
+}
+
+
+void merge_sort_recursive(int* from, int* to, size_t begin, size_t end){
+    if(end != begin){
+        int middle = floor((begin+end)/2);
+        merge_sort_recursive(from,to,begin,middle);
+        merge_sort_recursive(from,to,middle+1,end);
+        merge(to,from,begin,middle,end);
+    }
+}
+
+void merge_sort(int* A, size_t length){
+    int *B = (int*)malloc(length*sizeof(int));
+    memcpy(B,A,length*sizeof(int));
+    int begin = 0;
+    int end = length - 1;
+    int middle = floor((begin+end)/2);
+    merge_sort_recursive(A,B,begin,middle);
+    merge_sort_recursive(A,B,middle+1,end);
+    merge(B,A,begin,middle,end);
+    free(B);
 }
