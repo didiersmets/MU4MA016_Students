@@ -3,8 +3,8 @@
 
 struct Vertex {
     // 2D space
-    double x;
-    double y;
+    double x[2];
+    double y[2];
 };
 
 struct Triangle {
