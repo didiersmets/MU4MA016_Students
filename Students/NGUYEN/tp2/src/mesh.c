@@ -76,7 +76,12 @@ int read_mesh2D(struct Mesh2D* m, const char* filename) {
             sscanf(line, "%lf %lf", &m->vert[i].x, &m->vert[i].y);
         }
         
-        sscanf(line, "Triangles %d", &m->nt); // wip to malloc
+        if(sscanf(line, "Triangles %d", &m->nt) != 0){
+            if (m->tri != NULL) {
+                free(m->tri);
+            }
+            m->tri = malloc(sizeof(struct Vertex) * m->nt);
+        }; 
         for (int i = 0; i < m->nt; i++) {
             fgets(line, sizeof(line), fp);
             sscanf(line, "%d %d %d",
