@@ -157,7 +157,6 @@ int main ()
     fclose(insertion_file);
     fclose(merge_file);
 
-    printf("Data files created. Generating plot...\n");
 
     // Create gnuplot script
     FILE *gnuplot_script = fopen("plot_script.gp", "w");
@@ -166,7 +165,7 @@ int main ()
     fprintf(gnuplot_script, "set logscale xy\n");
     fprintf(gnuplot_script, "set xlabel 'Array Size (N)'\n");
     fprintf(gnuplot_script, "set ylabel 'Execution Time (ms)'\n");
-    fprintf(gnuplot_script, "set title 'Sorting Algorithm Performance Comparison'\n");
+    fprintf(gnuplot_script, "set title 'Sorting Algorithm'\n");
     fprintf(gnuplot_script, "set grid\n");
     fprintf(gnuplot_script, "set key left top\n");
     fprintf(gnuplot_script, "plot 'bubble_sort_data.txt' using 1:2 with linespoints title 'Bubble Sort', \\\n");
