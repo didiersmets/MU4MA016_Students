@@ -1,34 +1,64 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/time.h>
 #include <time.h>
 
 #include "../include/hashtable.h"
 #include "../include/mesh.h"
 #include "../include/mesh_io.h"
 
+ void timer_start(struct timeval *tv){gettimeofday(tv,NULL);}
+ 
+ unsigned int timer_stop(const struct timeval *tv,const char *str){
+    struct timeval now;
+    gettimeofday(&now,NULL);
+
+    unsigned int mus=1000000 * (now.tv_sec-tv->tv_sec);
+    mus+=(now.tv_usec-tv->tv_usec);
+
+    if(str[0]){
+        printf("Timer%s: ",str);
+        if(mus>=1000000){
+            printf("%.3f s\n",(float)mus/1000000);
+        }else{
+            printf("%.3f ms\n",(float)mus/1000);
+        }
+    }
+    return(mus);
+ }
+ 
 int main(int argc, char **argv){
+
+    if(argc <= 1){
+        printf("Missing filename; I need one in order to work :(\n");
+        return EXIT_FAILURE;
+    }
+
     char *filename = argv[1];
     struct Mesh m;
 
-    read_mesh_from_wavefront_file(&m, filename);
+    int sucess = read_mesh_from_wavefront_file(&m, filename);
 
-    time_t before1 = time(NULL);
-    int *adj1 = build_adjacency_table1(&m);
-    time_t after1 = time(NULL);
-    printf("Time of the first algorithm : %lds\n", after1 - before1);
+    if(sucess == -1){
+        printf("Opening file failed ! That's bad :(\n");
+        return EXIT_FAILURE;
+    }
 
-    time_t before2 = time(NULL);
+    struct timeval before;
+
+    // timer_start(&before);
+    // int *adj1 = build_adjacency_table1(&m);
+    // timer_stop(&before, " of the first algorithm ");
+    // free(adj1);
+
+    timer_start(&before);
     int *adj2 = build_adjacency_table2(&m);
-    time_t after2 = time(NULL);
-    printf("Time of the second algorithm : %lds\n", after2 - before2);
-
-    time_t before3 = time(NULL);
-    int *adj3 = build_adjacency_table3(&m);
-    time_t after3 = time(NULL);
-    printf("Time of the third algorithm : %lds\n", after3 - before3);
-
-    free(adj1);
+    timer_stop(&before, " of the second algorithm ");
     free(adj2);
+
+    timer_start(&before);
+    int *adj3 = build_adjacency_table3(&m);
+    timer_stop(&before, " of the third algorithm ");
     free(adj3);
 
     return 0;
