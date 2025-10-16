@@ -1,8 +1,8 @@
-#include <stdbool.h>
-#include <stddef.h> 
-#include <stdlib.h>
-#include <string.h> 
-#include <stdio.h>
+#include <stdbool.h> // for bool type
+#include <stddef.h>  // for size_t type
+#include <stdlib.h> // for malloc, free
+#include <string.h>  // for memcpy
+#include <stdio.h> // for printf
 
 #include "../include/circular_buffer_queue.h"
 
