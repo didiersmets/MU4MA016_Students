@@ -31,17 +31,17 @@ double area_mesh2D(struct Mesh2D* m);
 Example : (with reference number 0, because it's arbitrary ?)
 MeshVersionFormatted 1
 Dimension 2
-Vertices
-4
+Vertices 4
 0.0 0.0 0
 1.0 0.0 0
 1.0 1.0 0
 0.0 1.0 0
-Triangles
-2
+Triangles 2
 0 1 2 0
 0 2 3 0
 End
+
+But in the files given, beware of a space before Vertices and Triangles !
 */
 
 int read_mesh2D(struct Mesh2D* m, const char* filename);
