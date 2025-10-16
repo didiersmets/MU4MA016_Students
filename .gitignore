@@ -8,3 +8,11 @@ HUN/tp0/build/
 .vscode/
 
 Devora/.DS_Store
+Students/GIRARDIN/tp1/Test_queue
+Students/GIRARDIN/tp1/Test_queue_cpp
+Students/GIRARDIN/tp1/test_queue_cpp.o
+Students/GIRARDIN/tp1/test_queue.o
+Students/GIRARDIN/tp1/circular_buffer_queue.o
+Students/GIRARDIN/tp3/build
+Students/GIRARDIN/tp3/tp3
+.gitignore
