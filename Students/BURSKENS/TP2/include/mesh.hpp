@@ -23,12 +23,16 @@ struct Mesh2D {
     struct Triangle *triangles;
 };
 
-int initialize mesh2D(struct Mesh2D* m, int vtx capacity, int tri capacity);
+int initialize_mesh2D(struct Mesh2D* m, int vtx_capacity, int tri_capacity);
 
-void dispose mesh2D(struct Mesh2D* m);
+void dispose_mesh2D(struct Mesh2D* m);
 
-double area mesh2D(struct Mesh2D* m);
+double area_mesh2D(struct Mesh2D* m);
 
-double vect(struct Vertex v_1, struct Vertex v_2);
+//double vect(struct Vertex v_1, struct Vertex v_2);
 
-int read mesh2D(struct Mesh2D* m, const char* filename);
+int read_mesh2D(struct Mesh2D* m, const char* filename);
+
+int write_mesh2D(struct Mesh2D* m, const char* filename);
+
+int mesh2D_to_gnuplot(struct Mesh2D* m, const char* filename);
