@@ -33,7 +33,7 @@ int *build_adjacency_table1(const struct Mesh *m){
 }
 
 struct HashTable *build_edge_table1(const struct Mesh *m){
-
-
+    sizeof(struct Edge) //size of key in bytes
+    sizeof(int) //size of value in bytes
 
 }
