@@ -18,11 +18,12 @@ int main(){
     int i = 0;
 
     //vérifie que p ne change pas de valeur
-    printf("Je suis %d, seulement moi devrait être dans le truc\n", p);
+    
  
 
     if ( p%2 == 1 ){
         queue_enqueue(q,&p);
+        printf("adresse de p : %p, valeur de p : %d\n", &p,p);
     } else {
             if (q->length!=0){
             void *dest=NULL;
@@ -38,8 +39,14 @@ int main(){
     int taille = 0;
     int valeur;
     while(taille < (q->length)){
-        valeur = *(int *)((char *)q->data + q->elem_size*( ( q->front + taille ) % q->capacity));
-        printf("position %d : %d\n", taille+1, valeur);
+        //valeur = *(int *)((char *)q->data + q->elem_size*( ( q->front + taille ) % q->capacity));
+        printf("adresse du premier élement de q : %p\n", q->data);
+        
+        void* dest = (char *)q->data + q->elem_size * ((q->front + taille) % q->capacity);
+        printf("valeur :\n-q->length : %zu\n-q->front : %zu\n-taille:%d\n", q->length,q->front, taille);
+        printf("adresse de valeur : %p\n",  dest);
+        printf("valeur de valeur : %d\n", *((int*) dest));
+        //printf("position %d : %d\n", taille+1, valeur);
         taille++;
     }
 

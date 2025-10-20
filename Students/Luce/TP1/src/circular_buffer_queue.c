@@ -27,6 +27,7 @@ struct Queue *queue_init(size_t elem_size, size_t capacity){
     new->length = 0;
     new->front = 0;
     new->data = new ;
+    return new;
 }
 
 void queue_dispose(struct Queue *q){
@@ -52,6 +53,7 @@ static void enlarge_queue_capacity ( struct Queue * q ){
 
 void queue_enqueue(struct Queue *q, const void *src){
     if (!q){
+        printf("Erreur, pas de file");
         return;
     }
 
@@ -59,8 +61,12 @@ void queue_enqueue(struct Queue *q, const void *src){
         enlarge_queue_capacity(q);
     }
     void *dest = (char *)q->data + q->elem_size * ((q->front + q->length) % q->capacity);
+    printf("adresse src : %p, contenu de src : %d\n", src, *((int*) src));
+    printf("queue_enequeue, q->front : %zu\n", q->front);
     memcpy(dest, src, q->elem_size);
+    printf("apres memcpy\nadresse dest : %p, contenu de dest : %d\n", dest, *((int*) dest));
     q->length++;
+    printf("queue_enequeue, q->front : %zu\n", q->front);
 }
 
 void queue_dequeue ( struct Queue *q , void * dest ){
