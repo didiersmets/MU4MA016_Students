@@ -12,7 +12,6 @@ struct Mesh2D {
     struct Triangle* tri;
 };
 
-/* Prototypes des fonctions présentes dans exo1.c */
 double area_mesh2D(struct Mesh2D* m);
 void dispose_mesh2D(struct Mesh2D* m);
 
@@ -31,7 +30,7 @@ int read_mesh2D(struct Mesh2D* m, const char* filename) {
     char word[256];
     int nv = 0, nt = 0, dim = 0;
 
-    /* MeshVersionFormatted <int> (optionnel) */
+    /* MeshVersionFormatted */
     if (fscanf(f, "%255s", word) == 1 && strcmp(word, "MeshVersionFormatted") == 0) {
         int ver;
         if (fscanf(f, "%d", &ver) != 1) { fclose(f); return 1; }
