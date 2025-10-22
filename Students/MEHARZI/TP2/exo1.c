@@ -5,7 +5,7 @@
 // Part en 2D
 // =======================
 
-// Sommets (points)
+// Sommets
 struct Vertex {
     double x;
     double y;
@@ -88,7 +88,6 @@ struct Mesh3D {
     struct Triangle3D* tri;
 };
 
-// init / dispose très simples
 int initialize_mesh3D(struct Mesh3D* m, int vtx_capacity, int tri_capacity) {
     m->nv = vtx_capacity;
     m->nt = tri_capacity;
