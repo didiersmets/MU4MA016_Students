@@ -9,46 +9,61 @@
 
 
 
-int main(){
+int main(int argc, char *argv[]){
 
     struct Queue *q = queue_init(sizeof(int),10);
 
     srand(time(NULL));
-    int p = rand()%10;
-    int i = 0;
-
-    //vérifie que p ne change pas de valeur
+    int p;
+    int l_max = 0;
     
- 
+    
+    for(int i=0; i<atoi(argv[1]); i++){
+        p = rand()%6*2+1;
+        printf("tour %d p=%d\n",i+1,p);
+        
+        if ( p%2 == 1 ){
 
-    if ( p%2 == 1 ){
-        queue_enqueue(q,&p);
-        printf("adresse de p : %p, valeur de p : %d\n", &p,p);
-    } else {
-            if (q->length!=0){
-            void *dest=NULL;
+            //printf("p=%d entre dans la queue\n",p);
+            queue_enqueue(q,&p);
+
+            if (q->length>l_max){
+                l_max=q->length;
+            }
+
+        } else {
+
+            if (q->length==0){
+                printf("p=%d ne fait rien\n",p);
+            }
+
+            void *dest=malloc(sizeof(q->elem_size));
             queue_dequeue(q, dest);
-            int *QuiEstCe = (int *)dest;
-            printf("%d est sorti de la queue\n", *QuiEstCe);
-        }
+            int QuiEstCe = *(int *)dest;
+            if (p==QuiEstCe){
+                printf("%d est sorti de la queue\n", QuiEstCe);
+            }
+            free(dest);
+            }
     }
+    printf("l_max = %d\n", l_max);
 
 
 
     //affiche le contenu de la queue
     int taille = 0;
-    int valeur;
-    while(taille < (q->length)){
-        //valeur = *(int *)((char *)q->data + q->elem_size*( ( q->front + taille ) % q->capacity));
-        printf("adresse du premier élement de q : %p\n", q->data);
+    int* adresse_valeur;
+
+    while(taille < q->length){
+
+        adresse_valeur = (int*)(char *)q->data + q->elem_size*( ( q->front + taille ) % q->capacity);
+        printf("truc : %zu\n, q->data : %p, adresse_valeur %p\n",q->elem_size*( ( q->front + taille ) % q->capacity), (int*)(char *)q->data, (int*)(char *)q->data + q->elem_size*( ( q->front + taille ) % q->capacity) );
+        //printf("q->data : %p\nadresse valeur : %p, valeur : %d\n",q->data,adresse_valeur,*adresse_valeur);
         
-        void* dest = (char *)q->data + q->elem_size * ((q->front + taille) % q->capacity);
-        printf("valeur :\n-q->length : %zu\n-q->front : %zu\n-taille:%d\n", q->length,q->front, taille);
-        printf("adresse de valeur : %p\n",  dest);
-        printf("valeur de valeur : %d\n", *((int*) dest));
-        //printf("position %d : %d\n", taille+1, valeur);
         taille++;
     }
+
+    queue_dispose(q);
 
     return 0;   
 }
