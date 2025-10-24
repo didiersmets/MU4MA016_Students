@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/mathieu/MU4MA016_Students/Students/VENITE/tp1/src/merge_sort'
+relocations:     []
+...

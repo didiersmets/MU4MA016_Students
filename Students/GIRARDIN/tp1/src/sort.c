@@ -77,6 +77,7 @@ void merge_sort(int* seq, int length){
     free(B);
 }
 
+//Main -------------------------------------------------------------------------
 int main(int argc, char **argv){
 
     int A[] = {11,54,23,6,7,89,4,2,8,45};
