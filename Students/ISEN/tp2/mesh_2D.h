@@ -32,4 +32,3 @@ int mesh_2D_to_gnuplot(struct Mesh2D* m, const char* filename);
 
 int write_mesh2D(struct Mesh2D *m, const char* filename);
 
-int main(void);

@@ -9,7 +9,7 @@
 //array based
 
 bool is_empty(const struct Queue *q){
-    return !q;
+    return q->length==0;
 }
 
 size_t queue_length(const struct Queue *q){
@@ -33,6 +33,7 @@ struct Queue *queue_init(size_t elem_size, size_t capacity){
 
 void queue_dispose(struct Queue *q){
     if (!q){
+        printf("Erreur, pas de file\n");
         return;
     }
     free(q->data);
@@ -45,9 +46,7 @@ static void enlarge_queue_capacity ( struct Queue * q ){
         return;
     }
     size_t new_cap = q->capacity == 0 ? 1 : 2*q->capacity;
-    //printf("nouvelle capacity %zu\n", new_cap);
     void *new_data = realloc(q->data, new_cap * q->elem_size);
-    //printf("Après realloc: new_data=%p\n", new_data);
     if (new_data != NULL){
         q->data = new_data;
         q->capacity = new_cap;
@@ -63,26 +62,25 @@ void queue_enqueue(struct Queue *q, const void *src){
         printf("Erreur, pas de file\n");
         return;
     }
-    void *dest = (char *)q->data + q->elem_size * ((q->front + q->length) % q->capacity);
-    q->length++;
-    printf("src : %d receptioned\n", *(int *)src);   
-    //printf("length : %zu capacity : %zu\n", q->length, q->capacity);
+
+    q->length++; //avant de comparer length et capacity
 
     if (q->length >= q->capacity){
         size_t previous_capacity = q->capacity;
         enlarge_queue_capacity(q);
         printf("enlargement succeeded, nb of elements is %zu thus capacity goes from %zu to %zu\n",q->length, previous_capacity, q->capacity);
     }
+    void *dest = (char *)q->data + q->elem_size * ((q->front + q->length-1) % q->capacity);
     memcpy(dest, src, q->elem_size);
-    printf("dest : %p, valeur dans dest : %d\n", dest, *(int*) dest);
 }
 
 void queue_dequeue ( struct Queue *q , void * dest ){
-    if(!q || q->length ==0){
+    if(!q || is_empty(q)){
         return;
     }
     void *src = (char*) q->data + q->elem_size*q->front;
     memcpy(dest, src, q->elem_size);
+    printf("Je dequeue : %d\n", *(int*)dest);
     q->length--;
     q->front = (q->front + 1) %q->capacity;
 }

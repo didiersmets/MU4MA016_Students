@@ -11,20 +11,21 @@
 
 int main(int argc, char *argv[]){
 
-    struct Queue *q = queue_init(sizeof(int),10);
+    struct Queue *q = queue_init(sizeof(int),0);
 
     srand(time(NULL));
     int p;
     int l_max = 0;
-    
-    
-    for(int i=0; i<atoi(argv[1]); i++){
-        p = rand()%6*2+1;
+    int N;
+    argc<2 ? printf("Veuillez entrer un entier :\n"), scanf("%d",&N) : (N = atoi(argv[1]));
+
+    for(int i=0; i<N; i++){
+        p = rand()%11;
         printf("tour %d p=%d\n",i+1,p);
         
         if ( p%2 == 1 ){
 
-            //printf("p=%d entre dans la queue\n",p);
+            printf("p=%d entre dans la queue\n",p);
             queue_enqueue(q,&p);
 
             if (q->length>l_max){
@@ -34,17 +35,15 @@ int main(int argc, char *argv[]){
         } else {
 
             if (q->length==0){
-                printf("p=%d ne fait rien\n",p);
-            }
-
-            void *dest=malloc(sizeof(q->elem_size));
-            queue_dequeue(q, dest);
-            int QuiEstCe = *(int *)dest;
-            if (p==QuiEstCe){
+                printf("p=%d ne fait rien, file vide\n",p);
+            } else {
+                void *dest=malloc(sizeof(q->elem_size));
+                queue_dequeue(q, dest);
+                int QuiEstCe = *(int *)dest;
                 printf("%d est sorti de la queue\n", QuiEstCe);
+                free(dest);
             }
-            free(dest);
-            }
+        }
     }
     printf("l_max = %d\n", l_max);
 
@@ -52,13 +51,14 @@ int main(int argc, char *argv[]){
 
     //affiche le contenu de la queue
     int taille = 0;
-    int* adresse_valeur;
+    char *adresse_valeur;
 
     while(taille < q->length){
 
-        adresse_valeur = (int*)(char *)q->data + q->elem_size*( ( q->front + taille ) % q->capacity);
-        printf("truc : %zu\n, q->data : %p, adresse_valeur %p\n",q->elem_size*( ( q->front + taille ) % q->capacity), (int*)(char *)q->data, (int*)(char *)q->data + q->elem_size*( ( q->front + taille ) % q->capacity) );
-        //printf("q->data : %p\nadresse valeur : %p, valeur : %d\n",q->data,adresse_valeur,*adresse_valeur);
+        adresse_valeur = (char *)q->data +   q->elem_size * (( q->front + taille ) % q->capacity);
+        
+        //remarque, ajouter 1 à char* incrémente l'adresse de 1 octet, mais si je cast en int*, alors ça incrémente de 4 octets
+        printf("Position %d : %d\n", taille + 1, *(int*) adresse_valeur);
         
         taille++;
     }

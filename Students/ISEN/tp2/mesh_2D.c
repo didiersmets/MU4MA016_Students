@@ -1,8 +1,5 @@
 #include "mesh_2D.h"
 
-//NOT FULLY TESTED YET
-//missing: index {1,...,nt&nv} in mesh file, a few problems in the read_file, ...
-
 int initialize_mesh2D(struct Mesh2D *m, int vtx_capacity, int tri_capacity){
     m->nt = 0;
     m->nv = 0;
@@ -39,7 +36,7 @@ double area_mesh2D(struct Mesh2D *m){
         d2.y = c.y - a.y;
 
         //cross product
-        ar += 1/2 * (d1.x * d2.y - d2.x * d2.y);
+        ar += 0.5 * (d1.x * d2.y - d2.x * d2.y);
     }
     return ar;
 }
@@ -48,35 +45,42 @@ double area_mesh2D(struct Mesh2D *m){
 int read_mesh2D(struct Mesh2D* m, const char* filename){
     //read a 2D mesh from a .mesh file 
     FILE * mesh_file = fopen(filename, "r");
+    if (!mesh_file)
+    {
+        perror("File opening failed");
+        return EXIT_FAILURE;
+    }
 
     char line [128]; //arbitrary number
+    int found = 0;
 
-    int found;
     //version
     int meshversion;
-    printf("Hello");
     do{
         fgets(line, 128, mesh_file);
         found = sscanf(line, "MeshVersionFormatted %d", &meshversion);
-        printf("Hello");
+        printf("Version = %d\n", meshversion);
     }while(found != 1);
 
-    if(meshversion != 1){
-            return 0;
-        }
+    /*if(meshversion != 1){   --> version = 2 in the test file!!
+        return 0;
+    }*/
 
     //dimension
     int dim;
     found = 0;
     do{
         fgets(line, 128, mesh_file);
-        found = sscanf(line, "Dimension %d", &dim);
+        found = sscanf(line, "Dimension %1d", &dim);
     }while(found != 1);
+
+    printf("Dimension =  %d\n", dim);
 
     if(dim < 2){  //if it's >= 2, you could just ingore the other coordinates?
         printf("Invalid dimension");  
         return 0;
-        }
+    }
+
 
     // #vertices
     int num_vert;
@@ -86,15 +90,16 @@ int read_mesh2D(struct Mesh2D* m, const char* filename){
         found = sscanf(line, "Vertices %d", &num_vert);
     }while(found != 1);
 
+    //first init m 
     m->nv = num_vert;
-
     m->vert = (struct Vertex*)malloc(sizeof(struct Vertex) * m->nv);
-
 
     // vertices 
     for (int i = 0; i < m->nv; i++){
-        fgets(line, 128, mesh_file);
-        sscanf(line, "%Lf %Lf", &m->vert[i].x, &m->vert[i].y);   //or Lf if you want double
+        do{
+            fgets(line, 128, mesh_file);
+            found = sscanf(line, "%Lf %Lf", &m->vert[i].x, &m->vert[i].y);   //or Lf if you want double
+        }while(found != 2);
     }
 
     // #triangles 
@@ -102,27 +107,36 @@ int read_mesh2D(struct Mesh2D* m, const char* filename){
     found = 0;
     do{
         fgets(line, 128, mesh_file);
-        sscanf(line, "Triangles %d", &num_tri);
+        found = sscanf(line, "Triangles %d", &num_tri);
     }while(found != 1);
 
+    //second init m 
     m->nt = num_tri;
     m->tri = (struct Triangle *)malloc(sizeof(struct Triangle) * m->nt);
 
     // triangles 
     for (int j = 0; j < m->nt; j++){
-        fgets(line, 128, mesh_file);
-        sscanf(line, "%d %d %d", &m->tri[j].a, &m->tri[j].b, &m->tri[j].c);
+        do{
+            fgets(line, 128, mesh_file);
+            found = sscanf(line, "%d %d %d", &m->tri[j].a, &m->tri[j].b, &m->tri[j].c);
+        }while(found != 3);
+
+        //{1,...nv} --> {0,...,nv-1}
+        (m->tri)[j].a -= 1;
+        (m->tri)[j].b -= 1;
+        (m->tri)[j].c -= 1; 
     }
 
     fclose(mesh_file);
+    return 0;
 }
-
 
 
 //3  struct Mesh -> gnuplot 
 int mesh_2D_to_gnuplot(struct Mesh2D* m, const char* filename){
     FILE *file_mesh;
     file_mesh = fopen(filename, "w"); 
+    
 
     for (int i = 0; i < m->nt; i++){
         double a_x = m->vert[m->tri[i].a].x;
@@ -134,20 +148,23 @@ int mesh_2D_to_gnuplot(struct Mesh2D* m, const char* filename){
 
         fprintf(file_mesh, "%Lf\t%Lf\n", a_x, a_y);
         fprintf(file_mesh, "%Lf\t%Lf\n", b_x, b_y);
-        fprintf(file_mesh, "%Lf\t%Lf\n", c_x, c_y);
-        fclose(file_mesh);
+        fprintf(file_mesh, "%Lf\t%Lf\n\n", c_x, c_y);   
+        //  2*\n : 1 triangle per paragraph --> gnuplot only does lines between points of the triangle
     }
+    fclose(file_mesh);
+
 
     FILE *gnu_mesh = fopen("gnu_mesh.txt", "w");
     fprintf(gnu_mesh, "set title '2D Mesh'\n"
         "set xlabel 'x'\n"
         "set ylabel 'y'\n" 
-        "plot 'file_mesh.txt'"      
+        "plot 'filename.txt' with linespoints"
         );
     fclose(gnu_mesh);
     system("gnuplot -p gnu_mesh.txt");
+    return 0;
+    
 }
-
 
 
 //4 struct Mesh -> Mesh File
@@ -163,11 +180,12 @@ int write_mesh2D(struct Mesh2D *m, const char* filename){
     }
     fprintf(into_mesh, "Triangles %d\n", m->nt);
     for (int i = 0; i < m->nt; i++){
+        //indices back to mesh syntax
+        (m->tri)[i].a += 1;
+        (m->tri)[i].b += 1;
+        (m->tri)[i].c += 1;
         fprintf(into_mesh, "%d\t%d\t%d\n", m->tri[i].a, m->tri[i].b, m->tri[i].c);
     }
     fclose(into_mesh);
+    return 0;
 }
-
-
-
-
