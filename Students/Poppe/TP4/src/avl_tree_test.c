@@ -196,5 +196,6 @@ int main() {
     test8();
     test9();
     test_final();
+    printf("success\n");
     return 0;
 }
