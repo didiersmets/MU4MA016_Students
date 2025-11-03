@@ -1,4 +1,5 @@
 #include <mesh_adjacency.h>
+#include <hashtable.h>
 
 int edge_pos_in_tri(int v1, int v2, struct Triangle t){
     if(t.v1 == v1 && t.v2 == v2){return 0;}
@@ -17,7 +18,7 @@ int tris_are_neighbors(int tri1, int tri2, const struct Mesh *m){
 }
 
 int *build_adjacency_table1(const struct Mesh *m){
-    adj = (int*)malloc(sizeof(int)*3*m->ntri);
+    int* adj = (int*)malloc(sizeof(int)*3*m->ntri);
     for(int i = 0; i < 3*m->ntri; i++){
         adj[i] = -1;
     }
@@ -29,11 +30,54 @@ int *build_adjacency_table1(const struct Mesh *m){
             }
         }
     }
-    return &adj;
+    return adj;
 }
 
 struct HashTable *build_edge_table1(const struct Mesh *m){
-    sizeof(struct Edge) //size of key in bytes
-    sizeof(int) //size of value in bytes
+    struct HashTable *edg = hash_table_init(3*m->ntri,sizeof(struct Edge),sizeof(int));
+    for(int k = 0; k < m->ntri; k++){
+        struct Edge e0 = {m->triangles[k].v1, m->triangles[k].v2};
+        struct Edge e1 = {m->triangles[k].v2, m->triangles[k].v3};
+        struct Edge e2 = {m->triangles[k].v3, m->triangles[k].v1};
+        hash_table_insert(edg,e0,k);
+        hash_table_insert(edg,e1,k);
+        hash_table_insert(edg,e2,k);
+        }
+    return edg;
+}
 
+int *build_adjacency_table2(const struct Mesh *m){
+    int* adj = (int*)malloc(sizeof(int)*3*m->ntri);
+    struct HashTable *edge_table = build_edge_table1(m);
+    for(int i = 0; i < 3*m->ntri; i++){
+        struct Edge rev_e0 = {m->triangles[k].v2, m->triangles[k].v1};
+        void* address = hash_table_find(edge_table,&rev_e0);
+        if(address){
+            int* tri_index = address;
+            adj[3*k+0] = tri_index;
+        }
+        else{
+            adj[3*k+0] = -1;
+        }
+        struct Edge rev_e1 = {m->triangles[k].v3, m->triangles[k].v2};
+        void* address = hash_table_find(edge_table,&rev_e1);
+        if(address){
+            int* tri_index = address;
+            adj[3*k+1] = tri_index;
+        }
+        else{
+            adj[3*k+1] = -1;
+        }
+        struct Edge rev_e2 = {m->triangles[k].v1, m->triangles[k].v3};
+        void* address = hash_table_find(edge_table,&rev_e2);
+        if(address){
+            int* tri_index = address;
+            adj[3*k+2] = tri_index;
+        }
+        else{
+            adj[3*k+2] = -1;
+        }
+    }
+    hash_table_fini(edge_table);
+    return adj;
 }
