@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include "../tp02/include/mesh2d.h"
 #include "../tp02/include/triangle.h"
+#include "../tp02/include/Edge.h"
 
+#include "include/hash_tables.h"
 
 int edge_pos_in_tri(int v1 , int v2 , const struct Triangle *t)
 {
@@ -58,4 +60,50 @@ int *build_adjacency_table1(const struct mesh2d *m)
     }
     return adj;
 }
+
+struct HashTable *build_edge_table1(const struct mesh2d *m)
+{
+    //key_len = sizeof(struct Edge) = 2*sizeof(size_t)
+    //val_len = sizeof(int)
+    struct HashTable *ht = hash_table_init(4*m->nt, 2*sizeof(size_t), sizeof(int));
+    if (!ht) {
+        return NULL;
+    }
+    // fill the hash table with mesh data
+    for (int i=0; i<m->nt; i++){
+        struct Triangle *t = &m->tri[i];
+        struct Edge e1 = init_edge(t->v1, t->v2);
+        struct Edge e2 = init_edge(t->v2, t->v3);
+        struct Edge e3 = init_edge(t->v3, t->v1);
+        hash_table_insert(ht, &e1, &i);
+        hash_table_insert(ht, &e2, &i);
+        hash_table_insert(ht, &e3, &i);
+    }
+    // ht contains keys = edges and values = indices of triangles containing the edges.
+    return ht;
+}
+
+int *build_adjacency_table2(const struct mesh2d *m)
+{
+    int adj[3*m->nt];
+    for (int i=0; i<m->nt; i++){
+        adj[3*i] = -1;
+        adj[3*i+1] = -1;
+        adj[3*i+2] = -1;
+    }
+
+    struct HashTable *ht = build_edge_table1(m);
+    if (!ht) {
+        return NULL;
+    }
+
+    for (int i=0; i<m->nt; i++)
+    {
+        struct Triangle *t = &m->tri[i];
+        struct Edge e1 = init_edge(t->v1, t->v2);
+        struct Edge e2 = init_edge(t->v2, t->v3);
+        struct Edge e3 = init_edge(t->v3, t->v1);
+    }
+}
+
 
