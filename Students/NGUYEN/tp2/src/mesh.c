@@ -4,8 +4,8 @@
 
 int initialize_mesh2D(struct Mesh2D* m, int vtx_capacity, int tri_capacity){
 
-    struct Vertex *vert_init = malloc(vtx_capacity * sizeof(struct Vertex));
-    struct Triangle *tri_init = malloc(tri_capacity * sizeof(struct Triangle));
+    struct Vertex *vert_init = (struct Vertex*) malloc(vtx_capacity * sizeof(struct Vertex));
+    struct Triangle *tri_init = (struct Triangle*) malloc(tri_capacity * sizeof(struct Triangle));
     
     m->nv = vtx_capacity;
     m->vert = vert_init;
@@ -62,32 +62,44 @@ int read_mesh2D(struct Mesh2D* m, const char* filename) {
     if (!fp) return EXIT_FAILURE;
 
     char line[256];
-    while (fgets(line, sizeof(line), fp)) {
-        
 
-        if (sscanf(line,"Vertices %d", &m->nv) != 0) { // we have to malloc because the init function is not adapted for that
+    // for debugging
+    //int c = 1;
+
+    while (fgets(line, sizeof(line), fp)) {
+        //printf("Entering while loop number %d\n", c);
+        //c++;
+        //printf("Line read : %s\n", line);
+
+        if (sscanf(line, " Vertices %d", &m->nv) != 0) { // we have to malloc because the init function is not adapted for that
+            //printf("Number of vertices ?\n");
+            //printf("nv = %d\n", m->nv);
             if (m->vert != NULL) {
                 free(m->vert);
             }
-            m->vert = malloc(sizeof(struct Vertex) * m->nv);
-        }
-        for (int i = 0; i < m->nv; i++) {
-            fgets(line, sizeof(line), fp);
-            sscanf(line, "%lf %lf", &m->vert[i].x, &m->vert[i].y);
+            m->vert = malloc(sizeof(struct Vertex) * m->nv); // allocating space for vertices
+        
+            for (int i = 0; i < m->nv; i++) { // read all vertices
+                fgets(line, sizeof(line), fp);
+                sscanf(line, "%lf %lf", &m->vert[i].x, &m->vert[i].y);
+            }
         }
         
-        if(sscanf(line, "Triangles %d", &m->nt) != 0){
+        if(sscanf(line, " Triangles %d", &m->nt) != 0){ // read number of triangles and allocating space for them
+            //printf("Number of vertices ?\n");
+            //printf("nt = %d\n", m->nt);
             if (m->tri != NULL) {
                 free(m->tri);
             }
             m->tri = malloc(sizeof(struct Vertex) * m->nt);
-        }; 
-        for (int i = 0; i < m->nt; i++) {
-            fgets(line, sizeof(line), fp);
-            sscanf(line, "%d %d %d",
-                &m->tri[i].Index[0],
-                &m->tri[i].Index[1],
-                &m->tri[i].Index[2]);
+         
+            for (int i = 0; i < m->nt; i++) { // read triangles
+                fgets(line, sizeof(line), fp);
+                sscanf(line, "%d %d %d",
+                    &m->tri[i].Index[0],
+                    &m->tri[i].Index[1],
+                    &m->tri[i].Index[2]);
+            }
         }
     }
     fclose(fp);
@@ -104,10 +116,10 @@ int mesh2D_to_gnuplot(struct Mesh2D* m, const char* filename) {
         int v2 = m->tri[i].Index[1] - 1;
         int v3 = m->tri[i].Index[2] - 1;
 
-        fprintf(fp, "%lf %lf %lf\n", m->vert[v1].x, m->vert[v1].y);
-        fprintf(fp, "%lf %lf %lf\n", m->vert[v2].x, m->vert[v2].y);
-        fprintf(fp, "%lf %lf %lf\n", m->vert[v3].x, m->vert[v3].y);
-        fprintf(fp, "%lf %lf %lf\n\n", m->vert[v1].x, m->vert[v1].y);
+        fprintf(fp, "%lf %lf\n", m->vert[v1].x, m->vert[v1].y);
+        fprintf(fp, "%lf %lf\n", m->vert[v2].x, m->vert[v2].y);
+        fprintf(fp, "%lf %lf\n", m->vert[v3].x, m->vert[v3].y);
+        fprintf(fp, "%lf %lf\n", m->vert[v1].x, m->vert[v1].y);
     }
     fclose(fp);
     return EXIT_SUCCESS;

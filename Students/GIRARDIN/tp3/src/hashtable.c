@@ -76,7 +76,7 @@ struct HashTable *build_edge_table1(const struct Mesh *m){
 
 //-------------------------------------------------------------------------
 int *build_adjacency_table2(const struct Mesh *m){
-;
+
     //Allocate space
     size_t len_adj = 3*(m->ntri);
     int *adj = malloc(len_adj*sizeof(int));
@@ -205,10 +205,6 @@ int *build_adjacency_table3(const struct Mesh *m){
 
     for(int i = 0; i < m->ntri; i++){
         struct Triangle t = (m->triangles)[i];
-
-        if(i%2500 == 0){
-            printf("### i = %d / %d\n", i, m->ntri);
-        }
 
         /*Checking if the opposing edges exist in some triangle; 
         if yes, add the index k to adj*/ 

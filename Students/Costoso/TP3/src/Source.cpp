@@ -16,7 +16,7 @@ int tris_are_neighbors(int tri1, int tri2, const struct Mesh* m) {
 	return -1;
 }
 
-int* build_adjacency_table1(const struct Mesh* m) {
+int *build_adjacency_table1(const struct Mesh* m) {
 	int* adj = (int*)malloc(sizeof(int) * 3 * m->ntri);
 	for (int i = 0; i < 3 * m->ntri; i++) {
 		adj[i] = -1;
@@ -48,7 +48,7 @@ struct HashTable* build_edge_table1(const struct Mesh* m) {
 	}
 }
 
-int* build_adjacency_table1(const struct Mesh* m) {
+int* build_adjacency_table2(const struct Mesh* m) {
 	int* adj = (int*)malloc(sizeof(int) * 3 * m->ntri);
 	struct HashTable* H = build_edge_table1(m);
 	for (int i = 0; i < 3 * m->ntri; i++) {

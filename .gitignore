@@ -15,4 +15,6 @@ Students/GIRARDIN/tp1/test_queue.o
 Students/GIRARDIN/tp1/circular_buffer_queue.o
 Students/GIRARDIN/tp3/build
 Students/GIRARDIN/tp3/tp3
+Students/GIRARDIN/tp4/build
+Students/GIRARDIN/tp4/tp4
 .gitignore
