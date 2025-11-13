@@ -64,7 +64,7 @@ void Merge(int *T, int p, int q, int r){
     int j = 0;
     int count = 0;
 
-  //int array4[10]={10,9,8,7,6,5,4,3,2,1};
+  //int array4[13]={231,234242,4,6,8,11,1,2,3,4,0,0,1};
 
     while(i<taille1 && j<taille2){
         if (T[p+i]<=T[q+j]){
@@ -155,7 +155,7 @@ int main(int argc, char* argv[]){
     }
     printf("%d]\n\n", array2[N-1]);
 
-    timer_start(&chrono);
+    /*timer_start(&chrono);
     MergeSort(array3,0,N-1);
     timer_stop(&chrono, "du merge sort");
 
@@ -163,16 +163,16 @@ int main(int argc, char* argv[]){
     for(int i=0; i<N-1; i++){
         printf("%d,",array3[i]);
     }
-    printf("%d]\n\n", array3[N-1]);
+    printf("%d]\n\n", array3[N-1]);*/
 
-    /*int array4[10]={10,9,8,7,6,5,4,3,2,1};
-    Merge(array4, 0,4,8);
+    int array4[13]={231,234242,4,6,8,11,1,2,3,4,0,0,1};
+    Merge(array4, 2,6,9);
 
     printf("Merge sort : [");
-    for(int i=0; i<10-1; i++){
+    for(int i=0; i<13-1; i++){
         printf("%d,",array4[i]);
     }
-    printf("%d]\n\n", array4[9]);*/
+    printf("%d]\n\n", array4[13]);
 
     free(array);
     free(array2);
