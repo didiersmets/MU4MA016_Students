@@ -11,6 +11,11 @@ struct Edge {
 	int v2;
 };
 
+struct EdgeTable {
+    int *head;
+    int *next;
+};
+
 int edge_pos_in_tri(int v1, int v2, struct Triangle t);
 
 int tris_are_neighbors(int tri1, int tri2, const struct Mesh *m);
@@ -22,11 +27,6 @@ struct HashTable *build_edge_table1(const struct Mesh *m);
 int *build_adjacency_table2(const struct Mesh *m);
 
 //struct HashTable *build_edge_table2(const struct Mesh *m);
-
-struct EdgeTable {
-	int *head;
-	int *next;
-};
 
 void edge_table_initialize(struct EdgeTable *et, int nvert, int ntri);
 

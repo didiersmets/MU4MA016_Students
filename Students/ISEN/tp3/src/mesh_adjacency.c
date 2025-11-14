@@ -79,15 +79,12 @@ struct HashTable *build_edge_table1(const struct Mesh *m){
 }
 
 int *build_adjacency_table2(const struct Mesh *m){
-    printf("table 2");
+    //printf("table 2\n");
     struct HashTable *ht = build_edge_table1(m);
 
     //adjacency table
     int * adj = (int*) malloc(3* m->ntri* sizeof(int));
-    //-1 everywhere
-    for (int i = 0; i < 3* m->ntri; i++){
-        adj[i] = -1;
-    }
+
     //loop over all tragnles and update adjacency
     for (int i = 0; i < m->ntri; i++){
         //create edges with opposite direction wrt triangle[i]
@@ -103,12 +100,18 @@ int *build_adjacency_table2(const struct Mesh *m){
         //if yes, then put index of triangle (value) in adj table 
         if(pos0){
             adj[3 * i + 0] = *pos0;
+        }else{
+            adj[3 * i + 0] = -1;
         }
         if(pos1){
             adj[3 * i + 1] = *pos1;
+        }else{
+            adj[3 * i + 1] = -1;
         }
         if(pos2){
             adj[3 * i + 2] = *pos2;
+        }else{
+            adj[3 * i + 2] = -1;
         }
     }
     hash_table_fini(ht); //dispose ht
@@ -117,10 +120,6 @@ int *build_adjacency_table2(const struct Mesh *m){
 
 
 //third and optimal strategy
-struct EdgeTable {
-    int *head;
-    int *next;
-};
 
 void edge_table_initialize(struct EdgeTable *et, int nvert, int ntri){
     et->head = malloc(nvert * sizeof(int));
@@ -189,13 +188,9 @@ struct EdgeTable *build_edge_table3(const struct Mesh *m){
 
 
 int *build_adjacency_table3(const struct Mesh *m){
-    printf("table 3");
+    //printf("table 3\n");
     //adjacency table
     int * adj = (int*) malloc(3* m->ntri* sizeof(int));
-    //-1 everywhere
-    for (int i = 0; i < 3* m->ntri; i++){
-        adj[i] = -1;
-    }
 
     struct EdgeTable *et = build_edge_table3(m);
     
@@ -206,12 +201,18 @@ int *build_adjacency_table3(const struct Mesh *m){
 
         if(e1_opp != -1){
             adj[3 * i + 0] = e1_opp;  //put index of adjacent triangle at right position of triangle
+        }else{
+            adj[3 * i] = -1;
         }
         if(e2_opp != -1){
             adj[3 * i + 1] = e2_opp;
+        }else{
+            adj[3 * i + 1] = -1;
         }
         if(e3_opp != -1){
             adj[3 * i + 2] = e3_opp;
+        }else{
+            adj[3 * i + 2] = -1;
         }
     }
     edge_table_dispose(et);
