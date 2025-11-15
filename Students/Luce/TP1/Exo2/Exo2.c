@@ -49,24 +49,65 @@ void Insertion_sort(int* a, int N){
     }
 }
 
+
+
+void Merge(int *T, int p, int q, int r){
+    printf("/////////////////////////////////\n");
+    int taille1 = q - p; //de p à q - 1
+    int taille2 = r - q + 1; //de q à r
+    printf("taille 1 : %d | taille 2 : %d \np=%d | q=%d | r=%d\n", taille1,taille2,p,q,r);
+
+
+    int *tableau = malloc(sizeof(int)*r);
+
+    int i = 0;
+    int j = 0;
+    int count = 0;
+
+  //int array4[10]={10,9,8,7,6,5,4,3,2,1};
+
+    while(i<taille1 && j<taille2){
+        if (T[p+i]<=T[q+j]){
+            tableau[count]=T[p+i];
+            printf("I = T[p(%d)+i(%d)]=%d | T[q(%d)+j(%d)]=%d | tableau = %d\n ",p,i,T[p+i],q,j,T[q+j], tableau[count]);
+            i++;
+        } else {
+            tableau[count]=T[q+j];
+            printf("J = T[p(%d)+i(%d)]=%d | T[q(%d)+j(%d)]=%d | tableau = %d\n",p,i,T[p+i],q,j,T[q+j],tableau[count]);
+            j++;
+        }
+        count++;
+    }
+
+    while (i<taille1){
+        tableau[count+1]=T[p+i];
+        i++;
+    }
+
+    while (j<taille2){
+        tableau[count+1]=T[q+j];
+        j++;
+    }
+
+    printf("count = %d\n",count);
+
+    for(int k=p; k<=r; k++){
+        T[k]=tableau[k-p];
+        //printf("%d = %d\n",T[k],tableau[k-p]);
+    }
+
+    free(tableau);
+
+}
+
 void MergeSort(int *T, int p, int r){
     if (p<r){
-        q = (int) (p+r)/2;
+        int q = (int) (p+r)/2;
         MergeSort(T,p,q);
         MergeSort(T,q+1,r);
         Merge(T,p,q,r);
     }
 }
-
-void Merge(int *T, int p, int q, int r){
-    int new_array* = malloc(sizeof(int)*(r+1)); //on a r+1 élément, sachant que ça va de T[0] à T[r]
-    int temp = T[p];
-    for(int i=0; i<r+1; i++){
-        (T[p]>T[q]) ? new_array[i]=T[q] : new_array[i]=T[p];
-    }
-}
-
-
 
 
 int main(int argc, char* argv[]){
@@ -81,7 +122,7 @@ int main(int argc, char* argv[]){
 
 
 
-    printf("\nTableau de base : ["); //affiche le contenu du tableau en création
+    printf("\nTableau de base : ["); //affiche le contenu du tableau en création (j'en crée plusieurs comme demandé dans l'exercice)
     for(int i=0; i<N-1; i++){
         array[i]=rand()%(N+1);
         array2[i]=array[i];
@@ -124,6 +165,14 @@ int main(int argc, char* argv[]){
     }
     printf("%d]\n\n", array3[N-1]);
 
+    /*int array4[10]={10,9,8,7,6,5,4,3,2,1};
+    Merge(array4, 0,4,8);
+
+    printf("Merge sort : [");
+    for(int i=0; i<10-1; i++){
+        printf("%d,",array4[i]);
+    }
+    printf("%d]\n\n", array4[9]);*/
 
     free(array);
     free(array2);

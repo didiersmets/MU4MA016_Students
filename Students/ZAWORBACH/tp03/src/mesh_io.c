@@ -1,7 +1,9 @@
 #include "mesh_io.h"
+
 #include <stdio.h>   // Used for fopen, fclose, fgets, sscanf and printf
 #include <stdlib.h>  // Used for malloc and free
 #include <string.h>  // Used for strcmp
+
 #include "mesh.h"
 
 #define LINE 128

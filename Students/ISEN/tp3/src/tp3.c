@@ -18,11 +18,11 @@ int main(int argc, char* argv[]){
     //printf("enter filename");  get why this didn't work 
     //scanf(filename);
 
-    printf(filename);
-    printf("\n");
+    printf("%s\n", filename);
 
     struct Mesh m;
     int test = read_mesh_from_wavefront_file(&m, filename);
+
 
     //test the timings
     struct timeval chrono;
@@ -39,10 +39,12 @@ int main(int argc, char* argv[]){
     int *adj3 = build_adjacency_table3(&m);
     unsigned int third = timer_stop(&chrono, "3");
 
+    printf("Test");
+
 
     //check if same adjacency table for each algo
-    /* 
-    for (int i = 0; i < 3 * m->ntri; i ++){
+    /*
+    for (int i = 0; i < 3 * m.ntri; i ++){
         if(adj1[i] != adj2[i] || adj1[i] != adj3[i]){
             printf("Problem, algo not correct");
             return 0;
