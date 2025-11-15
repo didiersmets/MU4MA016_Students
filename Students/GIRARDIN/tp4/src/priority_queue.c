@@ -6,8 +6,16 @@
 int priority_queue_init(struct priority_queue *q, int capacity, int max_id){
     q->size = 0;
     q->capacity = capacity;
+
     q->heap = (struct priority_data *)malloc(capacity*sizeof(struct priority_data));
+    if(!q->heap){
+        perror("Failed malloc for q->heap\n");
+    }
+
     q->pos_in_heap = (int *)malloc((max_id + 1)* sizeof(int));
+    if(!q->pos_in_heap){
+        perror("Failed malloc for q->pos_in_heap\n");
+    }
 
     //initialising all entries of pos_in_heap to -1
     for(int i = 0; i < max_id; i++){
@@ -15,6 +23,12 @@ int priority_queue_init(struct priority_queue *q, int capacity, int max_id){
     }
     
     return 0;
+}
+
+//--------------------------------------------------------------------
+void priority_queue_destroy(struct priority_queue *q){
+    free(q->heap);
+    free(q->pos_in_heap);
 }
 
 //--------------------------------------------------------------------
@@ -28,8 +42,8 @@ void priority_queue_push(struct priority_queue *q, int id, float val){
     if(q->size < q->capacity){
         (q->heap)[q->size] = elt;
         (q->pos_in_heap)[id] = q->size;
-        q->size++;
         sift_up(q, q->size);
+        q->size++;
     }else{
         printf("The heap is full !\n");
     }
@@ -129,6 +143,35 @@ static void sift_down(struct priority_queue *q, int pos){
 
 //--------------------------------------------------------------------
 void priority_queue_update(struct priority_queue *q, int key, float new_val){
+    if(q->size == 0){
+        perror("Empty queue; no element to update\n");
+    }
     int pos = (q->pos_in_heap)[key];
-    (q->heap)[pos].val = new_val;
+    ((q->heap)[pos]).val = new_val;
+}
+
+//--------------------------------------------------------------------
+void priority_queue_print(struct priority_queue *q){
+    int nb_line = 1;
+    int line_count = 0;
+    for(int i = 0; i < q->size; i++){
+        for(int j = 0; j < 5 -nb_line; j ++){
+            printf("\t");
+        }
+        if((line_count*2 == nb_line) || (nb_line == 1)){
+            for(int j = 0; j < 5 - nb_line; j ++){
+                printf("\t");
+            }
+        }
+        struct priority_data elt = (q->heap)[i];
+        line_count++;
+        printf("[id: %d, val: %.2f]\t", elt.id, elt.val);
+        if(line_count==nb_line){
+            printf("\n\n");
+            
+            line_count = 0;
+            nb_line *= 2;
+        }
+    }
+    printf("\n");
 }
