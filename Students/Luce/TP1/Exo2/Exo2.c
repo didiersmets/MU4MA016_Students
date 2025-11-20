@@ -21,6 +21,21 @@ unsigned int timer_stop(const struct timeval *tv, const char *str){
     return (mus);
 }
 
+
+float timer_stop2(const struct timeval *tv){
+    struct timeval now;
+    gettimeofday(&now,NULL);
+    unsigned int mus = 1000000 * (now.tv_sec - tv->tv_sec);
+    mus += (now.tv_usec - tv->tv_usec);
+    float temps;
+    if (mus >= 100000){
+        temps = (float)mus/ 1000000; 
+    } else {
+        temps = (float)mus/ 1000; 
+    }
+    return temps;
+}
+
 void Bubble_sort(int* a, int N){
     if (N<2) return;
     int temp;
@@ -53,40 +68,27 @@ void Insertion_sort(int* a, int N){
 
 void Merge(int *T, int p, int q, int r){
 
-    printf("/////////////////////////////\n");
 
 
-    // Probleme quand p == 0 ! ne rentre pas dans la boucle qui organise
+    int taille1 = q - p+1; //nb d'elements entre  T[p] et T[q] car merge(T,p,q)
+    int taille2 = r - q; //nb d'elements entre  T[q+1] et T[r] car merge(T,q+1,r)
 
-    int taille1 = q - p; //nb d'elements entre  T[p] et T[q - 1] inclus
-    int taille2 = r - q +1; //nb d'elements entre  T[q] et T[r] inclus taille1+taille2=r-p+1
-
-    printf("taille 1 : %d | taille 2 : %d \np=%d | q=%d | r=%d\n", taille1,taille2,p,q,r);
 
 
     int *tableau = malloc(sizeof(int)*(taille1+taille2));
 
-    int i;
+    int i=0;
     int j = 0;
     int count = 0;
 
-  //int array4[13]={231,234242,4,6,8,11,1,2,3,4,0,0,1};
-
     while(i<taille1 && j<taille2){
-        if (T[p+i]<=T[q+j]){
-            tableau[count]=T[p+i];
+        if (T[p+i]<=T[q+1+j]){
+            tableau[count++]=T[p+i];
             i++;
         } else {
-            tableau[count]=T[q+j];
+            tableau[count++]=T[q+1+j];
             j++;
         }
-        count++;
-    }
-
-    if (p==0 && q==0 && r==1){
-        T[0]<=T[1] ? (tableau[count++]=T[0], tableau[count]=T[1]) : (tableau[count++]=T[1],tableau[count]=T[0]);
-        i=taille1; //pour pas que ça rentre dans les boucles suivantes
-        j=taille2;
     }
 
     while (i<taille1){
@@ -95,17 +97,8 @@ void Merge(int *T, int p, int q, int r){
     }
 
     while (j<taille2){
-        tableau[count++]=T[q+j];
+        tableau[count++]=T[q+j+1];
         j++;
-    }
-
-    printf("[");
-    for(int i=0; i<(taille1+taille2);i++){
-        if (i!=(taille1+taille2-1)){
-            printf("%d,",tableau[i]);
-        } else {
-            printf("%d]\n",tableau[i]);
-        }
     }
 
     for(int k=p; k<(p+(taille1+taille2)); k++){
@@ -128,19 +121,18 @@ void MergeSort(int *T, int p, int r){
 
 int main(int argc, char* argv[]){
     struct timeval chrono;
-
     srand(time(NULL));
+
     int N;
-    argc<2 ? printf("Veuillez entrer un entier\n"), scanf("%d",&N) : (N=atoi(argv[1]));
+    argc<2 ? printf("Afin de tester la validité de nos fonctions, veuillez entrer un entier\n"), scanf("%d",&N) : (N=atoi(argv[1]));
+
     int *array = (int *)malloc(sizeof(int)*N);
     int *array2 = (int *)malloc(sizeof(int)*N);
     int *array3 = (int *)malloc(sizeof(int)*N);
 
-
-
     printf("\nTableau de base : ["); //affiche le contenu du tableau en création (j'en crée plusieurs comme demandé dans l'exercice)
     for(int i=0; i<N-1; i++){
-        array[i]=rand()%(N+1)+5; // (+5) à suppr
+        array[i]=rand()%(N+1); //nombre aléatoire entre 0 et la taille du tableau car pourquoi pas
         array2[i]=array[i];
         array3[i]=array[i];
         printf("%d,", array[i]);
@@ -153,6 +145,7 @@ int main(int argc, char* argv[]){
     timer_start(&chrono);
     Bubble_sort(array,N);
     timer_stop(&chrono, "du bubble sort");
+
 
     printf("Bubble sort : [");
     for(int i=0; i<N-1; i++){
@@ -179,21 +172,84 @@ int main(int argc, char* argv[]){
     for(int i=0; i<N-1; i++){
         printf("%d,",array3[i]);
     }
-    printf("%d]\n\n", array3[N-1]);
+    printf("%d]\n\n\n", array3[N-1]);
 
-    /*int array4[13]={231,234242,4,6,8,11,1,2,3,4,0,0,1};
-    Merge(array4, 2,6,9);
+    int LesTableauxSontégaux = 1;
 
-    printf("Merge sort : [");
-    for(int i=0; i<12; i++){
-        printf("%d,",array4[i]);
+    for(int i=0; i<N; i++){
+        if ((array[i]!=array2[i]) || (array[i]!=array3[i])){
+            LesTableauxSontégaux = 0;
+            break;
+        }
     }
-    printf("%d]\n\n", array4[12]);*/
+
+    LesTableauxSontégaux==1 ? printf("Les tableaux sont égaux\n") : printf("Les tableaux sont pas égaux\n");
 
     free(array);
     free(array2);
     free(array3);
+
+
+    //partie GNUPLOT
+
+    FILE *f = fopen("valeurs","w");
+
+    if (f==NULL){
+        printf("fichier txt non ouvert");
+        exit(1);
+    } 
+
+    int taille_tableau[7]={10,20,50,100,200,500,1000};
+    int *array_pour_bubble_sort;
+    int *array_pour_insertion_sort;
+    int *array_pour_merge_sort;
+    float temps[3];
+
+    for(int i=0; i<7;i++){
+
+
+        for(int j; j<taille_tableau[i];j++){ //création des tableaux à ranger de taille taille_tableau[i]
+
+            array_pour_bubble_sort = (int*) malloc(sizeof(int)*taille_tableau[i]); //cast facultatif mais ça me rappelle que le type de retour du malloc est void*
+            array_pour_insertion_sort = (int*) malloc(sizeof(int)*taille_tableau[i]);
+            array_pour_merge_sort = (int*) malloc(sizeof(int)*taille_tableau[i]);
+            
+
+            array_pour_bubble_sort[j] = rand()%(taille_tableau[i]+1);  //des valeurs entre 0 et taille_tableau[i] inclus
+            array_pour_insertion_sort[j]=array[j];
+            array_pour_merge_sort[j]=array[j];
+        }
+
+        //Je mesure le temps que prend la fonction à organiser ce tableau
+
+        timer_start(&chrono);
+        Bubble_sort(array_pour_bubble_sort,taille_tableau[i]);
+        temps[0]=timer_stop2(&chrono);
+
+        timer_start(&chrono);
+        Insertion_sort(array_pour_insertion_sort,taille_tableau[i]);
+        temps[1]=timer_stop2(&chrono);
+
+        timer_start(&chrono);
+        MergeSort(array_pour_insertion_sort,taille_tableau[i]);
+        temps[2]=timer_stop2(&chrono);
+
+        //j'écris dans le fichier les valeurs trouvés, créant les axes des graphs à dessiner
+
+        fprintf(f,"%d %f %f %f\n", taille_tableau[i], temps[0], temps[1], temps[2]);
+    }
+
+
+    system(
+        "gnuplot -persistant -e \""
+        "set xlabel x;"
+        "set ylabel y;"
+        "plot 'valeurs' using 1:2 with linespoints" 
+        "'valeurs' using 1:3 with linespoints"
+        "'valeurs' using 1:4 with linespoints"\""
+        );
     
-    
+
+
     return 0;
 }
