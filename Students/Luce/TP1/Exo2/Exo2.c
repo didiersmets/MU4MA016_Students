@@ -9,7 +9,7 @@ unsigned int timer_stop(const struct timeval *tv, const char *str){
     struct timeval now;
     gettimeofday(&now,NULL);
     unsigned int mus = 1000000 * (now.tv_sec - tv->tv_sec);
-    mus += (now.tv_usec - tv->tv_usec);
+    mus += (now.tv_usec - tv->tv_usec); //ajoutes les microsecondes 
     if (str[0]){
         printf("Temps %s : ", str);
         if (mus >= 100000){
@@ -25,15 +25,9 @@ unsigned int timer_stop(const struct timeval *tv, const char *str){
 float timer_stop2(const struct timeval *tv){
     struct timeval now;
     gettimeofday(&now,NULL);
-    unsigned int mus = 1000000 * (now.tv_sec - tv->tv_sec);
+    float mus = (now.tv_sec - tv->tv_sec)*1000000;
     mus += (now.tv_usec - tv->tv_usec);
-    float temps;
-    if (mus >= 100000){
-        temps = (float)mus/ 1000000; 
-    } else {
-        temps = (float)mus/ 1000; 
-    }
-    return temps;
+    return mus/1000; //en milliseconde
 }
 
 void Bubble_sort(int* a, int N){
@@ -124,7 +118,7 @@ int main(int argc, char* argv[]){
     srand(time(NULL));
 
     int N;
-    argc<2 ? printf("Afin de tester la validité de nos fonctions, veuillez entrer un entier\n"), scanf("%d",&N) : (N=atoi(argv[1]));
+    argc<2 ? printf("Afin de tester la validite de nos fonctions, veuillez entrer un entier\n"), scanf("%d",&N) : (N=atoi(argv[1]));
 
     int *array = (int *)malloc(sizeof(int)*N);
     int *array2 = (int *)malloc(sizeof(int)*N);
@@ -137,7 +131,7 @@ int main(int argc, char* argv[]){
         array3[i]=array[i];
         printf("%d,", array[i]);
     }
-    array[N-1]=rand()%11;
+    array[N-1]=rand()%(N+1);
     array2[N-1]=array[N-1];
     array3[N-1]=array[N-1];
     printf("%d]\n\n",array[N-1]);
@@ -183,7 +177,7 @@ int main(int argc, char* argv[]){
         }
     }
 
-    LesTableauxSontégaux==1 ? printf("Les tableaux sont égaux\n") : printf("Les tableaux sont pas égaux\n");
+    LesTableauxSontégaux==1 ? printf("Les tableaux sont egaux\n") : printf("Les tableaux sont pas égaux\n");
 
     free(array);
     free(array2);
@@ -204,20 +198,21 @@ int main(int argc, char* argv[]){
     int *array_pour_insertion_sort;
     int *array_pour_merge_sort;
     float temps[3];
+    int val;
 
     for(int i=0; i<7;i++){
 
+        array_pour_bubble_sort = (int*) malloc(sizeof(int)*taille_tableau[i]); //cast facultatif mais ça me rappelle que le type de retour du malloc est void*
+        array_pour_insertion_sort = (int*) malloc(sizeof(int)*taille_tableau[i]);
+        array_pour_merge_sort = (int*) malloc(sizeof(int)*taille_tableau[i]);
 
-        for(int j; j<taille_tableau[i];j++){ //création des tableaux à ranger de taille taille_tableau[i]
 
-            array_pour_bubble_sort = (int*) malloc(sizeof(int)*taille_tableau[i]); //cast facultatif mais ça me rappelle que le type de retour du malloc est void*
-            array_pour_insertion_sort = (int*) malloc(sizeof(int)*taille_tableau[i]);
-            array_pour_merge_sort = (int*) malloc(sizeof(int)*taille_tableau[i]);
-            
+        for(int j=0; j<taille_tableau[i];j++){ //création des tableaux à ranger de taille taille_tableau[i]
 
-            array_pour_bubble_sort[j] = rand()%(taille_tableau[i]+1);  //des valeurs entre 0 et taille_tableau[i] inclus
-            array_pour_insertion_sort[j]=array[j];
-            array_pour_merge_sort[j]=array[j];
+            val = rand()%(taille_tableau[i]+1);  //des valeurs entre 0 et taille_tableau[i] inclus
+            array_pour_bubble_sort[j] = val;
+            array_pour_insertion_sort[j]= val;
+            array_pour_merge_sort[j]= val;
         }
 
         //Je mesure le temps que prend la fonction à organiser ce tableau
@@ -231,22 +226,30 @@ int main(int argc, char* argv[]){
         temps[1]=timer_stop2(&chrono);
 
         timer_start(&chrono);
-        MergeSort(array_pour_insertion_sort,taille_tableau[i]);
+        MergeSort(array_pour_merge_sort,0,taille_tableau[i]-1);
         temps[2]=timer_stop2(&chrono);
 
         //j'écris dans le fichier les valeurs trouvés, créant les axes des graphs à dessiner
-
         fprintf(f,"%d %f %f %f\n", taille_tableau[i], temps[0], temps[1], temps[2]);
+
+
+        free(array_pour_bubble_sort);
+        free(array_pour_insertion_sort);
+        free(array_pour_merge_sort);
     }
 
+    fclose(f);
 
     system(
-        "gnuplot -persistant -e \""
-        "set xlabel x;"
-        "set ylabel y;"
-        "plot 'valeurs' using 1:2 with linespoints" 
-        "'valeurs' using 1:3 with linespoints"
-        "'valeurs' using 1:4 with linespoints"\""
+        "gnuplot -persist -e \""
+        "set logscale x;" 
+        "set logscale y;"
+        "set ylabel 'Temps (ms)';"
+        "set xlabel 'Taille du tableau a organiser';"
+        "set title 'Comparaison des trois algos';"
+        "plot 'valeurs' using 1:2 with linespoints title 'Bubble sort'," 
+        "'valeurs' using 1:3 with linespoints title 'Insertion sort', "
+        "'valeurs' using 1:4 with linespoints title 'Merge sort'""\""
         );
     
 
