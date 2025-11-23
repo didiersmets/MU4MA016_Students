@@ -86,22 +86,22 @@ int *build_adjacency_table2(const struct Mesh *m){
 }
 
 void edge_table_initialize(struct EdgeTable *et, int nvert, int ntri){
-    printf("EdgTable Initialize called\n");
+    //printf("EdgTable Initialize called\n");
     int* temp = (int*)malloc(nvert*sizeof(int));
-    printf("Temp Memory allocated\n");
+    //printf("Temp Memory allocated\n");
     et->head = temp;
-    printf("Head assigned to temp\n");
+    //printf("Head assigned to temp\n");
     int* temp2 = (int*)malloc(3*ntri*sizeof(int));
     et->next = temp2;
-    printf("EdgeTable Memory allocated\n");
+    //printf("EdgeTable Memory allocated\n");
     for(int i = 0; i < nvert; i++){
         et->head[i] = -1;
     }
-    printf("EdgeTable head initialized\n");
+    //printf("EdgeTable head initialized\n");
     for(int i = 0; i < 3*ntri; i++){
         et->next[i] = -1;
     }
-    printf("EdgeTable next initialized\n");
+    //printf("EdgeTable next initialized\n");
 }
 
 void edge_table_dispose(struct EdgeTable *et){
@@ -122,6 +122,9 @@ void edge_table_insert(int v1, int edge_code, struct EdgeTable *et){
 
 int edge_table_find(int v1, int v2, const struct EdgeTable *et, const struct Mesh *m){
     int current_edge = et->head[v1];
+    if(current_edge == -1){
+        return -1;
+    }
     int current_tri = current_edge/3;
     if(edge_pos_in_tri(v1, v2,m->triangles[current_tri]) != -1){
             return current_tri;
@@ -138,24 +141,24 @@ int edge_table_find(int v1, int v2, const struct EdgeTable *et, const struct Mes
 }
 
 struct EdgeTable *build_edge_table3(const struct Mesh *m){
-    struct EdgeTable* etable;
-    printf("EdgeTable created\n");
+    struct EdgeTable* etable = (struct EdgeTable*)malloc(sizeof(struct EdgeTable));
+    //printf("EdgeTable created\n");
     edge_table_initialize(etable,m->nvert,m->ntri);
-    printf("EdgeTable initialized\n");
+    //printf("EdgeTable initialized\n");
     for(int k = 0; k < m->ntri; k++){
         edge_table_insert(m->triangles[k].v1,3*k+0,etable);
         edge_table_insert(m->triangles[k].v2,3*k+1,etable);
         edge_table_insert(m->triangles[k].v3,3*k+2,etable);
-        }
+    }
     return etable;
 }
 
 int *build_adjacency_table3(const struct Mesh *m){
-    printf("Build AdjTable3 called\n");
+    //printf("Build AdjTable3 called\n");
     int* adj = (int*)malloc(sizeof(int)*3*m->ntri);
-    printf("Memory for AdjTable3 allocated\n");
+    //printf("Memory for AdjTable3 allocated\n");
     struct EdgeTable* etable = build_edge_table3(m);
-    /*printf("EdgeTable succesfully built\n");
+    //printf("EdgeTable succesfully built\n");
     for(int k = 0; k < m->ntri; k++){
         int tri_index = edge_table_find(m->triangles[k].v2,m->triangles[k].v1,etable,m);
         adj[3*k+0] = tri_index;
@@ -164,6 +167,7 @@ int *build_adjacency_table3(const struct Mesh *m){
         tri_index = edge_table_find(m->triangles[k].v1,m->triangles[k].v3,etable,m);
         adj[3*k+2] = tri_index;
     }
-    edge_table_dispose(etable);*/
+    edge_table_dispose(etable);
+    free(etable);
     return adj;
 }
