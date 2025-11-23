@@ -27,10 +27,35 @@ static void swap(struct priority_queue *q, int pos1, int pos2){
 }
 
 static void sift_up(struct priority_queue *q, int pos){
-    
-
+    int current_position = pos;
+    int parent = pos/2;
+    while(pos > 0 && q->heap[parent]->val < q->heap[current_position]->val){  
+        swap(q,current_position,parent);
+        current_position = parent;
+        parent = current_position/2;
+    }
 }
-static void sift_down(struct priority_queue *q, int pos);
+
+static void sift_down(struct priority_queue *q, int pos){
+    int current_position = pos;
+    int child1 = 2*pos + 1;
+    int child2 = 2*pos + 2;
+    while(child1 < q->size){
+        int max_child = child1;
+        if(child2 < q->size && q->heap[child2]->val > q->heap[child1]->val){
+            max_child = child2;
+        }
+        if(q->heap[current_position]->val < q->heap[max_child]->val){
+            swap(q,current_position,max_child);
+            current_position = max_child;
+            child1 = 2*current_position + 1;
+            child2 = 2*current_position + 2;
+        }
+        else{
+            break;
+        }
+    }
+}
 
 void priority_queue_push(struct priority_queue *q, int id, float val){
     if(q->size +1 > q->capacity){
