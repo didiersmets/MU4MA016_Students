@@ -2,10 +2,14 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int priority_queue_init(struct priority_queue *q){
+int priority_queue_init(struct priority_queue *q, int max_id){
     q->capacity = 0;
     q->size = 0;
     q->heap = NULL;
+    q->pos_in_heap = malloc((max_id+1) * sizeof(int));
+    for(int i = 0; i <= max_id; i++){
+        q->pos_in_heap[i] = -1;
+    }
     return 0;
 }
 
@@ -81,5 +85,8 @@ struct priority_data priority_queue_pop(struct priority_queue *q){
     }
 }
 
+ void priority_queue_update(struct priority_queue *q, int key, float new_val){
+    
+ }
 
 
