@@ -157,40 +157,271 @@ void K3_tree::push_back(struct K3_node new_node, K3_tree* tree) {
 //-----------------------------//
 //      Search neighbours      //
 //-----------------------------//
+
+//Distance
 float distance(struct K3_node n1, struct K3_node n2){
     return sqrt((n1.x - n1.x) * (n1.x - n1.x) - (n1.y - n1.y) * (n1.y - n1.y) - (n1.z - n1.z) * (n1.z - n1.z));
 }
 float distance2(float x1,float x2, float y1, float y2, float z1, float z2) return sqrt((x1 - x2) * (x1 - x2) - (y1 - y2) * (y1 - y2) - (z1 - z2) * (z1 - z2));
-struct K3_node* K3_tree::Search_p_neighbours(struct K3_node ref_node, int p){
+float distance3(float x,float y) return sqrt((x-y)*(x-y));
+
+//Cherche le voisin le plus proche
+struct K3_node K3_tree::Search_neighbours(struct K3_node ref_node){
     int best_distance = distance(node,ref_node);
-    struct K3_tree curent_node;
-    struct K3_tree previous_node;
-    struct K3_node* best_neighbours = malloc(sizeof(struct K3_node) * p);
-    for(int i = 0; i < p; i++){
-        best_neighbours[i] = node;
-    }
-    if(distance(Left_Child->node, ref_node) > distance(Right_Child->node, ref_node)){ curent_node = Right_Child; }
-    else{ curent_node = Left_Child; }
+    struct K3_tree* curent_node;
+    struct K3_tree* best_node;
+    struct K3_tree* previous_node;
+    
+
     while(curent_node->Left_Child && curent_node->Right_Child){
         if(distance(curent_node->Left_Child->node, ref_node) > distance(curent_node->Right_Child->node, ref_node)){ curent_node = Right_Child; }
         else{ curent_node = Left_Child; }
     }
     best_distance = distance(curent_node->node, ref_node);
-    best_neighbours[0] = curent_node;
+    best_node = curent_node;
     
 
     while(curent_node->Pred){
-        previous_node = curent_node;
-        curent_node = curent_node->Pred;
-        if(previous_node->node == curent_node->Right_Child->node && distance2()){
-
-        }
         //Idee:
         //Regarder si le point projeter sur l'hyperplan est inf à la distance max
         //Si oui regarder la feuille la plus proche du point et noter la distance et remonter depuis cette feuille
         //Si non passe au Pred suivant
         //etc jusqu'a plus de Pred
 
-        //Chercher sol pour p points        
+        //Cherche l'autre branche
+        previous_node = curent_node;
+        curent_node = curent_node->Pred;
+        if(previous_node->node == curent_node->Right_Child->node){ previous_node = curent_node; curent_node = curent_node->Left_Child; }
+        else{ previous_node = curent_node; curent_node = curent_node->Right_Child; }
+        
+
+        //Verifie si vaut la peine de verifier toute la branche
+        if(curent_node->Hyperplan == 0){
+            if(distance2(curent_node->node.x, ref_node.x, curent_node->node.y, ref_node.y, ref_node.z, ref_node.z) < best_distance){
+                while(curent_node->Left_Child && curent_node->Right_Child){
+                   if(distance(curent_node->Left_Child->node, ref_node) > distance(curent_node->Right_Child->node, ref_node)){ curent_node = Right_Child; }
+                    else{ curent_node = Left_Child; }
+                }
+                if(distance(curent_node->node, ref_node) < best_distance) {best_distance = distance(curent_node->node, ref_node); best_node = curent_node;}
+            }
+        }
+        else if(curent_node->Hyperplan == 1){
+            if(distance2(curent_node->node.x, ref_node.x, curent_node->node.y, ref_node.y, ref_node.z, ref_node.z) < best_distance){
+                while(curent_node->Left_Child && curent_node->Right_Child){
+                    if(distance(curent_node->Left_Child->node, ref_node) > distance(curent_node->Right_Child->node, ref_node)){ curent_node = Right_Child; }
+                    else{ curent_node = Left_Child; }
+                }
+                if(distance(curent_node->node, ref_node) < best_distance) {best_distance = distance(curent_node->node, ref_node); best_node = curent_node;}
+            }
+        }
+        else if(curent_node->Hyperplan == 2){
+            if(distance2(curent_node->node.x, ref_node.x, curent_node->node.y, ref_node.y, ref_node.z, ref_node.z) < best_distance){
+                while(curent_node->Left_Child && curent_node->Right_Child){
+                    if(distance(curent_node->Left_Child->node, ref_node) > distance(curent_node->Right_Child->node, ref_node)){ curent_node = Right_Child; }
+                    else{ curent_node = Left_Child; }
+                }
+                if(distance(curent_node->node, ref_node) < best_distance) {best_distance = distance(curent_node->node, ref_node); best_node = curent_node;}
+            }
+        }
+        //Retour au debut de la branche
+        curent_node = previous_node;
     }
+    return best_node->node;
 }
+
+
+bool Check(struct K3_node* List, struct K3_node Node, int p){
+    for(int i=0;i<p;i++){
+        if(List[i]==Node) return true;
+    }
+    return false;
+}
+struct K3_node* K3_tree::Search_p_neighbours(struct K3_node ref_node, int p){
+    //Idee:
+        //Refaire search avec liste de meilleur voisins
+        //Ci curent_node en fait parti on pass au suivant
+        //etc jusqu'a p el
+    struct K3_node* best_neighbours = (struct K3_node)malloc(sizeof(struct K3_node) * p);
+    
+    for(int i=0;i<p;i++){
+        int best_distance = distance(node,ref_node);
+        struct K3_tree* curent_node;
+        struct K3_tree* best_node;
+        struct K3_tree* previous_node;
+    
+
+        while(curent_node->Left_Child && curent_node->Right_Child){
+            if(distance(curent_node->Left_Child->node, ref_node) > distance(curent_node->Right_Child->node, ref_node)){ curent_node = Right_Child; }
+            else{ curent_node = Left_Child; }
+        }
+        best_distance = distance(curent_node->node, ref_node);
+        best_node = curent_node;
+    
+
+        while(curent_node->Pred){
+        
+
+            //Cherche l'autre branche
+            previous_node = curent_node;
+            curent_node = curent_node->Pred;
+            if(previous_node->node == curent_node->Right_Child->node){ previous_node = curent_node; curent_node = curent_node->Left_Child; }
+            else{ previous_node = curent_node; curent_node = curent_node->Right_Child; }
+        
+
+            //Verifie si vaut la peine de verifier toute la branche
+            if(curent_node->Hyperplan == 0){
+                if(distance2(curent_node->node.x, ref_node.x, curent_node->node.y, ref_node.y, ref_node.z, ref_node.z) < best_distance){
+                    while(curent_node->Left_Child && curent_node->Right_Child){
+                       if(distance(curent_node->Left_Child->node, ref_node) > distance(curent_node->Right_Child->node, ref_node)){ curent_node = Right_Child; }
+                       else{ curent_node = Left_Child; }
+                   }
+                    if(distance(curent_node->node, ref_node) < best_distance) {best_distance = distance(curent_node->node, ref_node); best_node = curent_node;}
+                }
+            }
+            else if(curent_node->Hyperplan == 1){
+                if(distance2(curent_node->node.x, ref_node.x, curent_node->node.y, ref_node.y, ref_node.z, ref_node.z) < best_distance){
+                    while(curent_node->Left_Child && curent_node->Right_Child){
+                        if(distance(curent_node->Left_Child->node, ref_node) > distance(curent_node->Right_Child->node, ref_node)){ curent_node = Right_Child; }
+                        else{ curent_node = Left_Child; }
+                    }
+                    if(distance(curent_node->node, ref_node) < best_distance) {best_distance = distance(curent_node->node, ref_node); best_node = curent_node;}
+                }
+            }
+            else if(curent_node->Hyperplan == 2){
+                if(distance2(curent_node->node.x, ref_node.x, curent_node->node.y, ref_node.y, ref_node.z, ref_node.z) < best_distance){
+                    while(curent_node->Left_Child && curent_node->Right_Child){
+                        if(distance(curent_node->Left_Child->node, ref_node) > distance(curent_node->Right_Child->node, ref_node)){ curent_node = Right_Child; }
+                        else{ curent_node = Left_Child; }
+                    }
+                    if(distance(curent_node->node, ref_node) < best_distance) {best_distance = distance(curent_node->node, ref_node); best_node = curent_node;}
+                }
+            }
+            //Retour au debut de la branche
+            curent_node = previous_node;
+            }
+        r   eturn best_node->node;
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void K3_tree::Remove_point(struct K3_node ref_node){
+    struct K3_tree* curent_node;
+    while(curent_node->node != ref_node || (curent_node->Left_Child && curent_node->Right_Child)){
+        if(curent_node->Hyperplan == 0){
+            if(curent_node->node.z > ref_node.z){ curent_node = curent_node->Left_Child; }
+            else { curent_node = curent_node->Right_Child; }
+        }
+        if(curent_node->Hyperplan == 1){
+            if(curent_node->node.x > ref_node.x){ curent_node = curent_node->Left_Child; }
+            else { curent_node = curent_node->Right_Child; }
+        }
+        if(curent_node->Hyperplan == 2){
+            if(curent_node->node.y > ref_node.y){ curent_node = curent_node->Left_Child; }
+            else { curent_node = curent_node->Right_Child; }
+        }
+    }
+    if(curent_node->node != ref_node) return;
+    
+
+
+    if(curent_node->Hyperplan == 0){
+        int best_distance = distance3(curent_node->node.z,ref_node.z);
+    }
+    if(curent_node->Hyperplan == 1){
+        int best_distance = distance3(curent_node->node.z,ref_node.z);
+    }
+    if(curent_node->Hyperplan == 2){
+        int best_distance = distance3(curent_node->node.z,ref_node.z);
+
+    }
+    int best_distance = distance3(node,ref_node);
+    struct K3_tree* curent_node;
+    struct K3_tree* best_node;
+    struct K3_tree* previous_node;
+    
+
+    while(curent_node->Left_Child && curent_node->Right_Child){
+        if(distance(curent_node->Left_Child->node, ref_node) > distance(curent_node->Right_Child->node, ref_node)){ curent_node = Right_Child; }
+        else{ curent_node = Left_Child; }
+    }
+    best_distance = distance(curent_node->node, ref_node);
+    best_node = curent_node;
+    
+
+    while(curent_node->Pred){
+        //Idee:
+        //Regarder si le point projeter sur l'hyperplan est inf à la distance max
+        //Si oui regarder la feuille la plus proche du point et noter la distance et remonter depuis cette feuille
+        //Si non passe au Pred suivant
+        //etc jusqu'a plus de Pred
+
+        //Cherche l'autre branche
+        previous_node = curent_node;
+        curent_node = curent_node->Pred;
+        if(previous_node->node == curent_node->Right_Child->node){ previous_node = curent_node; curent_node = curent_node->Left_Child; }
+        else{ previous_node = curent_node; curent_node = curent_node->Right_Child; }
+        
+
+        //Verifie si vaut la peine de verifier toute la branche
+        if(curent_node->Hyperplan == 0){
+            if(distance2(curent_node->node.x, ref_node.x, curent_node->node.y, ref_node.y, ref_node.z, ref_node.z) < best_distance){
+                while(curent_node->Left_Child && curent_node->Right_Child){
+                   if(distance(curent_node->Left_Child->node, ref_node) > distance(curent_node->Right_Child->node, ref_node)){ curent_node = Right_Child; }
+                    else{ curent_node = Left_Child; }
+                }
+                if(distance(curent_node->node, ref_node) < best_distance) {best_distance = distance(curent_node->node, ref_node); best_node = curent_node;}
+            }
+        }
+        else if(curent_node->Hyperplan == 1){
+            if(distance2(curent_node->node.x, ref_node.x, curent_node->node.y, ref_node.y, ref_node.z, ref_node.z) < best_distance){
+                while(curent_node->Left_Child && curent_node->Right_Child){
+                    if(distance(curent_node->Left_Child->node, ref_node) > distance(curent_node->Right_Child->node, ref_node)){ curent_node = Right_Child; }
+                    else{ curent_node = Left_Child; }
+                }
+                if(distance(curent_node->node, ref_node) < best_distance) {best_distance = distance(curent_node->node, ref_node); best_node = curent_node;}
+            }
+        }
+        else if(curent_node->Hyperplan == 2){
+            if(distance2(curent_node->node.x, ref_node.x, curent_node->node.y, ref_node.y, ref_node.z, ref_node.z) < best_distance){
+                while(curent_node->Left_Child && curent_node->Right_Child){
+                    if(distance(curent_node->Left_Child->node, ref_node) > distance(curent_node->Right_Child->node, ref_node)){ curent_node = Right_Child; }
+                    else{ curent_node = Left_Child; }
+                }
+                if(distance(curent_node->node, ref_node) < best_distance) {best_distance = distance(curent_node->node, ref_node); best_node = curent_node;}
+            }
+        }
+        //Retour au debut de la branche
+        curent_node = previous_node;
+    }
+    return best_node->node;
+}
+
