@@ -23,7 +23,6 @@ typedef struct Mesh2D{
 }Mesh2D;
 
 int initialize_mesh2D(struct Mesh2D* m, int vtx_capacity, int tri_capacity){
-    m = malloc(sizeof(Mesh2D));
     m->nv = vtx_capacity;
     m->nt = tri_capacity;
     m->vert = malloc(sizeof(Vertex)*m->nv);
@@ -44,7 +43,7 @@ void dispose_mesh2D(struct Mesh2D*m){
 
 double area_mesh2D(struct Mesh2D* m){ //je comprends que c'est la somme de l'air de chaque triangle de mesh2D
 
-    double aire = 0;
+    double aire_totale = 0;
 
     for(int i=0; i<(m->nt); i++){
 
@@ -60,10 +59,22 @@ double area_mesh2D(struct Mesh2D* m){ //je comprends que c'est la somme de l'air
         AC.x = C.x - A.x;
         AC.y = C.y - A.y;
 
-        aire += 1/2*(AB.x*AC.y-AC.x*AB.y); //déterminant de la matrice composée des vecteurs colonnes AB et AC, qui divisé par 2 donne l'aire signé du trangle ABC
+        aire_totale += 0.5*(AB.x*AC.y-AC.x*AB.y); //déterminant de la matrice composée des vecteurs colonnes AB et AC, qui divisé par 2 donne l'aire signé du trangle ABC
     }
 
-    return aire;
+    return aire_totale;
+}
+
+int read(struct Mesh2D* m, const char* filename){
+    FILE *f = fopen(filename,"r");
+    if (!f){
+        printf("fichier txt non ouvert");
+        exit(1);
+    }
+
+    //on voit dans les fichiers mesh à disposition que la dimension est 3, on a 5 points de 3 coordonnées, et 4 triangles, formant, une pyramide à base triangulaire
+    //nous allons alors prendre les valeurs en oubliant la 3ème coordonnée
+
 }
 
 int main(){
