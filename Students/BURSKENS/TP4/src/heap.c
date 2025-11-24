@@ -28,6 +28,8 @@ static void swap(struct priority_queue *q, int pos1, int pos2){
     struct priority_data temp = q->heap[pos1];
     q->heap[pos1] = q->heap[pos2];
     q->heap[pos2] = temp;
+    priority_queue_update(q, q->heap[pos1].id, pos1);
+    priority_queue_update(q, q->heap[pos2].id, pos2);
 }
 
 static void sift_up(struct priority_queue *q, int pos){
@@ -69,8 +71,10 @@ void priority_queue_push(struct priority_queue *q, int id, float val){
     q->size = queue_end + 1;
     struct priority_data entry = {id,val};
     q->heap[queue_end] = entry;
+    priority_queue_update(q, id, queue_end);
     sift_up(q,queue_end);
 }
+
 struct priority_data priority_queue_pop(struct priority_queue *q){
     if(q->size <= 0){
         return NULL;
@@ -81,12 +85,13 @@ struct priority_data priority_queue_pop(struct priority_queue *q){
         struct priority_data entry = q->heap[queue_end];
         q->size = queue_end;
         sift_down(q,0);
+        priority_queue_update(q, entry.id, -1);
         return entry;
     }
 }
 
  void priority_queue_update(struct priority_queue *q, int key, float new_val){
-    
+    q->pos_in_heap[key] = new_val;
  }
 
 
