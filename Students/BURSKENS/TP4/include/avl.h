@@ -11,6 +11,7 @@ int offset;
 };
 
 struct user_data {
+ string info;
  /*
  * whatever struct fields before node, possibly none
  */
