@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
+#include <string.h>
 #include <time.h>
 
 typedef struct Vertex{
@@ -65,18 +66,47 @@ double area_mesh2D(struct Mesh2D* m){ //je comprends que c'est la somme de l'air
     return aire_totale;
 }
 
-int read(struct Mesh2D* m, const char* filename){
+int read(/*struct Mesh2D* m, */const char* filename){
     FILE *f = fopen(filename,"r");
     if (!f){
-        printf("fichier txt non ouvert");
+        printf("fichier non ouvert\n");
         exit(1);
     }
 
     //on voit dans les fichiers mesh à disposition que la dimension est 3, on a 5 points de 3 coordonnées, et 4 triangles, formant, une pyramide à base triangulaire
     //nous allons alors prendre les valeurs en oubliant la 3ème coordonnée
+    char buffer[256];
+    char mot[256];
+    int nb_vertices;
+    char* res;
 
+    while ((strcmp(mot,"Vertices")!=0) && res!=NULL){ //strcmp == 0 si les deux chaines de caractères mises en argument sont identiques
+        res = fgets(buffer, 256, f);
+        sscanf(buffer, "%s", mot);
+    }
+    if (res == NULL) printf("Pas de 'Vertices' dans ton fichier\n");
+    sscanf(buffer, "%s %d", mot, &nb_vertices);
+
+    int coordonnée_x;
+    int coordonnée_y;
+    int i=0;
+
+
+    for(int i=0; i<=nb_vertices;i++){
+        fgets(buffer, 256, f);
+        printf("////////////\n");
+        while (i!=256){
+            if (sizeof(buffer[i])==sizeof(int)){
+                printf("%d\n",i);
+            }
+            i++;
+        }
+    }
+
+    fclose(f);
 }
 
 int main(){
+    read("mesh1-tp2.mesh");
     return 0;
 }
