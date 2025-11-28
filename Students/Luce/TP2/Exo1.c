@@ -66,7 +66,7 @@ double area_mesh2D(struct Mesh2D* m){ //je comprends que c'est la somme de l'air
     return aire_totale;
 }
 
-int read(/*struct Mesh2D* m, */const char* filename){
+int read(struct Mesh2D* m, const char* filename){
     FILE *f = fopen(filename,"r");
     if (!f){
         printf("fichier non ouvert\n");
@@ -86,27 +86,38 @@ int read(/*struct Mesh2D* m, */const char* filename){
     }
     if (res == NULL) printf("Pas de 'Vertices' dans ton fichier\n");
     sscanf(buffer, "%s %d", mot, &nb_vertices);
+    m->nv = nb_vertices;
 
-    int coordonnée_x;
-    int coordonnée_y;
-    int i=0;
+    Vertex point;
+    char str[256];
+    int j;
+    int k=0;
 
-
-    for(int i=0; i<=nb_vertices;i++){
+    for(int i=0; i<m->nv;i++){
+        j=0;
         fgets(buffer, 256, f);
-        printf("////////////\n");
-        while (i!=256){
-            if (sizeof(buffer[i])==sizeof(int)){
-                printf("%d\n",i);
+        strcpy(str,""); //recopie le contenu du deuxième argument dans le premier
+        while (buffer[j] != '\0' && j < 256) {
+            while(buffer[j] != ' '){
+                printf("%c",buffer[j]);
+                str[strlen(str)]=buffer[j];
+                j++;
             }
-            i++;
+            if (k==1){
+                sscanf(str, "%f",&point.y);
+            }
+            if (k==0) {
+                sscanf(str, "%f",&point.x);
+            }
+            k = (k==0) ? 1 : 0;
+            j++;
         }
+        printf("\n");
     }
 
     fclose(f);
 }
 
 int main(){
-    read("mesh1-tp2.mesh");
     return 0;
 }
