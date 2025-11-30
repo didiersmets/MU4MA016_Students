@@ -1,0 +1,16 @@
+14
+Pidgeon
+Fox
+Chicken
+Cat
+Dog
+Squirrel
+Mouse
+Dolphin
+Eagle
+Rat
+Lion
+Whale
+Tiger
+Zebra
+
