@@ -77,7 +77,6 @@ int read(struct Mesh2D* m, const char* filename){
     //nous allons alors prendre les valeurs en oubliant la 3ème coordonnée
     char buffer[256];
     char mot[256];
-    int nb_vertices;
     char* res=""; //je l'initialise car parfois il s'auto initialise à NULL et n'entre pas dans la boucle
 
     while ((strcmp(mot,"Vertices")!=0) && res!=NULL){ //strcmp == 0 si les deux chaines de caractères mises en argument sont identiques
@@ -85,8 +84,7 @@ int read(struct Mesh2D* m, const char* filename){
         sscanf(buffer, "%s", mot);
     }
     if (res == NULL) printf("Pas de 'Vertices' dans ton fichier\n");
-    sscanf(buffer, "%s %d", mot, &nb_vertices);
-    m->nv = nb_vertices;
+    sscanf(buffer, "%s %d", mot, &(m->nv));
 
     Vertex *point = malloc(sizeof(Vertex));
     char str[256];
@@ -94,7 +92,7 @@ int read(struct Mesh2D* m, const char* filename){
     int j;
     int k=0;
     int index = 0; //indice pour le tableau str
-    printf("vertices number : %d\n", nb_vertices);
+    printf("vertices number : %d\n", m->nv);
 
     for(int i=0; i<m->nv;i++){ //i représente les lignes où se trouve les coordonnées des points
 
@@ -104,10 +102,10 @@ int read(struct Mesh2D* m, const char* filename){
         fgets(buffer, 256, f); //recopie une ligne de f et la met dans buffer
 
         while (k<2){
-            while ( (buffer[j] == ' ') && (j < 256) ){ //je skip les espaces      
+            while( buffer[j]!='\0' && j<256 && buffer[j]==' '){ //je skip les espaces      
                 j++;
             }
-            while ((buffer[j] != '\0')&&(buffer[j] != ' ')&& (j < 256)){ //si ce n'est pas la fin de la ligne, on a donc une suite de nombre à mettre dans str     
+            while( buffer[j]!='\0' && j<256 && buffer[j]!=' '){ //si ce n'est pas la fin de la ligne, on a donc une suite de nombre à mettre dans str     
                 str[index]=buffer[j];
                 index++;
                 j++;
@@ -115,30 +113,61 @@ int read(struct Mesh2D* m, const char* filename){
             //maintenant soit on a un nouveau un espace, soit c'est la fin de la ligne et donc str est un nombre (écrit en char*)
             if (k==0) {
                 sscanf(str, "%lf",&(point->x));
-                strcpy(str,"");
-                index =0;
             }
             if (k==1){
                 sscanf(str, "%lf",&(point->y));
-                strcpy(str,"");
-                index =0;
+                m->vert[i]=*point; //après avoir assigné les valeurs dans point, je mets point dans le tableau
             }
+            index =0;
+            strcpy(str,"");
             k++;
         }
-        m->vert[i]=*point; //après avoir assigné les valeurs dans point, je mets point dans le tableau
+    
     }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ///Partie pour prendre les coordonnées du triangle///
 
-    while ((strcmp(mot,"Triangle")!=0) && res!=NULL){ 
+    Triangle *tritri = malloc(sizeof(Triangle)); 
+
+    while ((strcmp(mot,"Triangles")!=0) && res!=NULL){  //même si je sais que c'est juste à la ligne d'après, on sait jamais
         res = fgets(buffer, 256, f);
         sscanf(buffer, "%s", mot);
     }
-    if (res == NULL) printf("Pas de 'Triangle' dans ton fichier\n");
-    printf("%s\n",mot);
+    if (res == NULL) printf("Pas de 'Triangles' dans ton fichier\n");
+    sscanf(buffer, "%s %d", mot, &(m->nt));
 
+    strcpy(str,"");
+    index = 0;
+
+   for(int i = 0; i<m->nt; i++){
+        k=0;
+        j=0;
+        fgets(buffer, 256, f);
+        while(k<3){
+            while( buffer[j]!='\0' && j<256 && buffer[j]==' '){
+                j++;  
+            }
+            while( buffer[j]!='\0' && j<256 && buffer[j]!=' '){
+                str[index++]=buffer[j];
+                j++;
+            }
+            if (k==0){
+                sscanf(str,"%d",&(tritri->index_pt1));
+            }
+            if (k==1){
+                sscanf(str,"%d",&(tritri->index_pt2));
+            }
+            if (k==2){
+                sscanf(str,"%d",&(tritri->index_pt3));
+                (m->tri)[i]=*tritri;
+            }
+            index = 0;
+            k++;
+            strcpy(str,"");
+        }
+    }
 
 
     fclose(f);
@@ -153,7 +182,9 @@ int main(){
     for(int i =0; i<5; i++){        //hourra ça a fait ce que j'ai voulu faire
         printf("(%lf,%lf)\n",(m->vert[i]).x,(m->vert[i]).y);
     }
-
+    for(int i =0; i<4; i++){
+        printf("(%d,%d,%d)\n",(m->tri[i]).index_pt1,(m->tri[i]).index_pt2, (m->tri[i]).index_pt3);
+    }
 
     dispose_mesh2D(m);
     return 0;

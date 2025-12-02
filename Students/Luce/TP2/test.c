@@ -5,14 +5,12 @@
 
 
 int main(){
-    char s[3];
-    int i = 0;
-    while (i<3){
-        s[i] = (char) 97+i;
-        i++;
-    }
- 
-        
-        printf("%s \n",s);
+    char s[50] = "salut bébé";
+    char h[50] = "salut toi";
+    char a[34] = "salut bébé";
+    if (strcmp(s,h)==0) printf("0\n");
+    if (strcmp(s,h)!=0) printf("autre\n");
+    if (strcmp(s,s)==0) printf("0 test 2\n");
+    if (strcmp(s,a)==0) printf("0 test 3\n");
     
 }
