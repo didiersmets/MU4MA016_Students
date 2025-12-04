@@ -84,7 +84,15 @@ int read(struct Mesh2D* m, const char* filename){
         sscanf(buffer, "%s", mot);
     }
     if (res == NULL) printf("Pas de 'Vertices' dans ton fichier\n");
+
+    int previous_nv = m->nv;
     sscanf(buffer, "%s %d", mot, &(m->nv));
+    if ((m->nv)>previous_nv){
+        printf("Veuillez initialisez mesh en mettant en second argument un nombre >=%d\n",m->nv);
+        return 0;
+    }
+
+    //printf("vertices number : %d\n", m->nv);
 
     Vertex *point = malloc(sizeof(Vertex));
     char str[256];
@@ -92,7 +100,7 @@ int read(struct Mesh2D* m, const char* filename){
     int j;
     int k=0;
     int index = 0; //indice pour le tableau str
-    printf("vertices number : %d\n", m->nv);
+
 
     for(int i=0; i<m->nv;i++){ //i représente les lignes où se trouve les coordonnées des points
 
@@ -136,7 +144,14 @@ int read(struct Mesh2D* m, const char* filename){
         sscanf(buffer, "%s", mot);
     }
     if (res == NULL) printf("Pas de 'Triangles' dans ton fichier\n");
+    int previous_nt = m->nt;
     sscanf(buffer, "%s %d", mot, &(m->nt));
+    if ((m->nv)>previous_nt){
+        printf("Veuillez initialisez mesh en mettant en troisième argument un nombre >=%d\n",m->nt+1);
+        return 0;
+    }
+
+//    fprintf(stdout, "triangle number : %d\n",m->nt); //fprintf(stdout,...) pour le fun (et pour retenir/apprendre)
 
     strcpy(str,"");
     index = 0;
@@ -171,21 +186,88 @@ int read(struct Mesh2D* m, const char* filename){
 
 
     fclose(f);
+    return 1;
+}
+
+int mesh2D_to_gnuplot(struct Mesh2D* m, const char* filename){
+    FILE *f = fopen(filename,"w");
+    for(int i=0; i<1;i++){ //m->nt au lieu de 1 mais pour c'est pour test
+        fprintf(f,"%lf %lf\n", m->vert[(m->tri)[i].index_pt1-1].x, m->vert[(m->tri)[i].index_pt1-1].y);
+        fprintf(f,"%lf %lf\n", m->vert[(m->tri)[i].index_pt2-1].x, m->vert[(m->tri)[i].index_pt2-1].y);
+        fprintf(f,"%lf %lf\n", m->vert[(m->tri)[i].index_pt3-1].x, m->vert[(m->tri)[i].index_pt3-1].y);
+    }
+    
+    system(
+        "gnuplot -persist -e \""
+        "set xrange [0:10];"
+        "set yrange [0:10];"
+        "set ylabel 'y';"
+        "set xlabel 'x';"
+        "plot '%s' using 1:2 with linespoints"
+
+        "\"",filename);
+
+    
+    fclose(f);
+    return 1;
+}
+
+int write_mesh2D(struct Mesh2D* m, const char* filename){
+    FILE *f=fopen(filename,"w");
+    fprintf(f,"MeshVersionFormatted 2\n");
+    fprintf(f,"Dimension 2\n");
+    fprintf(f,"Vertices %d\n",m->nv);
+    for(int i =0; i<m->nv;i++){
+        for(int k=0;k<20;k++){
+        fprintf(f," ");
+        }
+        fprintf(f,"                         ");
+        fprintf(f,"%.1lf", ((m->vert)[i]).x);
+        fprintf(f,"                         ");
+        fprintf(f,"%.1lf", ((m->vert)[i]).y);
+        fprintf(f,"\n");
+    }
+    fprintf(f,"Triangles %d\n",m->nt);
+    for(int i=0; i<m->nt;i++){
+        fprintf(f,"%d",((m->tri)[i]).index_pt1);
+        fprintf(f," %d",((m->tri)[i]).index_pt2);
+        fprintf(f," %d",((m->tri)[i]).index_pt3);
+        fprintf(f," 1\n");
+    }
+    fprintf(f,"End\n");
+    fclose(f);
+    return 1;
 }
 
 int main(){
     Mesh2D *m = malloc(sizeof(Mesh2D)); 
-    int d = initialize_mesh2D(m,50,50);
+    int d = initialize_mesh2D(m,5,5);
     if (d==0) printf("zut\n");
     read(m,"mesh1-tp2.mesh");
+    write_mesh2D(m,"salut.mesh");
 
-    for(int i =0; i<5; i++){        //hourra ça a fait ce que j'ai voulu faire
-        printf("(%lf,%lf)\n",(m->vert[i]).x,(m->vert[i]).y);
+    /*                    TEST(ça fonctionne)
+    
+    for(int i =0; i<5; i++){ 
+        printf("(%.1lf,%.1lf)\n",(m->vert[i]).x,(m->vert[i]).y);
     }
     for(int i =0; i<4; i++){
         printf("(%d,%d,%d)\n",(m->tri[i]).index_pt1,(m->tri[i]).index_pt2, (m->tri[i]).index_pt3);
     }
+    */
+
+    Mesh2D *m2 = malloc(sizeof(Mesh2D));
+    int e = initialize_mesh2D(m2,1000,1000);
+    if (e==0) printf("zut\n");
+
+    read(m2,"mesh2-tp2.mesh");
+    write_mesh2D(m2,"salut2.mesh"); 
+
+    mesh2D_to_gnuplot(m,"okokokokok");
 
     dispose_mesh2D(m);
+    dispose_mesh2D(m2);
+
+
     return 0;
 }

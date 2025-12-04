@@ -249,7 +249,8 @@ int main(int argc, char* argv[]){
         "set title 'Comparaison des trois algos';"
         "plot 'valeurs' using 1:2 with linespoints title 'Bubble sort'," 
         "'valeurs' using 1:3 with linespoints title 'Insertion sort', "
-        "'valeurs' using 1:4 with linespoints title 'Merge sort'""\""
+        "'valeurs' using 1:4 with linespoints title 'Merge sort'"
+        "\""
         );
     
 

@@ -5,12 +5,26 @@
 
 
 int main(){
-    char s[50] = "salut bébé";
-    char h[50] = "salut toi";
-    char a[34] = "salut bébé";
-    if (strcmp(s,h)==0) printf("0\n");
-    if (strcmp(s,h)!=0) printf("autre\n");
-    if (strcmp(s,s)==0) printf("0 test 2\n");
-    if (strcmp(s,a)==0) printf("0 test 3\n");
+
+    FILE *f = fopen("valeurs","w");
+    fprintf(f,"1 2\n");
+    fprintf(f,"1 4\n");
+    fprintf(f,"2 3\n");
+    fprintf(f,"1 2\n");
+    fclose(f);
+    
+
+    system(
+        "gnuplot -persist -e \""
+        "set xrange [0:10];"
+        "set yrange [0:10];"
+        "set ylabel 'y';"
+        "set xlabel 'x';"
+        "plot 'valeurs' using 1:2 with linespoints"
+
+        "\""
+        );
+    
+    
     
 }
