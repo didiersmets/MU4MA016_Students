@@ -1,0 +1,31 @@
+Allow for graph input as adjacency matrix or adjacency lists.
+
+Transform input into two sets of adjacency lists, one containing forward adjacency, the other backward adjacency.
+
+
+VARIANT 1
+
+Those vertices with no forward adjacency are last in priority and will be added first to the front of the priority queue.
+
+The vertices who are backward adjacent to those previously added are the next to be added to the front of the priority queue.
+
+Repeat until all are added, while moving previously added vertices to the front of the queue if they are added again. Alternatively, don't add them until all their forward adjacent vertices have been added.
+
+
+VARIANT 2
+
+Approach Makespan Analysis: 
+Start with those vertices that have no backward adjacency, Set their Earliest Maketime to their Task Duration. 
+
+Consider now the forward adjacent vertices to those considered in the last step. If all their backwards adjacent vertices have already been considered, Set their Earliest Maketime to their duration plus the maximum of the Earliest Maketime of their backwards adjacent vertices. This is not necessarily one of the vertices considered in the previous step.
+
+Repeat until all vertices considered, then schedule each task to start at their (Earliest Maketime - Task Duration).
+
+
+VARIANT 3 (NP-hard via Partition)
+
+Start with same Procedure as Variant 2. After all Earliest Maketimes are calculated, go back through the vertices to find their Latest Maketime. This gives us some way of prioritizing which tasks need to be put on a machine first.
+
+Assigning Machines: Start Greedy, choosing the tasks for which (Latest Maketime - Duration) is minimal, so long as all backwards adjacent vertices have already been completed.
+
+Alternative: Assign tasks as soon as their Earliest Starttime (Earliest Maketime - Task Duration). The first time a task can not be assigned because all machines are full, choose among the tasks that are currently being worked on or that have already been completed
