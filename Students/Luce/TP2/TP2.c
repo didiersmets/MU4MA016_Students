@@ -190,26 +190,50 @@ int read(struct Mesh2D* m, const char* filename){
 }
 
 int mesh2D_to_gnuplot(struct Mesh2D* m, const char* filename){
+
     FILE *f = fopen(filename,"w");
-    for(int i=0; i<1;i++){ //m->nt au lieu de 1 mais pour c'est pour test
+    
+    for(int i=0; i<m->nt;i++){
+
         fprintf(f,"%lf %lf\n", m->vert[(m->tri)[i].index_pt1-1].x, m->vert[(m->tri)[i].index_pt1-1].y);
         fprintf(f,"%lf %lf\n", m->vert[(m->tri)[i].index_pt2-1].x, m->vert[(m->tri)[i].index_pt2-1].y);
         fprintf(f,"%lf %lf\n", m->vert[(m->tri)[i].index_pt3-1].x, m->vert[(m->tri)[i].index_pt3-1].y);
+        fprintf(f,"%lf %lf\n", m->vert[(m->tri)[i].index_pt1-1].x, m->vert[(m->tri)[i].index_pt1-1].y); //copie du premier point, reliant le dernier à celui ci
     }
-    
-    system(
-        "gnuplot -persist -e \""
-        "set xrange [0:10];"
-        "set yrange [0:10];"
+     fclose(f); //il est important de fclose avant d'utiliser gnuplot, afin de sauvegarder ce qu'on a mis dans le fichier
+
+
+
+    char buffer[50000];
+    //snprintf permet de concaténer le troisième argument au buffer en s'assurant que la taille du résultat ne dépasse pas la mémoire allouée pour le buffer
+    //attention snprintf écrase ce qu'il y avait dans buffer, sprintf renvoie également un int, donnant le nombre de caractère dans buffer après la concaténation
+
+    int nb=0;
+
+    nb += snprintf(buffer, sizeof(buffer), "gnuplot -persist -e \""
+        "set xrange [-1:2];"
+        "set yrange [-1:2];"
         "set ylabel 'y';"
-        "set xlabel 'x';"
-        "plot '%s' using 1:2 with linespoints"
+        "set xlabel 'x';"); 
 
-        "\"",filename);
 
+    for(int i = 0; i<m->nt;i++){
+        if (i==0){
+            nb += snprintf(buffer+nb, sizeof(buffer)-nb, "plot '%s' using 1:2 with linespoints title 'triangle %d',",filename,i+1);
+        } if(i==(m->nt-1)){
+            nb += snprintf(buffer+nb, sizeof(buffer)-nb, "'%s' every ::%d::%d using 1:2 with linespoints title 'triangle %d';",filename, i*4, i*4+3,i+1);
+            //je lis les lignes qui concerne mon triangle
+        } else {
+            nb += snprintf(buffer+nb, sizeof(buffer)-nb, "'%s' every ::%d::%d using 1:2 with linespoints title 'triangle %d',",filename,i*4,i*4+3,i+1); 
+        }
+    }
+    snprintf(buffer+nb, sizeof(buffer)-nb,"\"");
+    printf("nb = %d\n",nb);
+
+    system(buffer);
     
-    fclose(f);
     return 1;
+
 }
 
 int write_mesh2D(struct Mesh2D* m, const char* filename){
@@ -263,7 +287,8 @@ int main(){
     read(m2,"mesh2-tp2.mesh");
     write_mesh2D(m2,"salut2.mesh"); 
 
-    mesh2D_to_gnuplot(m,"okokokokok");
+    mesh2D_to_gnuplot(m,"mesh1");
+
 
     dispose_mesh2D(m);
     dispose_mesh2D(m2);
