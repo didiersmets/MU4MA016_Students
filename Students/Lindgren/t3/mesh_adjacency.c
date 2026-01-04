@@ -1,20 +1,9 @@
-/* mesh_adjacency.c — Exercises 1–6 (TP3)
-   Updated to:
-   - implement build_edge_table2 (required by mesh_adjacency.h)
-   - correctly free HashTable structs after hash_table_fini (avoid leaks)
-*/
+
 
 #include <stdlib.h>
 #include "mesh_adjacency.h"
 
-/* ============================================================
-   Exercise 1
-   Return edge index in triangle t if (v1 -> v2) exists, else -1
-   Convention:
-   edge 0: idx[0] -> idx[1]
-   edge 1: idx[1] -> idx[2]
-   edge 2: idx[2] -> idx[0]
-   ============================================================ */
+
 int edge_pos_in_tri(int v1, int v2, struct Triangle t)
 {
     if (t.idx[0] == v1 && t.idx[1] == v2) return 0;
