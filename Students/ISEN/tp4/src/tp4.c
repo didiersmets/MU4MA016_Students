@@ -1,4 +1,4 @@
-#include "tp4.h"
+#include "../include/tp4.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,7 +24,8 @@ static void sift_up(struct priority_queue *q, int pos){
     }
 }
 
-
+//ignore : do everything with other method...
+/*
 static void sift_down_pop(struct priority_queue *q, int pos){
     int l = 2 * pos + 1; //left child
     int r = 2 * pos + 2; //right child
@@ -45,7 +46,7 @@ static void sift_down_pop(struct priority_queue *q, int pos){
     q->heap[pos] = q->heap[(q->size)-1];
     q->pos_in_heap[q->heap[(q->size)-1].id] = pos;
     sift_up(q, pos);
-}
+}*/
 
 static void sift_down(struct priority_queue *q, int pos){
     int l = 2 * pos + 1; //left child
@@ -92,7 +93,6 @@ void priority_queue_push(struct priority_queue *q, int id, float val){
 }
 
 
-
 int priority_queue_init(struct priority_queue *q, int max_id){
     q->heap = malloc((max_id + 1) * sizeof(struct priority_data));
     q->capacity = max_id + 1;
@@ -103,6 +103,7 @@ int priority_queue_init(struct priority_queue *q, int max_id){
     for (int i = 0; i < max_id+1; i++){
         q->pos_in_heap[i] = -1;
     }
+
     return 0;
 }
 
@@ -114,17 +115,18 @@ struct priority_data priority_queue_pop(struct priority_queue *q){
     }
     //to pop and return the root
     struct priority_data root = q->heap[0];
-    //_________________________________________1st method
-    //only works if modification of sift down
     //mark root as not present anymore
-    //q->pos_in_heap[q->heap[0].id] = -1;
+    q->pos_in_heap[q->heap[0].id] = -1;
+
     //now add last element in queue to root
-    //q->heap[0] = q->heap[q->size-1];
-    //q->pos_in_heap[q->heap[0].id] = 0;  //find correct position
-    //_____________________________________________________
-    sift_down_pop(q, 0);
-    //mark root as not present anymore
-    q->pos_in_heap[root.id] = -1;
+    q->heap[0] = q->heap[q->size-1];
+    q->pos_in_heap[q->heap[0].id] = 0; 
+    sift_down(q,0);
+
+    //[parts of other method: 
+    //sift_down_pop(q, 0); 
+    //q->pos_in_heap[root.id] = -1 -> root not present anymore;]
+
     q->size -= 1;
     return root;
 }
@@ -133,6 +135,11 @@ void priority_queue_update(struct priority_queue *q, int key, float new_val){
     //goal: change value of some element in q
     //key: id of the element 
     int pos = q->pos_in_heap[key]; 
+    if(pos == -1){
+        printf("Update not possible, key not in priority queue\n");
+        return;
+    }
+
     q->heap[pos].val = new_val;
     sift_up(q, pos);
     sift_down(q, pos);
@@ -141,5 +148,11 @@ void priority_queue_update(struct priority_queue *q, int key, float new_val){
 void priority_queue_dispose(struct priority_queue *q){
     free(q->heap);
     free(q->pos_in_heap);
-    free(q);
+}
+
+
+void print_priority_queue(struct priority_queue *q){
+    for (int i = 0; i < q->size; i++){
+        printf("%d: %f, pos: %d\n", i, q->heap[i].val, q->pos_in_heap[q->heap[i].id]);
+    }
 }

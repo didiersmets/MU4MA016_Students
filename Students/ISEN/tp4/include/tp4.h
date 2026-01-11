@@ -19,3 +19,4 @@ void priority_queue_push(struct priority_queue *q, int id, float val);
 struct priority_data priority_queue_pop(struct priority_queue *q);
 int priority_queue_init(struct priority_queue *q, int max_id);
 void priority_queue_update(struct priority_queue *q, int key, float new_val);
+void print_priority_queue(struct priority_queue *q);
