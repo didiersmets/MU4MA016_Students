@@ -81,7 +81,7 @@ int priority_queue_init(struct priority_queue *q, int capacity){
 
 void priority_queue_push(struct priority_queue *q, int id, float val){
     if(q->size == q->capacity){
-        printf("Push not possible, no free slot in queue");
+        printf("Push not possible, no free slot in queue\n");
         return;
     }
     q->heap[q->size].id = id;

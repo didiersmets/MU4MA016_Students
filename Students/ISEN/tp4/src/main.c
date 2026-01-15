@@ -22,7 +22,7 @@ int main(){
     //_____________________priority queue________________
     int max_id = 9;
     struct priority_queue q; 
-    priority_queue_init(&q, 10);
+    priority_queue_init(&q, max_id);
     
     printf("\nAfter init\n");
     print_priority_queue(&q);
@@ -42,10 +42,11 @@ int main(){
 
     //try update
     printf("\nAfter update\n");
-    priority_queue_update(&q, 5, 2);
+    priority_queue_update(&q, 0, 2);
     print_priority_queue(&q);
 
     //try pop
+    printf("\nPop\n");
     struct priority_data p;
     for (int i = 0; i < 10; i++){
         p = priority_queue_pop(&q);
